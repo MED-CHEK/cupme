@@ -5,13 +5,15 @@ import com.cupme.repository.UserRepository;
 import com.cupme.security.SecurityUtils;
 import com.cupme.service.MailService;
 import com.cupme.service.UserService;
-import com.cupme.service.dto.AdminUserDTO;
 import com.cupme.service.dto.PasswordChangeDTO;
+import com.cupme.service.dto.UserDTO;
+import com.cupme.service.mapper.UserMapper;
 import com.cupme.web.rest.errors.*;
 import com.cupme.web.rest.vm.KeyAndPasswordVM;
 import com.cupme.web.rest.vm.ManagedUserVM;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -35,13 +37,16 @@ public class AccountResource {
 
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);
 
+    private final UserMapper userMapper;
+
     private final UserRepository userRepository;
 
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserMapper userMapper, UserRepository userRepository, UserService userService, MailService mailService) {
+        this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
@@ -97,12 +102,15 @@ public class AccountResource {
      * @return the current user.
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be returned.
      */
+    @Transactional
     @GetMapping("/account")
-    public AdminUserDTO getAccount() {
-        return userService
-            .getUserWithAuthorities()
-            .map(AdminUserDTO::new)
-            .orElseThrow(() -> new AccountResourceException("User could not be found"));
+    public UserDTO getAccount() {
+        UserDTO user = userMapper.userToAdminUserDTO(userService.getUserWithAuthorities().get());
+        if (user != null) {
+            return user;
+        } else {
+            throw new AccountResourceException("User could not be found");
+        }
     }
 
     /**
@@ -113,7 +121,7 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user login wasn't found.
      */
     @PostMapping("/account")
-    public void saveAccount(@Valid @RequestBody AdminUserDTO userDTO) {
+    public void saveAccount(@Valid @RequestBody UserDTO userDTO) {
         String userLogin = SecurityUtils
             .getCurrentUserLogin()
             .orElseThrow(() -> new AccountResourceException("Current user login not found"));

@@ -4,8 +4,10 @@ import com.cupme.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,8 +23,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Table(name = "user")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,6 +58,20 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(length = 254, unique = true)
     private String email;
 
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
+    @Column(name = "weight")
+    private Integer weight;
+
+    @Column(name = "size")
+    private Integer size;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private Set<Address> addresses;
+
     @NotNull
     @Column(nullable = false)
     private boolean activated = false;
@@ -84,13 +100,53 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-        name = "jhi_user_authority",
+        name = "user_authority",
         joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
         inverseJoinColumns = { @JoinColumn(name = "authority_name", referencedColumnName = "name") }
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    public User() {}
+
+    public User(
+        Long id,
+        String login,
+        String password,
+        String firstName,
+        String lastName,
+        String email,
+        LocalDate birthDate,
+        Integer weight,
+        Integer size,
+        Set<Address> addresses,
+        boolean activated,
+        String langKey,
+        String imageUrl,
+        String activationKey,
+        String resetKey,
+        Instant resetDate,
+        Set<Authority> authorities
+    ) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.weight = weight;
+        this.size = size;
+        this.addresses = addresses;
+        this.activated = activated;
+        this.langKey = langKey;
+        this.imageUrl = imageUrl;
+        this.activationKey = activationKey;
+        this.resetKey = resetKey;
+        this.resetDate = resetDate;
+        this.authorities = authorities;
+    }
 
     public Long getId() {
         return id;
@@ -139,6 +195,38 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public String getImageUrl() {
@@ -199,33 +287,101 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-        return id != null && id.equals(((User) o).id);
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return (
+            isActivated() == user.isActivated() &&
+            getId().equals(user.getId()) &&
+            getLogin().equals(user.getLogin()) &&
+            getPassword().equals(user.getPassword()) &&
+            getFirstName().equals(user.getFirstName()) &&
+            getLastName().equals(user.getLastName()) &&
+            getEmail().equals(user.getEmail()) &&
+            getBirthDate().equals(user.getBirthDate()) &&
+            getWeight().equals(user.getWeight()) &&
+            getSize().equals(user.getSize()) &&
+            Objects.equals(getAddresses(), user.getAddresses()) &&
+            getLangKey().equals(user.getLangKey()) &&
+            Objects.equals(getImageUrl(), user.getImageUrl()) &&
+            Objects.equals(getActivationKey(), user.getActivationKey()) &&
+            Objects.equals(getResetKey(), user.getResetKey()) &&
+            Objects.equals(getResetDate(), user.getResetDate()) &&
+            getAuthorities().equals(user.getAuthorities())
+        );
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
-        return getClass().hashCode();
+        return Objects.hash(
+            getId(),
+            getLogin(),
+            getPassword(),
+            getFirstName(),
+            getLastName(),
+            getEmail(),
+            getBirthDate(),
+            getWeight(),
+            getSize(),
+            getAddresses(),
+            isActivated(),
+            getLangKey(),
+            getImageUrl(),
+            getActivationKey(),
+            getResetKey(),
+            getResetDate(),
+            getAuthorities()
+        );
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
+        return (
+            "User{" +
+            "id=" +
+            id +
+            ", login='" +
+            login +
+            '\'' +
+            ", password='" +
+            password +
+            '\'' +
+            ", firstName='" +
+            firstName +
+            '\'' +
+            ", lastName='" +
+            lastName +
+            '\'' +
+            ", email='" +
+            email +
+            '\'' +
+            ", birthDate=" +
+            birthDate +
+            ", weight=" +
+            weight +
+            ", size=" +
+            size +
+            ", addresses=" +
+            addresses +
+            ", activated=" +
+            activated +
+            ", langKey='" +
+            langKey +
+            '\'' +
+            ", imageUrl='" +
+            imageUrl +
+            '\'' +
+            ", activationKey='" +
+            activationKey +
+            '\'' +
+            ", resetKey='" +
+            resetKey +
+            '\'' +
+            ", resetDate=" +
+            resetDate +
+            ", authorities=" +
+            authorities +
+            '}'
+        );
     }
 }

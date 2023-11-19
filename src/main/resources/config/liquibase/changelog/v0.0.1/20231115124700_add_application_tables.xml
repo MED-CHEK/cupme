@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!-- Table des protocoles -->
+    <changeSet id="v0.0.1-ADD_PROTOCOL_TABLE" author="cupme">
+        <createTable tableName="protocol">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Table des produits -->
+    <changeSet id="v0.0.1-ADD_PRODUCT_TABLE" author="cupme">
+        <createTable tableName="product">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="stock" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="width" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="height" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Table de liaison entre Protocoles et Produits -->
+    <changeSet id="v0.0.1-ADD_PROTOCOL_PRODUCT" author="cupme">
+        <createTable tableName="protocol_product">
+            <column name="protocol_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="protocol_id, product_id" tableName="protocol_product"/>
+
+        <addForeignKeyConstraint baseColumnNames="protocol_id"
+                                 baseTableName="protocol_product"
+                                 constraintName="fk_product_protocol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="protocol"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                    baseTableName="protocol_product"
+                                    constraintName="fk_protocol_product_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="product"/>
+    </changeSet>
+
+    <!-- Table des catégories -->
+    <changeSet id="v0.0.1-ADD_CATEGORY_TABLE" author="cupme">
+        <createTable tableName="category">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Table des tags -->
+    <changeSet id="v0.0.1-ADD_TAG_TABLE" author="cupme">
+        <createTable tableName="tag">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Table de liaison entre Protocoles et Catégories -->
+    <changeSet id="v0.0.1-ADD_PROTOCOL_CATEGORY" author="cupme">
+        <createTable tableName="protocol_category">
+            <column name="protocol_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="protocol_id, category_id" tableName="protocol_category"/>
+
+        <addForeignKeyConstraint baseColumnNames="protocol_id"
+                                 baseTableName="protocol_category"
+                                 constraintName="fk_category_protocol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="protocol"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                    baseTableName="protocol_category"
+                                    constraintName="fk_protocol_category_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="category"/>
+    </changeSet>
+
+    <!-- Table de liaison entre Protocoles et Tags -->
+    <changeSet id="v0.0.1-ADD_PROTOCOL_TAG" author="cupme">
+        <createTable tableName="protocol_tag">
+            <column name="protocol_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tag_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="protocol_id, tag_id" tableName="protocol_tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="protocol_id"
+                                 baseTableName="protocol_tag"
+                                 constraintName="fk_tag_protocol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="protocol"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                    baseTableName="protocol_tag"
+                                    constraintName="fk_protocol_tag_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="tag"/>
+    </changeSet>
+
+    <!-- Table de liaison entre Produits et Catégories -->
+    <changeSet id="v0.0.1-ADD_PRODUCT_CATEGORY" author="cupme">
+        <createTable tableName="product_category">
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, category_id" tableName="product_category"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="product_category"
+                                 constraintName="fk_category_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                    baseTableName="product_category"
+                                    constraintName="fk_product_category_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="category"/>
+    </changeSet>
+
+    <!-- Table de liaison entre Produits et Tags -->
+    <changeSet id="v0.0.1-ADD_PRODUCT_TAG" author="cupme">
+        <createTable tableName="product_tag">
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tag_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="product_id, tag_id" tableName="product_tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="product_tag"
+                                 constraintName="fk_tag_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                    baseTableName="product_tag"
+                                    constraintName="fk_product_tag_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="tag"/>
+    </changeSet>
+
+    <!-- Table des avis sur les produits -->
+    <changeSet id="v0.0.1-ADD_PRODUCT_REVIEW_TABLE" author="cupme">
+        <createTable tableName="product_reviews">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="comment" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="product_reviews"
+                                 constraintName="fk_product_reviews_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                    baseTableName="product_reviews"
+                                    constraintName="fk_product_reviews_product_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="product"/>
+    </changeSet>
+
+    <!-- Table des avis sur les protocoles -->
+    <changeSet id="v0.0.1-ADD_PROTOCOL_REVIEW_TABLE" author="cupme">
+        <createTable tableName="protocol_reviews">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="comment" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protocol_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="protocol_reviews"
+                                 constraintName="fk_protocol_reviews_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+
+        <addForeignKeyConstraint baseColumnNames="protocol_id"
+                                    baseTableName="protocol_reviews"
+                                    constraintName="fk_protocol_reviews_protocol_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="protocol"/>
+    </changeSet>
+
+    <!-- Cart Table -->
+
+    <changeSet id="v0.0.1-ADD_CART_TABLE" author="cupme">
+        <createTable tableName="cart">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="cart"
+                                 constraintName="fk_cart_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+
+    <!-- Cart Item Table -->
+    <changeSet id="v0.0.1-ADD_CART_ITEM_TABLE" author="cupme">
+        <createTable tableName="cart_item">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="cart_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protocol_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="cart_id"
+                                 baseTableName="cart_item"
+                                 constraintName="fk_cart_item_cart_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cart"/>
+
+        <addForeignKeyConstraint baseColumnNames="protocol_id"
+                                 baseTableName="cart_item"
+                                 constraintName="fk_cart_item_protocol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="protocol"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                    baseTableName="cart_item"
+                                    constraintName="fk_cart_item_product_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="product"/>
+
+    </changeSet>
+
+    <!-- Order Table -->
+    <changeSet id="v0.0.1-ADD_ORDER_TABLE" author="cupme">
+        <createTable tableName="order">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="paid" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="order"
+                                 constraintName="fk_order_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"/>
+    </changeSet>
+
+    <!-- Order Item Table -->
+    <changeSet id="v0.0.1-ADD_ORDER_ITEM_TABLE" author="cupme">
+        <createTable tableName="order_item">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protocol_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="order_id"
+                                 baseTableName="order_item"
+                                 constraintName="fk_order_item_order_id"
+                                referencedColumnNames="id"
+                                referencedTableName="order"/>
+
+        <addForeignKeyConstraint baseColumnNames="protocol_id"
+                                 baseTableName="order_item"
+                                 constraintName="fk_order_item_protocol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="protocol"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                    baseTableName="order_item"
+                                    constraintName="fk_order_item_product_id"
+                                    referencedColumnNames="id"
+                                    referencedTableName="product"/>
+    </changeSet>
+</databaseChangeLog>
