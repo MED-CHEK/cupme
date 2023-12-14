@@ -128,6 +128,8 @@ docker-compose -f src/main/docker/jhipster-control-center.yml up
 - Change the database name in the file `src/main/resources/config/application-prod.yml`
 - Change the username and password of the database in the file `src/main/resources/config/application-prod.yml`
 - Change the email and password of the email in the file `src/main/resources/config/application-prod.yml`
+- Cors : allowed-origins in the file `src/main/resources/config/application-prod.yml` and `src/main/resources/config/application.yml`
+- Change the port of the application in the file `src/main/resources/config/application-prod.yml` and `src/main/resources/config/application.yml`
 
 ### Packaging as jar
 
