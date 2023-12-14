@@ -4,6 +4,7 @@ import com.cupme.domain.Category;
 import com.cupme.service.dto.CategoryDTO;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,8 @@ public class CategoryMapper {
         return new CategoryDTO(category);
     }
 
-    public List<Category> categoryDTOsToCategories(List<CategoryDTO> categoryDTOS) {
-        return categoryDTOS.stream().filter(Objects::nonNull).map(this::categoryDTOToCategory).collect(Collectors.toList());
+    public Set<Category> categoryDTOsToCategories(Set<CategoryDTO> categoryDTOS) {
+        return categoryDTOS.stream().filter(Objects::nonNull).map(this::categoryDTOToCategory).collect(Collectors.toSet());
     }
 
     public Category categoryDTOToCategory(CategoryDTO categoryDTO) {
@@ -35,8 +36,6 @@ public class CategoryMapper {
             Category category = new Category();
             category.setId(categoryDTO.getId());
             category.setName(categoryDTO.getName());
-            category.setProducts(categoryDTO.getProducts());
-            category.setProtocols(categoryDTO.getProtocols());
 
             return category;
         }

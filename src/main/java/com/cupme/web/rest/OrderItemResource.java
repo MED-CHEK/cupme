@@ -3,6 +3,8 @@ package com.cupme.web.rest;
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.service.OrderItemService;
 import com.cupme.service.dto.OrderItemDTO;
+import com.cupme.service.dto.OrderServerDTO;
+import com.cupme.service.dto.ProtocolCartDTO;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -38,6 +40,20 @@ public class OrderItemResource {
     }
 
     /**
+     * {@code GET /orderProtocols} : get all orderProtocols with only the public informations - calling this are allowed for anyone.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all orderItemes.
+     */
+    @GetMapping("/orderProtocols")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<List<ProtocolCartDTO>> getAllOrderProtocols() {
+        log.debug("REST request to get all public OrderItem names");
+
+        final List<ProtocolCartDTO> orderProtocols = orderItemService.getOrderProtocols();
+        return ResponseEntity.ok().body(orderProtocols);
+    }
+
+    /**
      * {@code GET /orderItems/:id} : get the "id" orderItem.
      * @param id the id of the orderItemDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the orderItemDTO, or with status {@code 404 (Not Found)}.
@@ -54,55 +70,15 @@ public class OrderItemResource {
     /**
      * {@code POST  /orderItems} : Create a new orderItem.
      *
-     * @param orderItemDTO the orderItemDTO to create.
+     * @param orderServerDTO the orderItemDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new orderItemDTO, or with status {@code 400 (Bad Request)} if the orderItem has already an ID.
      */
     @PostMapping("/orderItems")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<OrderItemDTO> createOrderItem(@Valid @RequestBody OrderItemDTO orderItemDTO) {
-        log.debug("REST request to save OrderItem : {}", orderItemDTO);
+    public ResponseEntity<Long> createOrderItem(@Valid @RequestBody OrderServerDTO orderServerDTO) {
+        log.debug("REST request to save orderServerDTO : {}", orderServerDTO);
 
-        if (orderItemDTO.getId() != null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        final OrderItemDTO result = orderItemService.createOrderItem(orderItemDTO);
-        return ResponseEntity.ok().body(result);
-    }
-
-    /**
-     * {@code PUT  /orderItems} : Updates an existing orderItem.
-     *
-     * @param orderItemDTO the orderItemDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated orderItemDTO,
-     * or with status {@code 400 (Bad Request)} if the orderItemDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the orderItemDTO couldn't be updated.
-     */
-    @PutMapping("/orderItems")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<OrderItemDTO> updateOrderItem(@Valid @RequestBody OrderItemDTO orderItemDTO) {
-        log.debug("REST request to update OrderItem : {}", orderItemDTO);
-
-        if (orderItemDTO.getId() == null) {
-            return createOrderItem(orderItemDTO);
-        }
-
-        final OrderItemDTO result = orderItemService.updateOrderItem(orderItemDTO);
-        return ResponseEntity.ok().body(result);
-    }
-
-    /**
-     * {@code DELETE  /orderItems/:id} : delete the "id" orderItem.
-     *
-     * @param id the id of the orderItemDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
-    @DeleteMapping("/orderItems/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<Void> deleteOrderItem(long id) {
-        log.debug("REST request to delete OrderItem : {}", id);
-
-        orderItemService.deleteOrderItem(id);
-        return ResponseEntity.noContent().build();
+        final Long orderId = orderItemService.createOrderItem(orderServerDTO);
+        return ResponseEntity.ok().body(orderId);
     }
 }

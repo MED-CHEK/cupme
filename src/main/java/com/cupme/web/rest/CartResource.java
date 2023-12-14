@@ -38,6 +38,20 @@ public class CartResource {
     }
 
     /**
+     * {@code GET /cart} : get cart for user
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all carts.
+     */
+    @GetMapping("/cart")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<CartDTO> getCartForUser() {
+        log.debug("REST request to get Cart for user");
+
+        final CartDTO cart = cartService.getCartForUser();
+        return ResponseEntity.ok().body(cart);
+    }
+
+    /**
      * {@code GET /carts/:id} : get the "id" cart.
      * @param id the id of the cartDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cartDTO, or with status {@code 404 (Not Found)}.
@@ -89,20 +103,5 @@ public class CartResource {
 
         final CartDTO result = cartService.updateCart(cartDTO);
         return ResponseEntity.ok().body(result);
-    }
-
-    /**
-     * {@code DELETE  /carts/:id} : delete the "id" cart.
-     *
-     * @param id the id of the cartDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
-    @DeleteMapping("/carts/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<Void> deleteCart(long id) {
-        log.debug("REST request to delete Cart : {}", id);
-
-        cartService.deleteCart(id);
-        return ResponseEntity.noContent().build();
     }
 }

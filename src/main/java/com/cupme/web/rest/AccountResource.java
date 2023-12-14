@@ -55,18 +55,17 @@ public class AccountResource {
     /**
      * {@code POST  /register} : register the user.
      *
-     * @param managedUserVM the managed user View Model.
+     * @param userDTO the managed user View Model.
      * @throws InvalidPasswordException {@code 400 (Bad Request)} if the password is incorrect.
      * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
      */
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
-        if (isPasswordLengthInvalid(managedUserVM.getPassword())) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json")
+    public void registerAccount(@Valid @RequestBody UserDTO userDTO) {
+        if (isPasswordLengthInvalid(userDTO.getPassword())) {
             throw new InvalidPasswordException();
         }
-        User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        User user = userService.registerUser(userDTO, userDTO.getPassword());
         mailService.sendActivationEmail(user);
     }
 

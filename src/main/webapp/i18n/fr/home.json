@@ -1,7 +1,10 @@
 {
   "home": {
-    "title": "Bienvenue, Java Hipster !",
+    "title": "Mon bien-être à portée de main",
     "subtitle": "Ceci est votre page d'accueil",
+    "login": {
+      "message": "bienvenue sur Cup'me, votre application de bien-être personnalisée !"
+    },
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     },
@@ -13,7 +16,7 @@
       "chat": "JHipster public chat room",
       "follow": "Suivez @jhipster sur Twitter"
     },
-    "like": "Si vous aimez JHipster, donnez nous une étoile sur",
-    "github": "GitHub "
+    "douleur": "Vous avez une douleur ?",
+    "chooseZones": "Choisissez la zone qui vous fait mal"
   }
 }

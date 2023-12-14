@@ -1,0 +1,14 @@
+<div class="customDate input-group">
+  <input
+    class="form-control"
+    placeholder="yyyy-mm-dd"
+    name="dp"
+    [(ngModel)]="model"
+    (ngModelChange)="onDateChange()"
+    ngbDatepicker
+    #d="ngbDatepicker"
+  />
+  <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+    <div class="calandar"></div>
+  </button>
+</div>

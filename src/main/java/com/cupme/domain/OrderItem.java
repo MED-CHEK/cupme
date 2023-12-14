@@ -25,11 +25,11 @@ public class OrderItem implements Serializable {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "protocol_id", nullable = false)
+    @JoinColumn(name = "protocol_id")
     private Protocol protocol;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @Column(name = "quantity", nullable = false)

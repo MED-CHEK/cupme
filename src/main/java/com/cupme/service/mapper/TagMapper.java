@@ -4,6 +4,7 @@ import com.cupme.domain.Tag;
 import com.cupme.service.dto.TagDTO;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,8 @@ public class TagMapper {
         return new TagDTO(tag);
     }
 
-    public List<Tag> tagDTOsToCategories(List<TagDTO> tagDTOS) {
-        return tagDTOS.stream().filter(Objects::nonNull).map(this::tagDTOToTag).collect(Collectors.toList());
+    public Set<Tag> tagDTOsToTags(Set<TagDTO> tagDTOS) {
+        return tagDTOS.stream().filter(Objects::nonNull).map(this::tagDTOToTag).collect(Collectors.toSet());
     }
 
     public Tag tagDTOToTag(TagDTO tagDTO) {
@@ -35,8 +36,6 @@ public class TagMapper {
             Tag tag = new Tag();
             tag.setId(tagDTO.getId());
             tag.setName(tagDTO.getName());
-            tag.setProducts(tagDTO.getProducts());
-            tag.setProtocols(tagDTO.getProtocols());
 
             return tag;
         }

@@ -1,6 +1,8 @@
 package com.cupme.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
@@ -25,22 +27,22 @@ public class CartItem implements Serializable {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "protocol_id", nullable = false)
+    @JoinColumn(name = "protocol_id")
     private Protocol protocol;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
     @Column(name = "created_date", nullable = false)
-    private String createdDate;
+    private Instant createdDate;
 
     public CartItem() {}
 
-    public CartItem(Long id, Cart cart, Protocol protocol, Product product, Integer quantity, String createdDate) {
+    public CartItem(Long id, Cart cart, Protocol protocol, Product product, Integer quantity, Instant createdDate) {
         this.id = id;
         this.cart = cart;
         this.protocol = protocol;
@@ -89,11 +91,11 @@ public class CartItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getCreatedDate() {
+    public Instant getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Instant createdDate) {
         this.createdDate = createdDate;
     }
 

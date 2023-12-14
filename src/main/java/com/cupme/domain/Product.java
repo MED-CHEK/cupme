@@ -88,6 +88,10 @@ public class Product implements Serializable {
     @JsonIgnore
     private Set<Category> categories = new HashSet<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private Set<Picture> pictures;
+
     public Product() {}
 
     public Product(
@@ -104,7 +108,8 @@ public class Product implements Serializable {
         Integer weight,
         Set<Protocol> protocols,
         Set<Tag> tags,
-        Set<Category> categories
+        Set<Category> categories,
+        Set<Picture> pictures
     ) {
         this.id = id;
         this.name = name;
@@ -120,6 +125,7 @@ public class Product implements Serializable {
         this.protocols = protocols;
         this.tags = tags;
         this.categories = categories;
+        this.pictures = pictures;
     }
 
     public Long getId() {
@@ -234,6 +240,14 @@ public class Product implements Serializable {
         this.categories = categories;
     }
 
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -253,7 +267,8 @@ public class Product implements Serializable {
             Objects.equals(getWeight(), product.getWeight()) &&
             Objects.equals(getProtocols(), product.getProtocols()) &&
             Objects.equals(getTags(), product.getTags()) &&
-            Objects.equals(getCategories(), product.getCategories())
+            Objects.equals(getCategories(), product.getCategories()) &&
+            Objects.equals(getPictures(), product.getPictures())
         );
     }
 
@@ -273,7 +288,8 @@ public class Product implements Serializable {
             getWeight(),
             getProtocols(),
             getTags(),
-            getCategories()
+            getCategories(),
+            getPictures()
         );
     }
 
@@ -313,6 +329,8 @@ public class Product implements Serializable {
             tags +
             ", categories=" +
             categories +
+            ", pictures=" +
+            pictures +
             '}'
         );
     }

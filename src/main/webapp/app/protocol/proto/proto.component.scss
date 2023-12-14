@@ -1,0 +1,65 @@
+.proto {
+  background-color: #e7e6e6;
+  padding: 0.75rem 0.75rem;
+  border-radius: 0.5rem;
+
+  .image {
+    position: relative;
+
+    .avis {
+      position: absolute;
+      top: 0.25rem;
+      left: 0.25rem;
+
+      .avis-text {
+        font-size: 0.75rem;
+        color: white;
+        background-color: goldenrod;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.5rem;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 10rem;
+    }
+  }
+
+  .name {
+    padding-top: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    height: 5rem;
+  }
+
+  .cart-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .price {
+      font-size: 1rem;
+      font-weight: 500;
+      color: goldenrod;
+    }
+
+    .cart {
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1.125rem;
+
+      .btn {
+        background-color: goldenrod;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,17 +1,19 @@
 package com.cupme.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedDate;
 
 /**
  * A order.
  */
 @Entity
-@Table(name = "order")
+@Table(name = "command")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Order implements Serializable {
 
@@ -28,16 +30,25 @@ public class Order implements Serializable {
     @Column(name = "paid", nullable = false)
     private Boolean paid;
 
-    @Column(name = "created_date", nullable = false)
-    private String createdDate;
+    @CreatedDate
+    @Column(name = "created_date", updatable = false)
+    private Instant createdDate = Instant.now();
+
+    @Column(name = "total_price", nullable = false)
+    private Double totalPrice;
+
+    @Column(name = "transaction_id", nullable = false)
+    private String transactionId;
 
     public Order() {}
 
-    public Order(Long id, User user, Boolean paid, String createdDate) {
+    public Order(Long id, User user, Boolean paid, Instant createdDate, Double totalPrice, String transactionId) {
         this.id = id;
         this.user = user;
         this.paid = paid;
         this.createdDate = createdDate;
+        this.totalPrice = totalPrice;
+        this.transactionId = transactionId;
     }
 
     public Long getId() {
@@ -64,12 +75,28 @@ public class Order implements Serializable {
         this.paid = paid;
     }
 
-    public String getCreatedDate() {
+    public Instant getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Instant createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     @Override
@@ -81,17 +108,37 @@ public class Order implements Serializable {
             Objects.equals(getId(), order.getId()) &&
             Objects.equals(getUser(), order.getUser()) &&
             Objects.equals(getPaid(), order.getPaid()) &&
-            Objects.equals(getCreatedDate(), order.getCreatedDate())
+            Objects.equals(getCreatedDate(), order.getCreatedDate()) &&
+            Objects.equals(getTotalPrice(), order.getTotalPrice()) &&
+            Objects.equals(getTransactionId(), order.getTransactionId())
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUser(), getPaid(), getCreatedDate());
+        return Objects.hash(getId(), getUser(), getPaid(), getCreatedDate(), getTotalPrice(), getTransactionId());
     }
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", user=" + user + ", paid=" + paid + ", createdDate='" + createdDate + '\'' + '}';
+        return (
+            "Order{" +
+            "id=" +
+            id +
+            ", user=" +
+            user +
+            ", paid=" +
+            paid +
+            ", createdDate='" +
+            createdDate +
+            '\'' +
+            ", totalPrice='" +
+            totalPrice +
+            '\'' +
+            ", transactionId='" +
+            transactionId +
+            '\'' +
+            '}'
+        );
     }
 }

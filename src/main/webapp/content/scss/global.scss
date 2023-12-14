@@ -1,18 +1,23 @@
+@use 'sass:map';
 @import 'bootstrap-variables';
 @import '~bootstrap/scss/functions';
 @import '~bootswatch/dist/cerulean/variables';
 @import '~bootstrap/scss/variables';
+@import '../../content/scss/custom-variables.scss';
 
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
+html {
+  scroll-behavior: smooth;
+}
 
 body,
 h1,
 h2,
 h3,
 h4 {
-  font-weight: 300;
+  font-weight: 400;
 }
 
 a:hover {
@@ -40,10 +45,10 @@ Generic styles
 
 /* other generic styles */
 
-.jh-card {
-  padding: 1.5%;
-  margin-top: 20px;
+.cup-card {
+  padding: 3% 3%;
   border: none;
+  width: 100%;
 }
 
 .error {
@@ -122,7 +127,7 @@ Custom alerts for notification
   }
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'lg') - 1px)) {
   .alerts .jhi-toast {
     width: 50%;
   }
@@ -146,7 +151,7 @@ entity detail page css
   line-height: 1.5;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
   .row-md.jh-entity-details > {
     dt {
       float: left;
@@ -189,15 +194,6 @@ ui bootstrap tweaks
 /* ==========================================================================
 angular-cli removes postcss-rtl processed inline css, processed rules must be added here instead
 ========================================================================== */
-/* page-ribbon.component.scss */
-.ribbon {
-  left: -3.5em;
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
 
 /* navbar.component.scss */
 .navbar {

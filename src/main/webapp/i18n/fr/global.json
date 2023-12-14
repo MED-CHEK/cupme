@@ -4,13 +4,12 @@
     "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
     "menu": {
       "home": "Accueil",
+      "myProtocols": "Mes protocoles",
+      "panier": "Panier",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
-      "entities": {
-        "main": "Entités",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
-      },
+
       "account": {
-        "main": "Compte",
+        "main": "Mon Compte",
         "settings": "Profil",
         "password": "Mot de passe",
         "sessions": "Sessions",
@@ -19,7 +18,7 @@
         "register": "Créer un compte"
       },
       "admin": {
-        "main": "Administration",
+        "main": "Mon cockpit",
         "userManagement": "Gestion des utilisateurs",
         "tracker": "Suivi des utilisateurs",
         "metrics": "Métriques",
@@ -33,8 +32,8 @@
       "language": "Langue"
     },
     "form": {
-      "username.label": "Nom d'utilisateur",
-      "username.placeholder": "Votre nom d'utilisateur",
+      "username.label": "Login",
+      "username.placeholder": "Entrez votre e'mail",
       "currentpassword.label": "Mot de passe actuel",
       "currentpassword.placeholder": "Mot de passe actuel",
       "newpassword.label": "Nouveau mot de passe",
@@ -42,7 +41,21 @@
       "confirmpassword.label": "Confirmation du nouveau mot de passe",
       "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
       "email.label": "Email",
-      "email.placeholder": "Votre email"
+      "email.placeholder": "Votre email",
+      "firstName.label": "Prénom",
+      "firstName.placeholder": "Entrez votre prénom",
+      "lastName.label": "Nom de famille",
+      "lastName.placeholder": "Entrez votre nom de famille",
+      "sex.label": "Genre",
+      "sex.placeholder": "Entrez votre genre",
+      "sex.homme": "Homme",
+      "sex.femme": "Femme",
+      "age.label": "Âge",
+      "age.placeholder": "Entrez votre Âge",
+      "weight.label": "Poids",
+      "weight.placeholder": "Entrez votre poids",
+      "size.label": "Taille",
+      "size.placeholder": "Entrez votre Taille"
     },
     "messages": {
       "info": {
@@ -52,8 +65,8 @@
           "suffix": ", vous pouvez utiliser les comptes par défaut : <br/> - Administrateur (nom d'utilisateur=\"admin\" et mot de passe =\"admin\") <br/> - Utilisateur (nom d'utilisateur=\"user\" et mot de passe =\"user\")."
         },
         "register": {
-          "noaccount": "Vous n'avez pas encore de compte ?",
-          "link": "Créer un compte"
+          "noaccount": "Pas encore inscrit ?",
+          "link": "Inscrivez-vous"
         }
       },
       "error": {
@@ -75,17 +88,46 @@
           "required": "Votre email est requis.",
           "minlength": "Votre email doit comporter au moins 5 caractères.",
           "maxlength": "Votre email ne doit pas comporter plus de 50 caractères.",
-          "invalid": "Votre email n'est pas valide."
+          "invalid": "Votre email n'est pas valide.",
+          "pattern": "Votre email n'est pas valide."
         }
       }
     },
     "field": {
       "id": "ID"
     },
-    "ribbon": {
-      "dev": "Développement"
+    "item-count": "Affichage {{first}} - {{second}} de {{total}} items.",
+    "protocol.title": "Protocoles",
+    "myprotocol.title": "Mes protocoles",
+    "detail": {
+      "title": "Détail",
+      "message": "ces protocoles sont faite pour vous !",
+      "panier": "Ajouter au panier",
+      "categories": "Catégories",
+      "shortDescription": "En bref",
+      "description": "Description",
+      "protocol.label": "Protocoles",
+      "product.label": "Produits pour ce protocole",
+      "myprotocol.label": "Mes protocoles"
     },
-    "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
+    "cart": {
+      "title": "Mon panier",
+      "label": "Mon panier",
+      "reset": "Vider le panier",
+      "empty": "Votre panier est actuellement vide. jetez un oeil à nos protocoles et ajoutez-en quelques-uns !",
+      "total": "Total",
+      "price": "Prix unitaire :",
+      "checkout": "Commander",
+      "remove": "Supprimer",
+      "quantity": "Quantité",
+      "table": {
+        "name": "Produit",
+        "quantity": "Quantité",
+        "total": "Sous Total"
+      },
+      "subTotal": "Récapitulatif de votre commande"
+    },
+    "success.title": "Transaction réussie"
   },
   "entity": {
     "action": {

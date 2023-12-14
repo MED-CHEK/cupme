@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="v0.0.1-ADD_CREATED_DATE_TO_USER" author="jhipster">
+        <addColumn tableName="user">
+            <column name="created_date" type="datetime" defaultValueDate="CURRENT_TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,382 @@
+<div class="detail">
+  <div class="row col-12 col-md-10 col-lg-8" *ngIf="step == 0">
+    <div class="step0">
+      <div class="title col-12">
+        {{ 'detail.' + protocol.id + '.title' | translate }}
+      </div>
+      <div class="desc">
+        <span [innerHTML]="'detail.' + protocol.id + '.desc1' | translate"></span>
+      </div>
+      <div class="row">
+        <div class="image col-12 col-md-6">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase01.png'" />
+        </div>
+        <div class="image col-12 col-md-6">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase02.png'" />
+        </div>
+      </div>
+      <div class="desc">
+        {{ 'detail.' + protocol.id + '.desc2' | translate }}
+      </div>
+      <div class="button d-flex justify-content-end">
+        <div class="col-12 col-md-6 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.commencer' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-12 col-lg-8" *ngIf="step == 1">
+    <div class="step1">
+      <div class="title col-12">
+        {{ 'detail.tuto' | translate }}
+      </div>
+      <div class="desc col-12">
+        {{ 'detail.desc' | translate }}
+      </div>
+      <div class="img row">
+        <div class="col-12 col-md-6">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase1-1.png'" />
+        </div>
+        <div class="col-12 col-md-6">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase1-2.png'" />
+        </div>
+      </div>
+      <div class="row flex-lg-row flex-column-reverse">
+        <div class="image col-12 col-lg-7">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase1.png'" />
+        </div>
+        <div class="phase col-12 col-lg-5">
+          <div class="tirer">&nbsp;</div>
+          <div class="phase-info row flex-row flex-lg-column">
+            <div class="col-12 col-md-8 col-lg-12">
+              <div class="title">{{ 'detail.phase.title' | translate }} 1</div>
+              <div class="text">
+                <span class="cupping-icon cup-icon"></span>
+                <span>{{ 'detail.phase1.text' | translate }}</span>
+                <ng-template #tipContent>
+                  <span [innerHTML]="'detail.aspiration' | translate: { nbAsp: aspiration }"></span>
+                </ng-template>
+                <span class="cupping-icon info-icon" [ngbTooltip]="tipContent" tooltipClass="tooltip" triggers="click:blur"></span>
+              </div>
+              <div class="duree">
+                {{ 'detail.phase1.duree' | translate: { time: poseTime } }}
+              </div>
+            </div>
+            <div class="timer col-12 col-md-4 col-lg-12">
+              <jhi-timer [poseTime]="poseTime"></jhi-timer>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button d-flex justify-content-between">
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+        </div>
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-12 col-md-8" *ngIf="step == 2">
+    <div class="step1">
+      <div class="title col-12">
+        {{ 'detail.tuto' | translate }}
+      </div>
+      <div class="desc col-12">
+        {{ 'detail.desc' | translate }}
+      </div>
+      <div class="row flex-lg-row flex-column-reverse">
+        <div class="image col-12 col-lg-8">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase2.png'" />
+        </div>
+        <div class="phase col-12 col-lg-4">
+          <div class="tirer">&nbsp;</div>
+          <div class="phase-info">
+            <div class="title">{{ 'detail.phase.title' | translate }} 2</div>
+            <div class="text">
+              {{ 'detail.phase2.text' | translate }}
+            </div>
+            <div class="row trace">
+              <div class="trace-img col-1">
+                <img [src]="'../../../content/images/trace.png'" />
+              </div>
+              <div class="trace-text col-11">
+                {{ 'detail.phase2.trace' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button d-flex justify-content-between">
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+        </div>
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-12 col-lg-8" *ngIf="step == 3">
+    <div class="step1">
+      <div class="title col-12">
+        {{ 'detail.tuto' | translate }}
+      </div>
+      <div class="desc col-12">
+        {{ 'detail.desc' | translate }}
+      </div>
+      <div class="row flex-lg-row flex-column-reverse">
+        <div class="image col-12 col-lg-8">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase3.png'" />
+        </div>
+        <div class="phase col-12 col-lg-4">
+          <div class="tirer">&nbsp;</div>
+          <div class="phase-info flex-row flex-lg-column">
+            <div class="col-12 col-lg-8 col-lg-12">
+              <div class="title">{{ 'detail.phase.title' | translate }} 3</div>
+              <div class="text">
+                <span class="cupping-icon cup-icon"></span>
+                <span>{{ 'detail.phase3.text' | translate }}</span>
+                <ng-template #tipContent>
+                  <span [innerHTML]="'detail.aspiration' | translate: { nbAsp: aspiration }"></span>
+                </ng-template>
+                <span class="cupping-icon info-icon" [ngbTooltip]="tipContent" tooltipClass="tooltip" triggers="click:blur"></span>
+              </div>
+              <div class="duree">
+                {{ 'detail.phase3.duree' | translate: { time: getPoseTime() } }}
+              </div>
+            </div>
+          </div>
+          <div class="timer col-12 col-lg-8 col-lg-12">
+            <jhi-timer [poseTime]="getPoseTime()"></jhi-timer>
+          </div>
+        </div>
+      </div>
+
+      <div class="button d-flex justify-content-between">
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+        </div>
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-12 col-lg-8" *ngIf="step == 4">
+    <div class="step1">
+      <div class="title col-12">
+        {{ 'detail.tuto' | translate }}
+      </div>
+      <div class="desc col-12">
+        {{ 'detail.desc' | translate }}
+      </div>
+      <div class="row flex-lg-row flex-column-reverse">
+        <div class="image col-12 col-lg-8">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase4.png'" />
+        </div>
+        <div class="phase col-12 col-lg-4">
+          <div class="tirer">&nbsp;</div>
+          <div class="phase-info">
+            <div class="title">{{ 'detail.phase.title' | translate }} 4</div>
+            <div class="text">
+              {{ 'detail.phase4.text' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button d-flex justify-content-between">
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+        </div>
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row col-12 col-lg-8" *ngIf="step == 5 && (protocol.id == 7486 || protocol.id == 7530)">
+    <div class="step1">
+      <div class="title col-12">
+        {{ 'detail.tuto' | translate }}
+      </div>
+      <div class="desc col-12">
+        {{ 'detail.desc' | translate }}
+      </div>
+      <div class="row flex-lg-row flex-column-reverse">
+        <div class="image col-12 col-lg-8">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase5.png'" />
+        </div>
+        <div class="phase col-12 col-lg-4">
+          <div class="tirer">&nbsp;</div>
+          <div class="phase-info flex-row flex-lg-column">
+            <div class="col-12 col-lg-8 col-lg-12">
+              <div class="title">{{ 'detail.phase.title' | translate }} 5</div>
+              <div class="text">
+                <span class="cupping-icon cup-icon"></span>
+                <span>{{ 'detail.phase3.text' | translate }}</span>
+                <ng-template #tipContent>
+                  <span [innerHTML]="'detail.aspiration' | translate: { nbAsp: aspiration }"></span>
+                </ng-template>
+                <span class="cupping-icon info-icon" [ngbTooltip]="tipContent" tooltipClass="tooltip" triggers="click:blur"></span>
+              </div>
+              <div class="duree">
+                {{ 'detail.phase3.duree' | translate: { time: getPoseTime() } }}
+              </div>
+            </div>
+          </div>
+          <div class="timer col-12 col-lg-8 col-lg-12">
+            <jhi-timer [poseTime]="getPoseTime()"></jhi-timer>
+          </div>
+        </div>
+      </div>
+
+      <div class="button d-flex justify-content-between">
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+        </div>
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-12 col-lg-8" *ngIf="step == 6 && protocol.id == 7486">
+    <div class="step1">
+      <div class="title col-12">
+        {{ 'detail.tuto' | translate }}
+      </div>
+      <div class="desc col-12">
+        {{ 'detail.desc' | translate }}
+      </div>
+      <div class="row flex-lg-row flex-column-reverse">
+        <div class="image col-12 col-lg-8">
+          <img [src]="'../../../content/images/' + protocol.id + '/phase6.png'" />
+        </div>
+        <div class="phase col-12 col-lg-4">
+          <div class="tirer">&nbsp;</div>
+          <div class="phase-info">
+            <div class="title">{{ 'detail.phase.title' | translate }} 6</div>
+            <div class="text">
+              {{ 'detail.phase4.text' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button d-flex justify-content-between">
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+        </div>
+        <div class="col-4 col-md-5 col-lg-4">
+          <button class="btn btn-primary" (click)="nextStep()">{{ 'detail.next' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="row col-12 col-md-10 col-lg-8"
+    *ngIf="
+      (step == 5 && protocol.id !== 7486 && protocol.id !== 7530) ||
+      (step == 7 && protocol.id == 7486) ||
+      (step == 6 && protocol.id == 7530)
+    "
+  >
+    <div class="step0">
+      <div class="title col-12">
+        {{ 'detail.fin' | translate }}
+      </div>
+      <div
+        *ngIf="
+          protocol.id == 7543 ||
+          protocol.id == 7544 ||
+          protocol.id == 7531 ||
+          protocol.id == 7533 ||
+          protocol.id == 7535 ||
+          protocol.id == 7550
+        "
+      >
+        <div class="desc">
+          {{ 'detail.' + protocol.id + '.find01' | translate }}
+        </div>
+        <div class="desc">
+          {{ 'detail.' + protocol.id + '.find02' | translate }}
+        </div>
+        <div class="desc">
+          {{ 'detail.' + protocol.id + '.find03' | translate }}
+        </div>
+      </div>
+      <div class="desc">
+        {{ 'detail.find1' | translate }}
+      </div>
+      <div class="desc">
+        {{ 'detail.find2' | translate }}
+      </div>
+      <div class="desc">
+        {{ 'detail.find3' | translate }}
+      </div>
+
+      <div *ngIf="protocol.id == 7530">
+        <div class="desc">
+          {{ 'detail.' + protocol.id + '.liste' | translate }}
+        </div>
+        <ul class="desc">
+          <li *ngFor="let number of [1, 2, 3, 4, 5, 6]">
+            {{ 'detail.' + protocol.id + '.liste' + number | translate }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="fin">
+        <div class="ligne row">
+          <div class="col-12 col-lg-8">
+            <div class="desc">
+              {{ 'detail.find4' | translate }}
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+            <img [src]="'../../../content/images/fin1.png'" />
+          </div>
+        </div>
+        <div class="ligne row">
+          <div class="col-12 col-lg-8">
+            <div class="desc">
+              {{ 'detail.find5' | translate }}
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+            <img [src]="'../../../content/images/fin2.png'" />
+          </div>
+        </div>
+        <div class="ligne row">
+          <div class="col-12 col-lg-8">
+            <div class="desc">
+              {{ 'detail.find6' | translate }}
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+            <img [src]="'../../../content/images/fin3.png'" />
+          </div>
+        </div>
+
+        <div class="button d-flex justify-content-between">
+          <div class="col-4 col-md-5 col-lg-4">
+            <button class="btn btn-primary" (click)="prevStep()">{{ 'detail.previous' | translate }}</button>
+          </div>
+          <div class="col-4 col-md-5 col-lg-4">
+            <button class="btn btn-primary" (click)="fin()">{{ 'detail.finduproto' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

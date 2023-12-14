@@ -3,6 +3,7 @@ package com.cupme.service.dto;
 import com.cupme.domain.Order;
 import com.cupme.domain.User;
 import java.io.Serializable;
+import java.time.Instant;
 
 public class OrderDTO implements Serializable {
 
@@ -14,22 +15,26 @@ public class OrderDTO implements Serializable {
 
     private Boolean paid;
 
-    private String createdDate;
+    private Double totalPrice;
+
+    private String transactionId;
 
     public OrderDTO() {}
 
-    public OrderDTO(Long id, User user, Boolean paid, String createdDate) {
+    public OrderDTO(Long id, User user, Boolean paid, Double totalPrice, String transactionId) {
         this.id = id;
         this.user = user;
         this.paid = paid;
-        this.createdDate = createdDate;
+        this.totalPrice = totalPrice;
+        this.transactionId = transactionId;
     }
 
     public OrderDTO(Order order) {
         this.id = order.getId();
         this.user = order.getUser();
         this.paid = order.getPaid();
-        this.createdDate = order.getCreatedDate();
+        this.totalPrice = order.getTotalPrice();
+        this.transactionId = order.getTransactionId();
     }
 
     public Long getId() {
@@ -56,16 +61,38 @@ public class OrderDTO implements Serializable {
         this.paid = paid;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", user=" + user + ", paid=" + paid + ", createdDate='" + createdDate + '\'' + '}';
+        return (
+            "Order{" +
+            "id=" +
+            id +
+            ", user=" +
+            user +
+            ", paid=" +
+            paid +
+            ", totalPrice=" +
+            totalPrice +
+            ", transactionId='" +
+            transactionId +
+            '\'' +
+            '}'
+        );
     }
 }

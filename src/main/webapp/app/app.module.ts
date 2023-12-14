@@ -22,9 +22,12 @@ import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { ProtocolModule } from './protocol/protocol.module';
+import { MyProtocolModule } from './myprotocol/myprotocol.module';
+import { CartModule } from './cart/cart.module';
+import { SuccessModule } from './success/success.module';
 
 @NgModule({
   imports: [
@@ -38,6 +41,10 @@ import { ErrorComponent } from './layouts/error/error.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
+    ProtocolModule,
+    MyProtocolModule,
+    CartModule,
+    SuccessModule,
   ],
   providers: [
     Title,
@@ -45,7 +52,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

@@ -123,6 +123,12 @@ docker-compose -f src/main/docker/jhipster-control-center.yml up
 
 ## Building for production
 
+### Some feild to change
+
+- Change the database name in the file `src/main/resources/config/application-prod.yml`
+- Change the username and password of the database in the file `src/main/resources/config/application-prod.yml`
+- Change the email and password of the email in the file `src/main/resources/config/application-prod.yml`
+
 ### Packaging as jar
 
 To build the final jar and optimize the CupMe application for production, run:
@@ -138,7 +144,7 @@ To ensure everything worked, run:
 java -jar target/*.jar
 ```
 
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
+Then navigate to [http://localhost:9000](http://localhost:9000) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
 

@@ -1,10 +1,11 @@
 package com.cupme.web.rest;
 
-import com.cupme.domain.CartItem;
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.service.CartItemService;
-import com.cupme.service.CartItemService;
 import com.cupme.service.dto.CartItemDTO;
+import com.cupme.service.dto.CartItemDisplayDTO;
+import com.cupme.service.dto.CartItemSessionDTO;
+import com.cupme.service.utils.AssetFilesService;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -20,9 +21,24 @@ public class CartItemResource {
     private final Logger log = LoggerFactory.getLogger(CartItemResource.class);
 
     private final CartItemService cartItemService;
+    private final AssetFilesService assetFilesService;
 
-    public CartItemResource(CartItemService cartItemService) {
+    public CartItemResource(CartItemService cartItemService, AssetFilesService assetFilesService) {
         this.cartItemService = cartItemService;
+        this.assetFilesService = assetFilesService;
+    }
+
+    /**
+     * {@code GET /cartItems/size} : get the size of the cart.
+     * @return
+     */
+    @GetMapping("/cartItems/size")
+    public ResponseEntity<Integer> getCartSize() {
+        log.debug("REST request to get Cart size");
+
+        final Integer size = cartItemService.getCartSize();
+
+        return ResponseEntity.ok().body(size);
     }
 
     /**
@@ -35,8 +51,9 @@ public class CartItemResource {
     public ResponseEntity<List<CartItemDTO>> getAllCartItems() {
         log.debug("REST request to get all public CartItem names");
 
-        final List<CartItemDTO> cartItemes = cartItemService.getCartItems();
-        return ResponseEntity.ok().body(cartItemes);
+        final List<CartItemDTO> cartItems = cartItemService.getCartItems();
+
+        return ResponseEntity.ok().body(cartItems);
     }
 
     /**
@@ -49,7 +66,7 @@ public class CartItemResource {
     public ResponseEntity<CartItemDTO> getCartItem(long id) {
         log.debug("REST request to get CartItem : {}", id);
 
-        final CartItemDTO cartItem = cartItemService.getCartItem(id);
+        final CartItemDTO cartItem = cartItemService.getCartItem();
         return ResponseEntity.ok().body(cartItem);
     }
 
@@ -99,12 +116,56 @@ public class CartItemResource {
      * @param id the id of the cartItemDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/cartItems/{id}")
+    @DeleteMapping("/cartItem/{id}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<Void> deleteCartItem(long id) {
+    public ResponseEntity<Void> deleteCartItem(@PathVariable long id) {
         log.debug("REST request to delete CartItem : {}", id);
 
         cartItemService.deleteCartItem(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * {@code DELETE  /cartItems/all} : delete all cartItems of the connected user.
+     *
+     * * @param cartId the id of the cartItemDTO to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/cartItems/{cartId}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<Void> deleteAllCartItems(@PathVariable long cartId) {
+        log.debug("REST request to delete all CartItems");
+
+        cartItemService.deleteCartItems(cartId);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * {@code POST  /cartItems/persist} : persist all cartItems of the connected user.
+     * @param cartItemSessionDTOs
+     * @return
+     */
+    @PostMapping("/cartItems/persist")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<Void> persistCartItems(@Valid @RequestBody List<CartItemSessionDTO> cartItemSessionDTOs) {
+        log.debug("REST request to persist CartItems : {}", cartItemSessionDTOs);
+
+        cartItemService.persistCartItems(cartItemSessionDTOs);
+        return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * {@code GET /cartItems/display} : get all cartItems with only the public informations - calling this are allowed for anyone.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all cartItems.
+     */
+    @GetMapping("/cartItems/display")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<List<CartItemDisplayDTO>> getPersistedCartItems() {
+        log.debug("REST request to get persisted CartItems");
+
+        final List<CartItemDisplayDTO> cartItems = cartItemService.getPersistedCartItems();
+
+        return ResponseEntity.ok().body(cartItems);
     }
 }

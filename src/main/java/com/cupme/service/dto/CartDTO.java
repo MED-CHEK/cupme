@@ -10,18 +10,18 @@ public class CartDTO implements Serializable {
 
     private Long id;
 
-    private User user;
+    private PublicUserDTO user;
 
     public CartDTO() {}
 
-    public CartDTO(Long id, User user) {
+    public CartDTO(Long id, PublicUserDTO user) {
         this.id = id;
         this.user = user;
     }
 
     public CartDTO(Cart cart) {
         this.id = cart.getId();
-        this.user = cart.getUser();
+        this.user = new PublicUserDTO(cart.getUser());
     }
 
     public Long getId() {
@@ -32,11 +32,11 @@ public class CartDTO implements Serializable {
         this.id = id;
     }
 
-    public User getUser() {
+    public PublicUserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(PublicUserDTO user) {
         this.user = user;
     }
 

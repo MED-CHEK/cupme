@@ -1,0 +1,66 @@
+@use 'sass:map';
+@import '../../../../content/scss/custom-variables.scss';
+
+.countdown-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 10rem;
+  border: 0.25rem solid #00205a;
+  border-radius: 50%;
+
+  .time {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.625rem;
+    color: $primary;
+  }
+}
+
+.timer-icon {
+  height: 2rem;
+  width: 2rem;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  cursor: pointer;
+
+  &.play-icon {
+    background: url('../../../../content/images/play.svg') no-repeat center top;
+    background-size: 100%;
+  }
+
+  &.pause-icon {
+    background: url('../../../../content/images/pause.svg') no-repeat center top;
+    background-size: 100%;
+  }
+
+  &.stop-icon {
+    background: url('../../../../content/images/stop.svg') no-repeat center top;
+    background-size: 100%;
+  }
+
+  *:hover {
+    opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .countdown-timer {
+    width: 6rem;
+    height: 6rem;
+    border-width: 0.125rem;
+
+    .time {
+      font-size: 1rem;
+      margin-bottom: 0.3125rem;
+    }
+
+    .timer-icon {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+}

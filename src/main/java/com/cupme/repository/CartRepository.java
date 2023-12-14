@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
  * Spring Data JPA repository for the {@link Cart} entity.
  */
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Long> {}
+public interface CartRepository extends JpaRepository<Cart, Long> {
+    Cart findByUserId(long id);
+}

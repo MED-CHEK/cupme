@@ -15,24 +15,16 @@ public class CategoryDTO implements Serializable {
 
     private String name;
 
-    private Set<Protocol> protocols = new HashSet<>();
-
-    private Set<Product> products = new HashSet<>();
-
     public CategoryDTO() {}
 
-    public CategoryDTO(Long id, String name, Set<Protocol> protocols, Set<Product> products) {
+    public CategoryDTO(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.protocols = protocols;
-        this.products = products;
     }
 
     public CategoryDTO(Category category) {
         this.id = category.getId();
         this.name = category.getName();
-        this.protocols = category.getProtocols();
-        this.products = category.getProducts();
     }
 
     public Long getId() {
@@ -51,24 +43,8 @@ public class CategoryDTO implements Serializable {
         this.name = name;
     }
 
-    public Set<Protocol> getProtocols() {
-        return protocols;
-    }
-
-    public void setProtocols(Set<Protocol> protocols) {
-        this.protocols = protocols;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public String toString() {
-        return "CategoryDTO{" + "id=" + id + ", name='" + name + '\'' + ", protocols=" + protocols + ", products=" + products + '}';
+        return "CategoryDTO{" + "id=" + id + ", name='" + name + '}';
     }
 }

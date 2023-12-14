@@ -6,11 +6,59 @@
     },
     "messages": {
       "validate": {
+        "firstName": {
+          "required": "Votre prénom est obligatoire.",
+          "minlength": "Votre prénom doit contenir plus d'un caractère.",
+          "maxlength": "Votre prénom ne peut pas contenir plus de 50 caractères.",
+          "pattern": "Votre prénom est invalide."
+        },
+        "lastName": {
+          "required": "Votre nom est obligatoire.",
+          "minlength": "Votre nom doit contenir plus d'un caractère.",
+          "maxlength": "Votre nom ne peut pas contenir plus de 50 caractères.",
+          "pattern": "Votre nom est invalide."
+        },
+        "email": {
+          "required": "Votre email est obligatoire.",
+          "minlength": "Votre email doit contenir plus d'un caractère.",
+          "maxlength": "Votre email ne peut pas contenir plus de 50 caractères.",
+          "pattern": "Votre email est invalide."
+        },
         "login": {
           "required": "Votre nom d'utilisateur est obligatoire.",
           "minlength": "Votre nom d'utilisateur doit contenir plus d'un caractère.",
           "maxlength": "Votre nom d'utilisateur ne peut pas contenir plus de 50 caractères.",
           "pattern": "Votre nom d'utilisateur est invalide."
+        },
+        "password": {
+          "required": "Votre mot de passe est obligatoire.",
+          "minlength": "Votre mot de passe doit contenir plus de 6 caractères.",
+          "maxlength": "Votre mot de passe ne peut pas contenir plus de 50 caractères.",
+          "pattern": "Votre mot de passe est invalide."
+        },
+        "passwordConfirm": {
+          "required": "Votre mot de passe est obligatoire.",
+          "minlength": "Votre mot de passe doit contenir plus de 6 caractères.",
+          "maxlength": "Votre mot de passe ne peut pas contenir plus de 50 caractères.",
+          "pattern": "Votre mot de passe est invalide.",
+          "validateEqual": "Les mots de passe ne correspondent pas."
+        },
+        "age": {
+          "required": "Votre âge est obligatoire.",
+          "pattern": "Votre âge est invalide."
+        },
+        "sex": {
+          "required": "Votre genre est obligatoire."
+        },
+        "weight": {
+          "required": "Votre poids est obligatoire.",
+          "min": "Votre poids doit être supérieur à 0.",
+          "max": "Votre poids doit être inférieur à 999."
+        },
+        "size": {
+          "required": "Votre taille est obligatoire.",
+          "min": "Votre taille doit être supérieur à 0.",
+          "max": "Votre taille doit être inférieur à 999."
         }
       },
       "success": "<strong>Compte enregistré !</strong> Merci de vérifier votre email de confirmation.",

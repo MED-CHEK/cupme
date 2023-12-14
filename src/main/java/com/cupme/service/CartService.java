@@ -1,9 +1,7 @@
 package com.cupme.service;
 
-import com.cupme.repository.AddressRepository;
 import com.cupme.repository.CartRepository;
 import com.cupme.service.dto.CartDTO;
-import com.cupme.service.mapper.AddressMapper;
 import com.cupme.service.mapper.CartMapper;
 import java.util.List;
 import org.slf4j.Logger;
@@ -26,10 +24,18 @@ public class CartService {
     private final CartMapper cartMapper;
     private final CacheManager cacheManager;
 
-    public CartService(CartRepository cartRepository, CartMapper cartMapper, CacheManager cacheManager) {
+    private final UserService userService;
+
+    public CartService(CartRepository cartRepository, CartMapper cartMapper, CacheManager cacheManager, UserService userService) {
         this.cartRepository = cartRepository;
         this.cartMapper = cartMapper;
         this.cacheManager = cacheManager;
+        this.userService = userService;
+    }
+
+    public CartDTO getCartForUser() {
+        Long userId = userService.getUserWithAuthorities().get().getId();
+        return cartMapper.cartToCartDTO(cartRepository.findByUserId(userId));
     }
 
     public List<CartDTO> getCarts() {

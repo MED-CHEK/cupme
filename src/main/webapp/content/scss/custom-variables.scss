@@ -1,0 +1,60 @@
+// Screen sizes
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1920px,
+);
+
+$enable-smooth-scroll: false;
+
+$zoomLgSize: 0.74;
+
+//Colors
+$primary: #00205a;
+$primary-dark: #001a4d;
+$backgroundColor: #f7f9fa;
+$statusColor: #f7f9fa;
+$submiInfoColor: #707070;
+
+$statusDone: #08875b;
+$statusPending: #ff7700;
+$statusTransaction: #647491;
+$statusExpired: #8390a7;
+$statusRejected: #e3002b;
+
+$titleColor: #282e3a;
+
+$searchBar: #e1e9ed;
+$textColor: #002d80;
+$textBlackColor: #272e3a;
+$inputFilledColor: #245ecd;
+$dataTextColor: #053a9d;
+$borderColor: #e5e5e5;
+$border: #707070;
+
+$boxShadow: #c8cbcc;
+$tableBackground: #d3dde3;
+$filterBackgroundHover: #e2e9ee;
+
+//Sizes
+$headerHeight: 12.5rem;
+$pagePaddingTop: 3.75rem;
+$pagePaddingBottom: 6.25rem;
+$pagePaddingHorizontal: 10.375rem;
+
+$myTaskPaddingLeftDesktop: 22.625rem;
+$myTaskPaddingRigthDesktop: 15.3125rem;
+$myTaskPaddingTopDesktop: 3.75rem;
+$myTaskPaddingBottomDesktop: 10rem;
+
+$itColor: #da1884;
+$furnituresColor: #08875a;
+$workshopColor: #ff7725;
+$logisticColor: #053a9d;
+$equipmentColor: #fadb00;
+$materialsColor: #a41890;
+
+$formTimeline: #08875b;

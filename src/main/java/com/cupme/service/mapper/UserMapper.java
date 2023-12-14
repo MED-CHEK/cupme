@@ -50,7 +50,8 @@ public class UserMapper {
             user.setFirstName(userDTO.getFirstName());
             user.setLastName(userDTO.getLastName());
             user.setEmail(userDTO.getEmail());
-            user.setBirthDate(userDTO.getBirthDate());
+            user.setSex(userDTO.getSex());
+            user.setAge(userDTO.getAge());
             user.setWeight(userDTO.getWeight());
             user.setSize(userDTO.getSize());
             user.setAddresses(userDTO.getAddresses());
@@ -80,6 +81,17 @@ public class UserMapper {
         }
 
         return authorities;
+    }
+
+    public User userFromPublicUserDTO(PublicUserDTO publicUserDTO) {
+        if (publicUserDTO == null) {
+            return null;
+        } else {
+            User user = new User();
+            user.setId(publicUserDTO.getId());
+            user.setLogin(publicUserDTO.getLogin());
+            return user;
+        }
     }
 
     public User userFromId(Long id) {

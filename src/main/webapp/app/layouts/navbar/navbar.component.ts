@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
 
-import { VERSION } from 'app/app.constants';
 import { LANGUAGES } from 'app/config/language.constants';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { CartService } from '../../cart/cart.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -17,36 +16,43 @@ import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  inProduction?: boolean;
+  inProductDTOion?: boolean;
   isNavbarCollapsed = true;
   languages = LANGUAGES;
   openAPIEnabled?: boolean;
-  version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  cartSize!: number;
 
   constructor(
     private loginService: LoginService,
+    private cartService: CartService,
     private translateService: TranslateService,
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
-    private profileService: ProfileService,
     private router: Router
-  ) {
-    if (VERSION) {
-      this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.entitiesNavbarItems = EntityNavbarItems;
-    this.profileService.getProfileInfo().subscribe(profileInfo => {
-      this.inProduction = profileInfo.inProduction;
-      this.openAPIEnabled = profileInfo.openAPIEnabled;
-    });
 
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
+    });
+    let cartItems = localStorage.getItem('jhi-cart-items');
+    if (cartItems) {
+      this.cartSize = JSON.parse(cartItems).length;
+    } else {
+      this.cartSize = 0;
+    }
+    this.loadCart();
+  }
+
+  loadCart(): void {
+    this.cartService.loadCartFromLocalStorage();
+    //this.cartSize = this.cartService.getCartItems().length;
+    this.cartService.cartdata.subscribe(items => {
+      this.cartSize = items.length;
     });
   }
 
@@ -65,8 +71,9 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.collapseNavbar();
+    this.cartService.persistCart();
     this.loginService.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
   }
 
   toggleNavbar(): void {

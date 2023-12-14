@@ -13,6 +13,11 @@ import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
 import { FilterComponent } from './filter/filter.component';
+import { DateComponent } from './date/date/date.component';
+import { VideoComponent } from './video/video.component';
+import { NgbdRatingDecimal } from './rating/rating-decimal';
+import { LoadingComponent } from './loading/loading.component';
+import { ToastsContainer } from './toast/toasts-container.component';
 
 @NgModule({
   imports: [SharedLibsModule],
@@ -29,6 +34,11 @@ import { FilterComponent } from './filter/filter.component';
     SortDirective,
     ItemCountComponent,
     FilterComponent,
+    DateComponent,
+    VideoComponent,
+    LoadingComponent,
+    NgbdRatingDecimal,
+    ToastsContainer,
   ],
   exports: [
     SharedLibsModule,
@@ -44,6 +54,11 @@ import { FilterComponent } from './filter/filter.component';
     SortDirective,
     ItemCountComponent,
     FilterComponent,
+    DateComponent,
+    VideoComponent,
+    LoadingComponent,
+    NgbdRatingDecimal,
+    ToastsContainer,
   ],
 })
 export class SharedModule {}

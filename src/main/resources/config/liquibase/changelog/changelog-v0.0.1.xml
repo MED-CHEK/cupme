@@ -12,4 +12,25 @@
 
     <!-- Add application tables -->
     <include file="config/liquibase/changelog/v0.0.1/20231115124700_add_application_tables.xml" relativeToChangelogFile="false"/>
+
+    <!-- Add sexe column to user table -->
+    <include file="config/liquibase/changelog/v0.0.1/20231129102200_add_sex_to_user.xml" relativeToChangelogFile="false"/>
+
+    <!-- Add the pose time(minute number) to protocol table -->
+    <include file="config/liquibase/changelog/v0.0.1/20231129102200_add_pose-time.xml" relativeToChangelogFile="false"/>
+
+    <!-- Add total price and transaction id -->
+    <include file="config/liquibase/changelog/v0.0.1/20231203102200_add_total_price_and_transaction_id.xml" relativeToChangelogFile="false"/>
+
+    <!-- Add created date to user -->
+    <include file="config/liquibase/changelog/v0.0.1/20231203102200_add_created_date_to_user.xml" relativeToChangelogFile="false"/>
+
+    <!-- Change order table name to command -->
+    <include file="config/liquibase/changelog/v0.0.1/20231203102200_change_order_table_name_to_command.xml" relativeToChangelogFile="false"/>
+
+    <!-- Default value for created date in command -->
+    <include file="config/liquibase/changelog/v0.0.1/20231203102200_default_value_for_created_date_in_command.xml" relativeToChangelogFile="false"/>
+
+    <!-- Set to null -->
+    <include file="config/liquibase/changelog/v0.0.1/20231203102200_set_to_null.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

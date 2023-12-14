@@ -16,6 +16,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CartMapper {
 
+    private final UserMapper userMapper;
+
+    public CartMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
     public List<CartDTO> cartsToCartDTOs(List<Cart> carts) {
         return carts.stream().filter(Objects::nonNull).map(this::cartToCartDTO).collect(Collectors.toList());
     }
@@ -34,7 +40,7 @@ public class CartMapper {
         } else {
             Cart cart = new Cart();
             cart.setId(cartDTO.getId());
-            cart.setUser(cartDTO.getUser());
+            cart.setUser(userMapper.userFromPublicUserDTO(cartDTO.getUser()));
 
             return cart;
         }

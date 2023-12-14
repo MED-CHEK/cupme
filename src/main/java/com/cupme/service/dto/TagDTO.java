@@ -17,24 +17,16 @@ public class TagDTO implements Serializable {
 
     private String name;
 
-    private Set<Protocol> protocols = new HashSet<>();
-
-    private Set<Product> products = new HashSet<>();
-
     public TagDTO() {}
 
-    public TagDTO(Long id, String name, Set<Protocol> protocols, Set<Product> products) {
+    public TagDTO(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.protocols = protocols;
-        this.products = products;
     }
 
     public TagDTO(Tag tag) {
         this.id = tag.getId();
         this.name = tag.getName();
-        this.protocols = tag.getProtocols();
-        this.products = tag.getProducts();
     }
 
     public Long getId() {
@@ -53,24 +45,8 @@ public class TagDTO implements Serializable {
         this.name = name;
     }
 
-    public Set<Protocol> getProtocols() {
-        return protocols;
-    }
-
-    public void setProtocols(Set<Protocol> protocols) {
-        this.protocols = protocols;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public String toString() {
-        return "Tag{" + "id=" + id + ", name='" + name + '\'' + ", protocols=" + protocols + ", products=" + products + '}';
+        return "Tag{" + "id=" + id + ", name='" + name + '}';
     }
 }

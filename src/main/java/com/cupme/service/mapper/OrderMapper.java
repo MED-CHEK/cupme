@@ -36,7 +36,8 @@ public class OrderMapper {
             order.setId(orderDTO.getId());
             order.setUser(orderDTO.getUser());
             order.setPaid(orderDTO.isPaid());
-            order.setCreatedDate(orderDTO.getCreatedDate());
+            order.setTotalPrice(orderDTO.getTotalPrice());
+            order.setTransactionId(orderDTO.getTransactionId());
 
             return order;
         }

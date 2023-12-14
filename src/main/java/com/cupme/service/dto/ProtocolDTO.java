@@ -1,9 +1,6 @@
 package com.cupme.service.dto;
 
-import com.cupme.domain.Category;
-import com.cupme.domain.Product;
-import com.cupme.domain.Protocol;
-import com.cupme.domain.Tag;
+import com.cupme.domain.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,11 +22,15 @@ public class ProtocolDTO implements Serializable {
 
     private Double price;
 
-    private Set<Product> products = new HashSet<>();
+    private Integer poseTime;
 
-    private Set<Category> categories = new HashSet<>();
+    private Set<ProductDTO> productDTOs = new HashSet<>();
 
-    private Set<Tag> tags = new HashSet<>();
+    private Set<CategoryDTO> categoryDTOs = new HashSet<>();
+
+    private Set<TagDTO> tagDTOs = new HashSet<>();
+
+    private Set<PictureDTO> pictures = new HashSet<>();
 
     public ProtocolDTO() {}
 
@@ -40,9 +41,11 @@ public class ProtocolDTO implements Serializable {
         String shortDescription,
         String description,
         Double price,
-        Set<Product> products,
-        Set<Category> categories,
-        Set<Tag> tags
+        Integer poseTime,
+        Set<ProductDTO> productDTOs,
+        Set<CategoryDTO> categoryDTOs,
+        Set<TagDTO> tagDTOs,
+        Set<PictureDTO> pictures
     ) {
         this.id = id;
         this.name = name;
@@ -50,9 +53,11 @@ public class ProtocolDTO implements Serializable {
         this.shortDescription = shortDescription;
         this.description = description;
         this.price = price;
-        this.products = products;
-        this.categories = categories;
-        this.tags = tags;
+        this.poseTime = poseTime;
+        this.productDTOs = productDTOs;
+        this.categoryDTOs = categoryDTOs;
+        this.tagDTOs = tagDTOs;
+        this.pictures = pictures;
     }
 
     public ProtocolDTO(Protocol protocol) {
@@ -62,9 +67,14 @@ public class ProtocolDTO implements Serializable {
         this.shortDescription = protocol.getShortDescription();
         this.description = protocol.getDescription();
         this.price = protocol.getPrice();
-        this.products = protocol.getProducts();
-        this.tags = protocol.getTags();
-        this.categories = protocol.getCategories();
+        this.poseTime = protocol.getPoseTime();
+        this.productDTOs =
+            protocol.getProducts() != null ? protocol.getProducts().stream().map(ProductDTO::new).collect(Collectors.toSet()) : null;
+        this.tagDTOs = protocol.getTags() != null ? protocol.getTags().stream().map(TagDTO::new).collect(Collectors.toSet()) : null;
+        this.categoryDTOs =
+            protocol.getCategories() != null ? protocol.getCategories().stream().map(CategoryDTO::new).collect(Collectors.toSet()) : null;
+        this.pictures =
+            protocol.getPictures() != null ? protocol.getPictures().stream().map(PictureDTO::new).collect(Collectors.toSet()) : null;
     }
 
     public Long getId() {
@@ -115,34 +125,50 @@ public class ProtocolDTO implements Serializable {
         this.price = price;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Integer getPoseTime() {
+        return poseTime;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setPoseTime(Integer poseTime) {
+        this.poseTime = poseTime;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public Set<ProductDTO> getProductDTOs() {
+        return productDTOs;
     }
 
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setProductDTOs(Set<ProductDTO> productDTOs) {
+        this.productDTOs = productDTOs;
     }
 
-    public Set<Tag> getTags() {
-        return tags;
+    public Set<CategoryDTO> getCategoryDTOs() {
+        return categoryDTOs;
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+    public void setCategoryDTOs(Set<CategoryDTO> categoryDTOs) {
+        this.categoryDTOs = categoryDTOs;
+    }
+
+    public Set<TagDTO> getTagDTOs() {
+        return tagDTOs;
+    }
+
+    public void setTagDTOs(Set<TagDTO> tagDTOs) {
+        this.tagDTOs = tagDTOs;
+    }
+
+    public Set<PictureDTO> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<PictureDTO> pictures) {
+        this.pictures = pictures;
     }
 
     @Override
     public String toString() {
         return (
-            "Protocol{" +
+            "ProtocolDTO{" +
             "id=" +
             id +
             ", name='" +
@@ -159,12 +185,16 @@ public class ProtocolDTO implements Serializable {
             '\'' +
             ", price=" +
             price +
-            ", products=" +
-            products +
-            ", tags=" +
-            tags +
-            ", categories=" +
-            categories +
+            ", poseTime=" +
+            poseTime +
+            ", productDTOs=" +
+            productDTOs +
+            ", categoryDTOs=" +
+            categoryDTOs +
+            ", tagDTOs=" +
+            tagDTOs +
+            ", pictures=" +
+            pictures +
             '}'
         );
     }

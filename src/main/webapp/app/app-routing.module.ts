@@ -7,6 +7,7 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -29,8 +30,29 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
         },
         {
+          path: 'cart',
+          loadChildren: () => import('./cart/cart.module').then(m => m.CartModule),
+        },
+        {
+          path: 'success',
+          loadChildren: () => import('./success/success.module').then(m => m.SuccessModule),
+        },
+        {
+          path: 'protocols',
+          loadChildren: () => import('./protocol/protocol.module').then(m => m.ProtocolModule),
+        },
+        {
+          path: 'myprotocols',
+          loadChildren: () => import('./myprotocol/myprotocol.module').then(m => m.MyProtocolModule),
+        },
+        {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
+        },
+        {
+          path: '**',
+          component: HomeComponent,
+          pathMatch: 'full',
         },
         navbarRoute,
         ...errorRoute,

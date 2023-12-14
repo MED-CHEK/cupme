@@ -4,9 +4,9 @@ import com.cupme.config.Constants;
 import com.cupme.domain.Address;
 import com.cupme.domain.Authority;
 import com.cupme.domain.User;
+import com.cupme.domain.enumeration.SexType;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.constraints.Email;
@@ -28,6 +28,8 @@ public class UserDTO implements Serializable {
     @Size(min = 1, max = 50)
     private String login;
 
+    private String password;
+
     @Size(max = 50)
     private String firstName;
 
@@ -38,7 +40,8 @@ public class UserDTO implements Serializable {
     @Size(min = 5, max = 254)
     private String email;
 
-    private LocalDate birthDate;
+    private SexType sex;
+    private Integer age;
 
     private Integer weight;
 
@@ -68,13 +71,57 @@ public class UserDTO implements Serializable {
         // Empty constructor needed for Jackson.
     }
 
+    public UserDTO(
+        Long id,
+        String login,
+        String password,
+        String firstName,
+        String lastName,
+        String email,
+        Integer age,
+        SexType sex,
+        Integer weight,
+        Integer size,
+        Set<Address> addresses,
+        String imageUrl,
+        boolean activated,
+        String langKey,
+        String createdBy,
+        Instant createdDate,
+        String lastModifiedBy,
+        Instant lastModifiedDate,
+        Set<String> authorities
+    ) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.sex = sex;
+        this.age = age;
+        this.weight = weight;
+        this.size = size;
+        this.addresses = addresses;
+        this.imageUrl = imageUrl;
+        this.activated = activated;
+        this.langKey = langKey;
+        this.createdBy = createdBy;
+        this.createdDate = createdDate;
+        this.lastModifiedBy = lastModifiedBy;
+        this.lastModifiedDate = lastModifiedDate;
+        this.authorities = authorities;
+    }
+
     public UserDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
+        this.password = user.getPassword();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
-        this.birthDate = user.getBirthDate();
+        this.sex = user.getSex();
+        this.age = user.getAge();
         this.weight = user.getWeight();
         this.size = user.getSize();
         this.addresses = user.getAddresses();
@@ -94,6 +141,14 @@ public class UserDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getLogin() {
@@ -128,12 +183,20 @@ public class UserDTO implements Serializable {
         this.email = email;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public SexType getSex() {
+        return sex;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setSex(SexType sex) {
+        this.sex = sex;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Integer getWeight() {
@@ -233,6 +296,9 @@ public class UserDTO implements Serializable {
             ", login='" +
             login +
             '\'' +
+            ", password='" +
+            password +
+            '\'' +
             ", firstName='" +
             firstName +
             '\'' +
@@ -242,8 +308,10 @@ public class UserDTO implements Serializable {
             ", email='" +
             email +
             '\'' +
-            ", birthDate=" +
-            birthDate +
+            ", age=" +
+            age +
+            ", sex=" +
+            sex +
             ", weight=" +
             weight +
             ", size=" +

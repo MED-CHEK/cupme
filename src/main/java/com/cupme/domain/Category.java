@@ -41,7 +41,7 @@ public class Category implements Serializable {
     @JsonIgnore
     private Set<Protocol> protocols = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "product_category",
         joinColumns = { @JoinColumn(name = "category_id", referencedColumnName = "id") },
@@ -103,15 +103,5 @@ public class Category implements Serializable {
             Objects.equals(getProtocols(), category.getProtocols()) &&
             Objects.equals(getProducts(), category.getProducts())
         );
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getProtocols(), getProducts());
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" + "id=" + id + ", name='" + name + '\'' + ", protocols=" + protocols + ", products=" + products + '}';
     }
 }

@@ -1,9 +1,11 @@
 package com.cupme.service.mapper;
 
 import com.cupme.domain.Product;
+import com.cupme.service.dto.ProductCartDTO;
 import com.cupme.service.dto.ProductDTO;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +26,8 @@ public class ProductMapper {
         return new ProductDTO(product);
     }
 
-    public List<Product> productDTOsToProducts(List<ProductDTO> productDTOS) {
-        return productDTOS.stream().filter(Objects::nonNull).map(this::productDTOToProduct).collect(Collectors.toList());
+    public Set<Product> productDTOsToProducts(Set<ProductDTO> productDTOS) {
+        return productDTOS.stream().filter(Objects::nonNull).map(this::productDTOToProduct).collect(Collectors.toSet());
     }
 
     public Product productDTOToProduct(ProductDTO productDTO) {
@@ -47,6 +49,19 @@ public class ProductMapper {
             product.setTags(productDTO.getTags());
             product.setCategories(productDTO.getCategories());
             product.setProtocols(productDTO.getProtocols());
+
+            return product;
+        }
+    }
+
+    public Product productCartDTOToProduct(ProductCartDTO productCartDTO) {
+        if (productCartDTO == null) {
+            return null;
+        } else {
+            Product product = new Product();
+            product.setId(productCartDTO.getId());
+            product.setName(productCartDTO.getName());
+            product.setPrice(productCartDTO.getPrice());
 
             return product;
         }

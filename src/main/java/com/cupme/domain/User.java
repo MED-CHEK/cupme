@@ -1,10 +1,10 @@
 package com.cupme.domain;
 
 import com.cupme.config.Constants;
+import com.cupme.domain.enumeration.SexType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
@@ -58,8 +58,12 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Column(length = 254, unique = true)
     private String email;
 
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sex")
+    private SexType sex;
+
+    @Column(name = "age")
+    private Integer age;
 
     @Column(name = "weight")
     private Integer weight;
@@ -117,7 +121,8 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
         String firstName,
         String lastName,
         String email,
-        LocalDate birthDate,
+        SexType sex,
+        Integer age,
         Integer weight,
         Integer size,
         Set<Address> addresses,
@@ -135,7 +140,8 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.birthDate = birthDate;
+        this.sex = sex;
+        this.age = age;
         this.weight = weight;
         this.size = size;
         this.addresses = addresses;
@@ -197,12 +203,20 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
         this.email = email;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public SexType getSex() {
+        return sex;
+    }
+
+    public void setSex(SexType sex) {
+        this.sex = sex;
     }
 
     public Integer getWeight() {
@@ -298,7 +312,8 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             getFirstName().equals(user.getFirstName()) &&
             getLastName().equals(user.getLastName()) &&
             getEmail().equals(user.getEmail()) &&
-            getBirthDate().equals(user.getBirthDate()) &&
+            getSex().equals(user.getSex()) &&
+            getAge().equals(user.getAge()) &&
             getWeight().equals(user.getWeight()) &&
             getSize().equals(user.getSize()) &&
             Objects.equals(getAddresses(), user.getAddresses()) &&
@@ -320,7 +335,8 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             getFirstName(),
             getLastName(),
             getEmail(),
-            getBirthDate(),
+            getSex(),
+            getAge(),
             getWeight(),
             getSize(),
             getAddresses(),
@@ -355,8 +371,10 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
             ", email='" +
             email +
             '\'' +
-            ", birthDate=" +
-            birthDate +
+            ", age=" +
+            age +
+            ", sex=" +
+            sex +
             ", weight=" +
             weight +
             ", size=" +

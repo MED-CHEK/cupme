@@ -4,11 +4,14 @@ import com.cupme.config.Constants;
 import com.cupme.domain.Authority;
 import com.cupme.domain.User;
 import com.cupme.repository.AuthorityRepository;
+import com.cupme.repository.CartRepository;
 import com.cupme.repository.UserRepository;
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.security.SecurityUtils;
+import com.cupme.service.dto.CartDTO;
 import com.cupme.service.dto.PublicUserDTO;
 import com.cupme.service.dto.UserDTO;
+import com.cupme.service.mapper.CartMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -41,16 +44,24 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    private final CartRepository cartRepository;
+
+    private final CartMapper cartMapper;
+
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        CartRepository cartRepository,
+        CartMapper cartMapper
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.cartRepository = cartRepository;
+        this.cartMapper = cartMapper;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -120,6 +131,10 @@ public class UserService {
         if (userDTO.getEmail() != null) {
             newUser.setEmail(userDTO.getEmail().toLowerCase());
         }
+        newUser.setSex(userDTO.getSex());
+        newUser.setAge(userDTO.getAge());
+        newUser.setWeight(userDTO.getWeight());
+        newUser.setSize(userDTO.getSize());
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
@@ -130,6 +145,10 @@ public class UserService {
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+
+        CartDTO cartDTO = new CartDTO();
+        cartDTO.setUser(new PublicUserDTO(newUser));
+        cartRepository.save(cartMapper.cartDTOToCart(cartDTO));
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;

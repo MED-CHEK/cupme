@@ -1,0 +1,55 @@
+.protos {
+  display: flex;
+  justify-content: center;
+
+  .label {
+    font-size: 1.75rem;
+    font-weight: 500;
+    padding-bottom: 1.5rem;
+    color: black;
+    border-radius: 0.275rem;
+    line-height: 1.5rem;
+  }
+
+  .protocols {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .protocol {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      min-width: 15rem;
+      height: 18rem;
+    }
+  }
+}
+
+/* ==========================================================================
+Main page styles
+========================================================================== */
+.corps {
+  background: url('../../../content/images/bg-zones.jpg') no-repeat center top;
+  background-size: contain;
+}
+
+.cup {
+  display: inline-block;
+  width: 347px;
+  height: 497px;
+  background: url('../../../content/images/auth.jpeg') no-repeat center top;
+  background-size: contain;
+}
+
+/* wait autoprefixer update to allow simple generation of high pixel density media query */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (-moz-min-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+  .cup {
+    background: url('../../../content/images/auth.jpeg') no-repeat center top;
+    background-size: contain;
+  }
+}

@@ -1,0 +1,42 @@
+@use 'sass:map';
+@import '~bootstrap/scss/functions';
+@import '~bootswatch/dist/cerulean/variables';
+@import '~bootstrap/scss/variables';
+@import '../../../content/scss/custom-variables.scss';
+
+.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loading {
+    width: 21rem;
+    font-size: 4.5rem;
+    color: #647491;
+    font-weight: 500;
+  }
+
+  .loading:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    animation: ellipsis steps(5, end) 1500ms infinite;
+    content: '\2026';
+    width: 0px;
+  }
+
+  @keyframes ellipsis {
+    to {
+      width: 1.25em;
+    }
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .load {
+    .loading {
+      width: 7rem !important;
+      font-size: 1.5rem;
+    }
+  }
+}

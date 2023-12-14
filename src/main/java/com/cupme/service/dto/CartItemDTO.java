@@ -5,6 +5,8 @@ import com.cupme.domain.CartItem;
 import com.cupme.domain.Product;
 import com.cupme.domain.Protocol;
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
 
 public class CartItemDTO implements Serializable {
 
@@ -12,32 +14,39 @@ public class CartItemDTO implements Serializable {
 
     private Long id;
 
-    private Cart cart;
+    private CartDTO cartDTO;
 
-    private Protocol protocol;
+    private ProtocolCartDTO protocolCartDTO;
 
-    private Product product;
+    private ProductCartDTO productCartDTO;
 
     private Integer quantity;
 
-    private String createdDate;
+    private Instant createdDate;
 
     public CartItemDTO() {}
 
-    public CartItemDTO(Long id, Cart cart, Protocol protocol, Product product, Integer quantity, String createdDate) {
+    public CartItemDTO(
+        Long id,
+        CartDTO cartDTO,
+        ProtocolCartDTO protocolCartDTO,
+        ProductCartDTO productCartDTO,
+        Integer quantity,
+        Instant createdDate
+    ) {
         this.id = id;
-        this.cart = cart;
-        this.protocol = protocol;
-        this.product = product;
+        this.cartDTO = cartDTO;
+        this.protocolCartDTO = protocolCartDTO;
+        this.productCartDTO = productCartDTO;
         this.quantity = quantity;
         this.createdDate = createdDate;
     }
 
     public CartItemDTO(CartItem cartItem) {
         this.id = cartItem.getId();
-        this.cart = cartItem.getCart();
-        this.protocol = cartItem.getProtocol();
-        this.product = cartItem.getProduct();
+        this.cartDTO = cartItem.getCart() == null ? null : new CartDTO(cartItem.getCart());
+        this.protocolCartDTO = cartItem.getProtocol() == null ? null : new ProtocolCartDTO(cartItem.getProtocol());
+        this.productCartDTO = cartItem.getProduct() == null ? null : new ProductCartDTO(cartItem.getProduct());
         this.quantity = cartItem.getQuantity();
         this.createdDate = cartItem.getCreatedDate();
     }
@@ -50,28 +59,28 @@ public class CartItemDTO implements Serializable {
         this.id = id;
     }
 
-    public Cart getCart() {
-        return cart;
+    public CartDTO getCartDTO() {
+        return cartDTO;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setCartDTO(CartDTO cartDTO) {
+        this.cartDTO = cartDTO;
     }
 
-    public Protocol getProtocol() {
-        return protocol;
+    public ProtocolCartDTO getProtocolCartDTO() {
+        return protocolCartDTO;
     }
 
-    public void setProtocol(Protocol protocol) {
-        this.protocol = protocol;
+    public void setProtocolCartDTO(ProtocolCartDTO protocolCartDTO) {
+        this.protocolCartDTO = protocolCartDTO;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductCartDTO getProductCartDTO() {
+        return productCartDTO;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductCartDTO(ProductCartDTO productCartDTO) {
+        this.productCartDTO = productCartDTO;
     }
 
     public Integer getQuantity() {
@@ -82,11 +91,11 @@ public class CartItemDTO implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getCreatedDate() {
+    public Instant getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(Instant createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -96,17 +105,16 @@ public class CartItemDTO implements Serializable {
             "CartItemDTO{" +
             "id=" +
             id +
-            ", cart=" +
-            cart +
-            ", protocol=" +
-            protocol +
-            ", product=" +
-            product +
+            ", cartDTO=" +
+            cartDTO +
+            ", protocolCartDTO=" +
+            protocolCartDTO +
+            ", productCartDTO=" +
+            productCartDTO +
             ", quantity=" +
             quantity +
-            ", createdDate='" +
+            ", createdDate=" +
             createdDate +
-            '\'' +
             '}'
         );
     }

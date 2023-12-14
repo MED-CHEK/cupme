@@ -1,0 +1,7 @@
+<div class="countdown-timer">
+  <span class="time">{{ this.timer }}</span>
+  <div class="icons">
+    <span class="timer-icon play-icon" [ngClass]="isTimerRunning ? 'pause-icon' : 'play-icon'" (click)="toggleTimer()"></span>
+    <span class="timer-icon stop-icon" (click)="resetTimer()"></span>
+  </div>
+</div>

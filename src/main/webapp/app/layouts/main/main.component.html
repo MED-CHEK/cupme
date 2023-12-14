@@ -1,13 +1,13 @@
-<jhi-page-ribbon></jhi-page-ribbon>
-
-<div>
-  <router-outlet name="navbar"></router-outlet>
-</div>
-
-<div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet></router-outlet>
+<div class="page">
+  <div class="header d-flex justify-content-center">
+    <div class="header">
+      <jhi-navbar></jhi-navbar>
+    </div>
   </div>
 
-  <jhi-footer></jhi-footer>
+  <div class="main d-flex justify-content-center">
+    <div class="card cup-card">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>

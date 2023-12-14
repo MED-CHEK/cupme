@@ -1,0 +1,446 @@
+@use 'sass:map';
+@import 'custom-variables';
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300,100italic,100);
+
+// Custom theme
+:root {
+  --bs-font-sans-serif: Roboto, Arial, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --input-color-hover: #f0f3f6;
+  --input-color-focus: #245ecc;
+  --input-background-color: #f7f9fa;
+  --input-text-color: #8390a7;
+  --input-text-valid-color: #272e3a;
+  --input-border-color: #a1abbd;
+  --button-primary-color: #002d80;
+  --button-primary-hover: #002466;
+  --button-primary-active: #001b4d;
+  --button-secondary-color: #053a9d;
+  --button-secondary-hover: #f0f3f6;
+  --button-secondary-active: #e1e9ed;
+  --button-ghost-color: #053a9d;
+  --button-ghost-hover: #f7f8f9;
+  --button-ghost-active: #f0f4f6;
+  --padding-horizontal-main-page: calc(100vw * 0.03125);
+  --padding-horizontal-privacy-page: calc(100vw * 0.1026);
+  --padding-horizontal-privacy-mobile-page: calc(100vw * 0.0416);
+}
+
+hr {
+  margin: 1.5rem 0;
+}
+// change default value of the text in the navbar
+.navbar-dark {
+  --bs-navbar-color: white;
+  --bs-navbar-hover-color: rgba(255, 255, 255, 0.8);
+}
+
+// Suppression of the default gradient
+.navbar.bg-primary {
+  background-image: none !important;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: $primary;
+}
+
+.form-control,
+.form-control + .btn-outline-secondary,
+.btn-outline-secondary:has(+ .form-control),
+.ng-select .ng-select-container {
+  height: 2.625rem;
+  background-color: var(--input-background-color);
+  color: var(--input-text-valid-color);
+  border: none;
+  border-radius: 0;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom: 0.0625rem solid var(--input-border-color);
+}
+
+.form-control.ng-invalid:not(.ng-untouched):not(input[ngbdatepicker]),
+sec-date.ng-invalid:not(.ng-untouched),
+.ng-select.ng-invalid:not(.ng-untouched) .ng-select-container {
+  border-bottom: 0.125rem solid red !important;
+}
+
+.form-switch {
+  input[type='checkbox'] {
+    background-color: $searchBar;
+    border: none;
+
+    &:checked {
+      background-color: $primary;
+    }
+  }
+
+  .form-check-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  }
+}
+
+.ng-select {
+  height: 2.65rem;
+}
+
+.ng-select .ng-select-container {
+  height: 100% !important;
+}
+
+.ng-select .ng-arrow {
+  display: none !important;
+}
+
+.ng-select .ng-arrow-wrapper {
+  height: 14px;
+  width: 14px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23053a9d' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  margin-right: 12px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder::after {
+  content: '*';
+  color: red;
+}
+
+.ng-select-opened.ng-select-container {
+  background-color: var(--input-background-color) !important;
+  border: none;
+}
+
+.ng-select.ng-select-opened > .ng-select-container {
+  background-color: var(--input-background-color) !important;
+  border: none;
+}
+
+.ng-select-opened .ng-arrow-wrapper {
+  transform: rotate(180deg);
+}
+
+.ng-select .ng-clear-wrapper:hover .ng-clear {
+  color: var(--input-text-valid-color);
+}
+
+.ng-select-focused {
+  border-radius: 0;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border: 0.125rem solid var(--input-color-focus);
+}
+
+.ng-select-focused:not(.ng-select-opened) .ng-select-container {
+  border: none;
+  box-shadow: none;
+}
+
+.ng-dropdown-panel.ng-select-bottom {
+  margin-top: 0.125rem !important;
+  box-shadow: 0 0.0625rem 0.0625rem 0.0625rem #e6e6e6;
+  border-color: #e6e6e6;
+}
+
+.ng-dropdown-panel.ng-select-top {
+  margin-bottom: 0.125rem !important;
+  box-shadow: 0 -0.0625rem 0.0625rem 0.0625rem #e6e6e6;
+  border-color: #e6e6e6;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items {
+  max-height: 14.375rem !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: #f7f8f9;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+  background-color: #f7f8f9;
+}
+
+.form-control:placeholder-shown,
+.form-control:placeholder-shown + .btn-outline-secondary,
+.btn-outline-secondary:placeholder-shown,
+.btn-outline-secondary:placeholder-shown:has(+ .form-control) {
+  color: var(--input-text-color);
+}
+
+.form-control:hover,
+.form-control:hover + .btn-outline-secondary {
+  background-color: var(--input-color-hover);
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:hover:has(+ input) {
+  background-color: var(--input-color-hover);
+}
+
+.form-control:focus,
+.form-control:focus + .btn-outline-secondary,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:focus:has(+ .form-control) {
+  background-color: var(--input-background-color);
+  box-shadow: none;
+  border: 0.125rem solid var(--input-color-focus);
+}
+
+.btn-outline-secondary:checked {
+  background-color: var(--input-color-focus);
+}
+
+.form-control:disabled,
+.form-control:disabled + .btn-outline-secondary,
+.btn-outline-secondary:disabled,
+.btn-outline-secondary:disabled:has(+ .form-control) {
+  background-color: white;
+}
+
+.form-check-input {
+  border: 1px solid var(--button-primary-color);
+}
+
+input[type='radio']:hover:not(:checked) {
+  background-color: var(--color-hover);
+}
+
+input[type='radio']:focus {
+  box-shadow: none;
+  outline: 0.125rem solid var(--color-focus);
+  outline-offset: 0.125rem;
+}
+
+.btn-primary {
+  background-color: var(--button-primary-color) !important;
+  border: none;
+  border-radius: 0.125rem;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-size: 1.125rem;
+  opacity: 1 !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--button-primary-hover);
+}
+
+.btn-primary:active {
+  background-color: var(--button-primary-active);
+}
+
+.btn-primary:focus {
+  background-color: var(--button-primary-color);
+  outline: 0.125rem solid var(--input-color-focus) !important;
+  outline-offset: 0.125rem;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--button-secondary-color) !important;
+  border: 0.0625rem solid var(--button-secondary-color) !important;
+  border-radius: 0.125rem;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.btn-secondary:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+.btn-secondary:active {
+  background-color: var(--button-secondary-active);
+}
+
+.btn-secondary:focus {
+  background-color: white;
+  outline: 0.125rem solid var(--input-color-focus) !important;
+  outline-offset: 0.125rem;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--button-ghost-color) !important;
+  border: none !important;
+  border-radius: 0.125rem;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.btn-ghost:hover {
+  background-color: var(--button-ghost-hover);
+}
+
+.btn-ghost:active {
+  background-color: var(--button-ghost-active);
+}
+
+.btn-ghost:focus {
+  background-color: white;
+  outline: 0.125rem solid var(--input-color-focus) !important;
+  outline-offset: 0.125rem;
+}
+
+input[type='radio']:hover:not(:checked) {
+  background-color: var(--color-hover);
+}
+
+input[type='radio']:focus {
+  box-shadow: none;
+  outline: 0.125rem solid var(--color-focus);
+  outline-offset: 0.125rem;
+}
+
+.popover {
+  display: flex;
+  max-width: 100% !important;
+}
+
+.popover-arrow {
+  visibility: hidden !important;
+}
+
+.popover-error .popover-header {
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: red;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: calc(0.5rem - 1px);
+}
+
+.file-preview {
+  .tooltip .tooltip-inner {
+    background-color: #00205a;
+    color: white;
+    font-size: 14px;
+    padding: 0.5rem;
+    --bs-tooltip-max-width: 1;
+    height: fit-content;
+
+    &.bs-tooltip-end .tooltip-arrow::before {
+      border-right-color: #00205a;
+    }
+
+    &.bs-tooltip-start .tooltip-arrow::before {
+      border-left-color: #00205a;
+    }
+
+    &.bs-tooltip-top.tooltip-arrow::before {
+      border-top-color: #00205a;
+    }
+
+    &.bs-tooltip-bottom .tooltip-arrow::before {
+      border-bottom-color: #00205a;
+    }
+  }
+}
+
+.modal-content {
+  border-radius: 0;
+
+  .modal-body {
+    padding: 2rem;
+  }
+
+  .modal-footer {
+    padding: 2rem;
+    border-top: none;
+  }
+}
+
+img {
+  object-fit: cover;
+}
+
+.pagination {
+  .page-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+
+    .page-link {
+      border: none;
+      padding: 0 !important;
+      background-color: transparent !important;
+      font-size: 0.875rem !important;
+      color: #647491;
+      font-weight: 400;
+    }
+  }
+
+  .page-item.active {
+    background-color: $textColor;
+    border: 0.0625rem solid $textColor;
+    border-radius: 0.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+
+    .page-link {
+      color: white;
+    }
+  }
+
+  .page-item:first-child,
+  .page-item:last-child {
+    background-color: white;
+    border: 0.063rem solid $dataTextColor;
+    border-radius: 0.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    .page-link {
+      color: $dataTextColor !important;
+    }
+  }
+
+  .page-item:nth-child(2) {
+    margin-left: 1.125rem;
+  }
+
+  .page-item:nth-last-child(2) {
+    margin-right: 1.125rem;
+  }
+}
+
+.modal-backdrop {
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .form-control,
+  .form-control + .btn-outline-secondary,
+  .btn-outline-secondary:has(+ .form-control),
+  .ng-select .ng-select-container {
+    font-size: 0.875rem !important;
+    height: 2.5rem !important;
+  }
+
+  .form-control:placeholder-shown,
+  .form-control:placeholder-shown + .btn-outline-secondary,
+  .btn-outline-secondary:placeholder-shown,
+  .btn-outline-secondary:placeholder-shown:has(+ .form-control) {
+    font-size: 0.875rem !important;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+}

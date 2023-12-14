@@ -1,0 +1,54 @@
+@import '../../../../content/scss/custom-variables.scss';
+
+::ng-deep .sec-date {
+  display: block;
+}
+
+.customDate {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+
+  button {
+    background-color: var(--input-background-color) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    border-top-right-radius: 0.25rem !important;
+    border-bottom: 0.0625rem solid var(--input-border-color) !important;
+    width: 3rem;
+
+    .calandar {
+      -webkit-mask: url('../../../../content/images/calandar.svg') no-repeat center;
+      mask: url('../../../../content/images/calandar.svg') no-repeat center;
+      background-color: $textColor;
+      height: 1rem;
+    }
+  }
+
+  button:hover {
+    background-color: var(--input-color-hover) !important;
+  }
+
+  ::ng-deep .dropdown-menu {
+    width: 100%;
+    border-radius: 0px;
+    border: none;
+    box-shadow: 0 0 5px 0px;
+
+    .ngb-dp-header {
+      background-color: unset !important;
+    }
+
+    .ngb-dp-months {
+      display: block;
+
+      .ngb-dp-weekdays {
+        background-color: unset !important;
+      }
+    }
+
+    .ngb-dp-week {
+      justify-content: space-between;
+    }
+  }
+}

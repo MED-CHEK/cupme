@@ -1,21 +1,13 @@
 package com.cupme.domain;
 
-import com.cupme.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -51,6 +43,9 @@ public class Protocol implements Serializable {
     @Column(name = "price", nullable = false)
     private Double price;
 
+    @Column(name = "pose_time", nullable = false)
+    private Integer poseTime;
+
     @ManyToMany
     @JoinTable(
         name = "protocol_product",
@@ -61,7 +56,7 @@ public class Protocol implements Serializable {
     @JsonIgnore
     private Set<Product> products = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "protocol_category",
         joinColumns = { @JoinColumn(name = "protocol_id", referencedColumnName = "id") },
@@ -81,6 +76,9 @@ public class Protocol implements Serializable {
     @JsonIgnore
     private Set<Tag> tags = new HashSet<>();
 
+    @OneToMany(mappedBy = "protocol")
+    private Set<Picture> pictures;
+
     public Protocol() {}
 
     public Protocol(
@@ -90,9 +88,11 @@ public class Protocol implements Serializable {
         String shortDescription,
         String description,
         Double price,
+        Integer poseTime,
         Set<Product> products,
         Set<Tag> tags,
-        Set<Category> categories
+        Set<Category> categories,
+        Set<Picture> pictures
     ) {
         this.id = id;
         this.name = name;
@@ -100,9 +100,11 @@ public class Protocol implements Serializable {
         this.shortDescription = shortDescription;
         this.description = description;
         this.price = price;
+        this.poseTime = poseTime;
         this.products = products;
         this.tags = tags;
         this.categories = categories;
+        this.pictures = pictures;
     }
 
     public Long getId() {
@@ -153,6 +155,14 @@ public class Protocol implements Serializable {
         this.price = price;
     }
 
+    public Integer getPoseTime() {
+        return poseTime;
+    }
+
+    public void setPoseTime(Integer poseTime) {
+        this.poseTime = poseTime;
+    }
+
     public Set<Product> getProducts() {
         return products;
     }
@@ -177,6 +187,14 @@ public class Protocol implements Serializable {
         this.categories = categories;
     }
 
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -189,54 +207,11 @@ public class Protocol implements Serializable {
             Objects.equals(getShortDescription(), protocol.getShortDescription()) &&
             Objects.equals(getDescription(), protocol.getDescription()) &&
             Objects.equals(getPrice(), protocol.getPrice()) &&
+            Objects.equals(getPoseTime(), protocol.getPoseTime()) &&
             Objects.equals(getProducts(), protocol.getProducts()) &&
             Objects.equals(getTags(), protocol.getTags()) &&
-            Objects.equals(getCategories(), protocol.getCategories())
-        );
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-            getId(),
-            getName(),
-            getType(),
-            getShortDescription(),
-            getDescription(),
-            getPrice(),
-            getProducts(),
-            getTags(),
-            getCategories()
-        );
-    }
-
-    @Override
-    public String toString() {
-        return (
-            "Protocol{" +
-            "id=" +
-            id +
-            ", name='" +
-            name +
-            '\'' +
-            ", type='" +
-            type +
-            '\'' +
-            ", shortDescription='" +
-            shortDescription +
-            '\'' +
-            ", description='" +
-            description +
-            '\'' +
-            ", price=" +
-            price +
-            ", products=" +
-            products +
-            ", tags=" +
-            tags +
-            ", categories=" +
-            categories +
-            '}'
+            Objects.equals(getCategories(), protocol.getCategories()) &&
+            Objects.equals(getPictures(), protocol.getPictures())
         );
     }
 }

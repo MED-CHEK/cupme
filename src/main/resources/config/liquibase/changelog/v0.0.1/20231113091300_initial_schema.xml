@@ -21,7 +21,7 @@
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_email"/>
             </column>
             <column name="phone_number" type="varchar(20)"/>
-            <column name="birth_date" type="datetime"/>
+            <column name="age" type="int"/>
             <column name="weight" type="int"/>
             <column name="size" type="int"/>
 

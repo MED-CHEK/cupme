@@ -1,0 +1,114 @@
+<div class="cart">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <div class="col-12 col-lg-8">
+      <div class="head mb-4">
+        <span class="label">
+          {{ 'global.cart.label' | translate }}
+        </span>
+        <span class="reset" (click)="clearCart()">
+          <span class="cart-icon trash-icon"></span>
+          <span class="text">{{ 'global.cart.reset' | translate }}</span>
+        </span>
+      </div>
+      <div class="items">
+        <div class="table">
+          <div class="thead">
+            <div class="tr">
+              <div class="th name col-9 col-md-7">
+                <span>
+                  {{ 'global.cart.table.name' | translate }}
+                </span>
+              </div>
+              <div class="th quantity col-3 col-md-3">
+                <span>
+                  {{ 'global.cart.table.quantity' | translate }}
+                </span>
+              </div>
+              <div class="th total col-md-2" *ngIf="!isMobileDisplay">
+                <span>
+                  {{ 'global.cart.table.total' | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="tbody">
+            <div class="empty" *ngIf="cartItems.length == 0">
+              <span>
+                {{ 'global.cart.empty' | translate }}
+              </span>
+            </div>
+            <div class="tr row" *ngFor="let cartItem of cartItems">
+              <div class="td name col-9 col-md-7">
+                <div class="row" *ngIf="!cartItem.protocol">
+                  <div class="img col-4 col-sm-3">
+                    <img [src]="cartItem.picture" [alt]="cartItem.name" />
+                  </div>
+                  <div class="name-price col-8 col-sm-9">
+                    <span class="pro-name">{{ cartItem.name }}</span>
+                    <div class="price">
+                      <span>{{ 'global.cart.price' | translate }}</span>
+                      <span>€ {{ cartItem.price }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="cartItem.protocol">
+                  <div class="col-4">
+                    <img class="col-4 col-sm-3" [src]="cartItem.picture" [alt]="cartItem.name" />
+                  </div>
+                  <div class="name-price col-8">
+                    <span class="pro-name">{{ cartItem.name }}</span>
+                    <div class="price">
+                      <span class="label">{{ 'global.cart.price' | translate }}</span>
+                      <span>€ {{ cartItem.price }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="td quantity col-3 col-md-3">
+                <div *ngIf="!cartItem.protocol">
+                  <div class="add-">
+                    <span class="minus" (click)="reduceQuantity(cartItem)">
+                      <span class="cart-icon minus-icon"></span>
+                    </span>
+                    <span class="text">{{ cartItem.quantity }}</span>
+                    <span class="plus" (click)="increaseQuantity(cartItem)">
+                      <span class="cart-icon plus-icon"></span>
+                    </span>
+                  </div>
+                </div>
+                <span class="text" *ngIf="cartItem.protocol">
+                  {{ cartItem.quantity }}
+                </span>
+                <div class="remove">
+                  <span class="trash" (click)="removeFromCart(cartItem)">
+                    <span class="cart-icon trash-icon"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="td total col-12 col-md-2">
+                <span class="sous-total" *ngIf="isMobileDisplay"> {{ 'global.cart.table.total' | translate }}: </span>
+                <span> € {{ cartItem.price * cartItem.quantity }} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 offset-md-6 col-md-6 offset-lg-0 col-lg-4">
+      <div class="sub-total">
+        <div class="label">
+          <span>
+            {{ 'global.cart.subTotal' | translate }}
+          </span>
+        </div>
+        <div class="text">
+          <span class="total"> {{ 'global.cart.total' | translate }} : </span>
+          <span class="price"> € {{ subTotal | number: '1.2-2' }} </span>
+        </div>
+        <div class="checkout">
+          <div #paymentRef></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

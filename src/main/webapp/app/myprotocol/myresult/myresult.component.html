@@ -1,0 +1,14 @@
+<div class="protos">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <div class="label">
+      <span>
+        {{ 'global.detail.myprotocol.label' | translate }}
+      </span>
+    </div>
+    <div class="protocols">
+      <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols" (click)="selectProtocol(protocol)">
+        <jhi-my-proto [protocol]="protocol"></jhi-my-proto>
+      </div>
+    </div>
+  </div>
+</div>

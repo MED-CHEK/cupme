@@ -1,9 +1,6 @@
 package com.cupme.service.dto;
 
-import com.cupme.domain.Category;
-import com.cupme.domain.Product;
-import com.cupme.domain.Protocol;
-import com.cupme.domain.Tag;
+import com.cupme.domain.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,6 +37,8 @@ public class ProductDTO implements Serializable {
 
     private Set<Category> categories = new HashSet<>();
 
+    private Set<PictureDTO> pictures = new HashSet<>();
+
     public ProductDTO() {}
 
     public ProductDTO(
@@ -56,7 +55,8 @@ public class ProductDTO implements Serializable {
         Integer weight,
         Set<Protocol> protocols,
         Set<Tag> tags,
-        Set<Category> categories
+        Set<Category> categories,
+        Set<PictureDTO> pictures
     ) {
         this.id = id;
         this.name = name;
@@ -72,6 +72,7 @@ public class ProductDTO implements Serializable {
         this.protocols = protocols;
         this.tags = tags;
         this.categories = categories;
+        this.pictures = pictures;
     }
 
     public ProductDTO(Product product) {
@@ -89,6 +90,10 @@ public class ProductDTO implements Serializable {
         this.protocols = product.getProtocols();
         this.tags = product.getTags();
         this.categories = product.getCategories();
+        this.pictures =
+            product.getPictures() != null
+                ? product.getPictures().stream().map(PictureDTO::new).collect(java.util.stream.Collectors.toSet())
+                : null;
     }
 
     public Long getId() {
@@ -203,6 +208,14 @@ public class ProductDTO implements Serializable {
         this.categories = categories;
     }
 
+    public Set<PictureDTO> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<PictureDTO> pictures) {
+        this.pictures = pictures;
+    }
+
     @Override
     public String toString() {
         return (
@@ -239,7 +252,9 @@ public class ProductDTO implements Serializable {
             tags +
             ", categories=" +
             categories +
-            '}'
+            ", pictures=" +
+            pictures +
+            "}"
         );
     }
 }

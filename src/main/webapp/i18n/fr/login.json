@@ -2,14 +2,15 @@
   "login": {
     "title": "Authentification",
     "form": {
-      "password": "Mot de passe",
-      "password.placeholder": "Votre mot de passe",
-      "rememberme": "Garder la session ouverte",
+      "password": "Mot de passe *",
+      "password.placeholder": "Entrez votre mot de passe",
+      "rememberme": "Souvenez de moi.",
       "button": "Connexion"
     },
     "messages": {
       "error": {
-        "authentication": "<strong>Erreur d'authentification !</strong> Veuillez vérifier vos identifiants de connexion."
+        "authentication.err": "Erreur d'authentification !",
+        "authentication": "Veuillez vérifier vos identifiants de connexion."
       }
     },
     "password": {

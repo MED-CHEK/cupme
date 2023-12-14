@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'jhi-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
@@ -21,7 +23,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     rememberMe: new FormControl(false, { nonNullable: true, validators: [Validators.required] }),
   });
 
-  constructor(private accountService: AccountService, private loginService: LoginService, private router: Router) {}
+  constructor(
+    private accountService: AccountService,
+    private cartService: CartService,
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // if already authenticated then navigate to home page
@@ -43,6 +50,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
           this.router.navigate(['']);
+          console.log('login');
+          this.cartService.loadCartFromBD();
         }
       },
       error: () => (this.authenticationError = true),
