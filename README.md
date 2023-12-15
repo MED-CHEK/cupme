@@ -126,6 +126,7 @@ docker-compose -f src/main/docker/jhipster-control-center.yml up
 - Change the email and password of the email in the file `src/main/resources/config/application-prod.yml`
 - Cors : allowed-origins in the file `src/main/resources/config/application-prod.yml` and `src/main/resources/config/application.yml`
 - Change the port of the application in the file `src/main/resources/config/application-prod.yml` and `src/main/resources/config/application.yml`
+- Change the paypal clientID in the index file `src/main/webapp/index.html`
 
 ### Packaging as jar
 
