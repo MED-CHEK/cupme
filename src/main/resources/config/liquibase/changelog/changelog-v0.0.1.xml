@@ -13,7 +13,7 @@
     <!-- Add application tables -->
     <include file="config/liquibase/changelog/v0.0.1/20231115124700_add_application_tables.xml" relativeToChangelogFile="false"/>
 
-    <!-- Add sexe column to user table -->
+    <!-- Add sex column to user table -->
     <include file="config/liquibase/changelog/v0.0.1/20231129102200_add_sex_to_user.xml" relativeToChangelogFile="false"/>
 
     <!-- Add the pose time(minute number) to protocol table -->
@@ -33,4 +33,7 @@
 
     <!-- Set to null -->
     <include file="config/liquibase/changelog/v0.0.1/20231203102200_set_to_null.xml" relativeToChangelogFile="false"/>
+
+    <!-- Insert data -->
+    <include file="config/liquibase/changelog/v0.0.1/20231215124300_insert_data.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

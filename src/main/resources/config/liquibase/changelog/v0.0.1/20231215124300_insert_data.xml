@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="v0.0.1-INSERT_CATEGORY_DATA" author="cumpme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Category
+            INSERT INTO category (id, name) VALUES(1, 'Bien-être');
+            INSERT INTO category (id, name) VALUES(2, 'Récupération sportive');
+            INSERT INTO category (id, name) VALUES(3, 'Kits de cupping');
+            INSERT INTO category (id, name) VALUES(4, 'Lait et crème de cupping');
+            INSERT INTO category (id, name) VALUES(5, 'Uncategorized');
+            INSERT INTO category (id, name) VALUES(6, 'Protocoles');
+            INSERT INTO category (id, name) VALUES(7, 'Protocoles milieu du coprs');
+            INSERT INTO category (id, name) VALUES(8, 'Protocoles bas du corps');
+            INSERT INTO category (id, name) VALUES(9, 'Protocoles haut du coprs');
+        </sql>
+    </changeSet>
+
+    <changeSet id="v0.0.1-INSERT_PRODUCT_DATA" author="cumpme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Product
+            INSERT INTO product (id, `type`, name, short_description, description, price, stock, width, `size`, height, weight) VALUES(4839, 'grouped', 'Les kits de cupping', 'Ventouses en polycarbone de haute qualité, agréable au touché et a la pose. \\n \\nLes mêmes ventouses que celles utilisées par les professionnels du cupping.', 'Des kits de cupping de qualité professionnelle, facilement nettoyables et entreposables. Ventouses déjà utilisées par de nombreux ostéopathes et professionnels du cupping.', 149.99, 1, 0, 0, 0, 0);
+            INSERT INTO product (id, `type`, name, short_description, description, price, stock, width, `size`, height, weight) VALUES(4840, 'simple', 'Kit 22 pièces (19 ventouses)', 'Ventouses en polycarbone de haute qualité, agréable au touché et a la pose. \\n \\nLes mêmes ventouses que celles utilisées par les professionnels du cupping.', 'Ce kit est adapté pour soulager des douleurs d''une zone assez large telle que :', 89.99, 1, 0, 0, 0, 0);
+            INSERT INTO product (id, `type`, name, short_description, description, price, stock, width, `size`, height, weight) VALUES(5540, 'simple', 'Kit 11 pièces (10 ventouses)', 'Adapté pour soulager une zone musculaire assez restreinte telle : \\n&lt;ul&gt;\\n &lt;li&gt;un biceps&lt;/li&gt;\\n &lt;li&gt;une épaule&lt;/li&gt;\\n &lt;li&gt;un avant-bras.&lt;/li&gt;\\n&lt;/ul&gt;\\nInédit : Contient une ventouse ovale, pour une meilleure accroche au niveau des tendons.', 'Adapté pour soulager une douleur sur une zone restreinte telle que :', 49.99, 1, 0, 0, 0, 0);
+            INSERT INTO product (id, `type`, name, short_description, description, price, stock, width, `size`, height, weight) VALUES(5541, 'simple', 'Ventouses + Malette pour déplacement', '&lt;p style="text-align: center;"&gt;Malette de transport adaptée à votre coffre, votre sac de sport.&lt;/p&gt;', 'Conçue pour emmener vos ventouses partout avec vous ! Au sport, en vacances, en week-end. Dans votre coffre, dans votre sac de sport, vos ventouses sont à portée de main.', 129.99, 1, 0, 0, 0, 0);
+            INSERT INTO product (id, `type`, name, short_description, description, price, stock, width, `size`, height, weight) VALUES(5569, 'simple', 'Kit 33 pièces (30 ventouses)', '&lt;p style="text-align: center;"&gt;En soulageant plusieurs zones simultanément, vous gagnez du temps.&lt;/p&gt;', 'Gagnez du temps dans votre récupération sportive ou votre détente musculaire, en  vous soulageant des douleurs de plusieurs zones assez large telles que :', 149.99, 1, 0, 0, 0, 0);
+            INSERT INTO product (id, `type`, name, short_description, description, price, stock, width, `size`, height, weight) VALUES(5570, 'simple', 'Lait de massage spécial ventouses - 100 mL', '&lt;p style="text-align: center;"&gt;Crème idéale pour une bonne accroche des ventouses sur votre peau.&lt;/p&gt;', 'Lait de massage spécialement adapté à la bonne accroche des ventouses sur votre peau.', 7.99, 1, 0, 0, 0, 0);
+        </sql>
+    </changeSet>
+
+    <changeSet id="v0.0.1-INSET_PRODUCT_CATEGORY_DATA" author="cupme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Product Category
+            INSERT INTO product_category (product_id, category_id) VALUES(4839, 1);
+            INSERT INTO product_category (product_id, category_id) VALUES(4840, 1);
+            INSERT INTO product_category (product_id, category_id) VALUES(5540, 1);
+            INSERT INTO product_category (product_id, category_id) VALUES(5541, 1);
+            INSERT INTO product_category (product_id, category_id) VALUES(5569, 1);
+            INSERT INTO product_category (product_id, category_id) VALUES(5570, 1);
+            INSERT INTO product_category (product_id, category_id) VALUES(4839, 2);
+            INSERT INTO product_category (product_id, category_id) VALUES(4840, 3);
+            INSERT INTO product_category (product_id, category_id) VALUES(5540, 3);
+            INSERT INTO product_category (product_id, category_id) VALUES(5541, 3);
+            INSERT INTO product_category (product_id, category_id) VALUES(5569, 3);
+            INSERT INTO product_category (product_id, category_id) VALUES(5570, 4);
+        </sql>
+    </changeSet>
+
+    <changeSet id="v0.0.1-INSERT_PROTOCOL_DATA" author="cupme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Protocol
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7480, 'simple', 'Protocole pour soulager les Contractures/tensions mollets avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulagez les contractures et tensions dans les mollets grâce à notre protocole spécialisé. &lt;span&gt;&#129681;&lt;/span&gt; Améliore la circulation sanguine et favorise la récupération. &lt;span&gt;&#9889;&lt;/span&gt;Procure une sensation de légèreté et de bien-être.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les contractures et les tensions dans vos mollets avec notre protocole spécialisé. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles et à réduire les douleurs. Grâce à une meilleure circulation sanguine dans la région, vous bénéficierez d''une récupération plus rapide. Ressentez une sensation de légèreté et de bien-être dans vos mollets grâce à ce protocole efficace.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7484, 'simple', 'Protocole pour soulager les trapèzes tendus avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les tensions dans les trapèzes et améliore la mobilité des épaules et du cou. &lt;span&gt;&#128524;&lt;/span&gt; Procure un soulagement durable et une détente profonde.', '&lt;span&gt;&#128308;&lt;/span&gt; Dites adieu aux tensions dans les trapèzes grâce à notre protocole spécialisé. Les ventouses appliquées sur les points clés aident à relâcher les muscles tendus. Réduisez les douleurs et améliorez votre mobilité au niveau des épaules et du cou. Offrez-vous un soulagement durable et une détente profonde grâce à ce protocole efficace.', 69.99, 7);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7485, 'simple', 'Protocole pour soulager les Migraines avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les migraines et les tensions. &lt;span&gt;&#127807;&lt;/span&gt; Soulagement naturel sans médicaments. &lt;span&gt;&#129497;&lt;/span&gt; Favorise le bien-être général et la détente.', '&lt;span&gt;&#128308;&lt;/span&gt; Oubliez les migraines grâce à notre protocole spécialement conçu. Les ventouses appliquées sur les points spécifiques du crâne aident à réduire les douleurs et les tensions. Profitez d''un soulagement naturel sans avoir à recourir à des médicaments. Améliorez votre bien-être général et retrouvez une sensation de calme et de sérénité.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7486, 'simple', 'Protocole pour soulager les Pointe dans le dos avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Élimine les douleurs dans la pointe du dos. &lt;span&gt;&#128588;&lt;/span&gt; Soulage les tensions musculaires. &lt;span&gt;&#128170;&lt;/span&gt; Améliore la posture et le confort.', '&lt;span&gt;&#128308;&lt;/span&gt; Éliminez les douleurs persistantes dans la pointe de votre dos grâce à notre protocole spécialisé. Les ventouses ciblées aident à détendre les muscles et à soulager les tensions. Améliorez votre posture et votre confort au quotidien. Retrouvez une liberté de mouvement et une sensation de soulagement durable.', 69.99, 4);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7487, 'simple', 'Protocole pour soulager les Courbatures Biceps avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les courbatures dans les biceps. &lt;span&gt;&#x1F3CB;&#xFE0F;&amp;zwj;&#x2642;&#xFE0F;&lt;/span&gt; Favorise la récupération musculaire. &lt;span&gt;&#9889;&lt;/span&gt;Améliore la force et la mobilité.', '&lt;span&gt;&#128308;&lt;/span&gt; Dites adieu aux courbatures dans les biceps grâce à notre protocole spécialisé. Les ventouses appliquées sur les muscles sollicités aident à favoriser la récupération. Réduisez les douleurs et retrouvez une force et une mobilité optimales. Profitez d''une meilleure performance lors de vos activités sportives et de vos entraînements.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7488, 'simple', 'Protocole pour soulager les Tensions adducteurs avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les tensions dans les adducteurs. &lt;span&gt;&#x1F3CB;&#xFE0F;&amp;zwj;&#x2640;&#xFE0F;&lt;/span&gt;Améliore la flexibilité et le confort. &lt;span&gt;&#9889;&lt;/span&gt;Soulagement des douleurs et liberté de mouvement retrouvée.', '&lt;span&gt;&#128308;&lt;/span&gt; Libérez-vous des tensions dans les adducteurs grâce à notre protocole spécialisé. Les ventouses appliquées sur les zones ciblées aident à relâcher les muscles et à réduire les tensions. Améliorez votre flexibilité et votre confort au niveau de l''aine. Retrouvez une liberté de mouvement et soulagez les douleurs associées aux tensions des adducteurs.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7490, 'simple', 'Protocole pour soulager les Douleurs lombaires avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les douleurs lombaires. &lt;span&gt;&#127775;&lt;/span&gt; Améliore la posture et le confort. &lt;span&gt;&#128588;&lt;/span&gt; Procure un soulagement durable pour une meilleure qualité de vie.', '&lt;span&gt;&#128308;&lt;/span&gt; Dites adieu aux douleurs lombaires grâce à notre protocole spécialisé. Les ventouses appliquées sur les zones lombaires aident à soulager les douleurs et à détendre les muscles. Améliorez votre posture, réduisez les inconforts et retrouvez une meilleure qualité de vie. Profitez d''une sensation de soulagement et de bien-être durable.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7492, 'simple', 'Protocole pour soulager les Courbatures ischio-jambiers avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les courbatures des ischio-jambiers. &lt;span&gt;&#x1F3C3;&amp;zwj;&#x2642;&#xFE0F;&lt;/span&gt; Améliore la souplesse et la mobilité. &lt;span&gt;&#9889;&lt;/span&gt;Favorise la récupération musculaire pour une meilleure performance.', '&lt;span&gt;&#128308;&lt;/span&gt; Dites adieu aux courbatures dans les ischio-jambiers grâce à notre protocole spécialisé. Les ventouses appliquées sur les muscles sollicités aident à améliorer la récupération musculaire et à réduire les douleurs. Améliorez votre souplesse et votre mobilité au niveau des jambes. Retrouvez un soulagement rapide et une meilleure performance lors de vos activités physiques.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7496, 'simple', 'Protocole pour soulager les Tensions cervicales avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les tensions cervicales. &lt;span&gt;&#127807;&lt;/span&gt; Améliore la posture et la mobilité. &lt;span&gt;&#128524;&lt;/span&gt; Procure une relaxation profonde et un soulagement durable.', '&lt;span&gt;&#128308;&lt;/span&gt; Oubliez les tensions cervicales grâce à notre protocole spécialisé. Les ventouses appliquées sur les points clés aident à détendre les muscles et à soulager les douleurs au niveau du cou. Améliorez votre posture et retrouvez une mobilité sans inconfort. Profitez d''une relaxation profonde et d''un soulagement durable des tensions cervicales.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7529, 'simple', 'Protocole pour soulager les douleurs aux genoux avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les douleurs aux genoux avec des ventouses sèches. &lt;span&gt;&#x1F3CB;&#xFE0F;&amp;zwj;&#x2640;&#xFE0F;&lt;/span&gt;Améliore la circulation sanguine et la mobilité. &lt;span&gt;&#9889;&lt;/span&gt; Procure un soulagement naturel et durable.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez efficacement les douleurs aux genoux grâce à notre protocolespécialisé utilisant des ventouses sèches. Les ventouses appliquées surles zones ciblées aident à améliorer la circulation sanguine et à réduire les douleurs articulaires. Profitez d''un soulagement naturel et d''une meilleure mobilité au niveau de vos genoux, vous permettant de retrouver votre rythme de vie habituel.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7530, 'simple', 'Protocole pour soulager le Stress "Boule au ventre" avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les douleurs lombaires. &lt;span&gt;&#127775;&lt;/span&gt; Améliore la posture et le confort. &lt;span&gt;&#128588;&lt;/span&gt; Procure un soulagement durable pour une meilleure qualité de vie.', '&lt;span&gt;&#128308;&lt;/span&gt; Dites adieu au stress et à la sensation de "boule au ventre" grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les points clés aident à détendre les muscles abdominaux, à favoriser la relaxation et à réduire les sensations d''inconfort. Retrouvez un équilibre émotionnel et une sérénité intérieure grâce à cette technique apaisante.', 69.99, 4);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7531, 'simple', 'Protocole pour soulager Tensions creux du genou avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les tensions dans le creux du genou avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt; Stimule la circulation sanguine, favorisant ainsi un soulagement efficace. &lt;span&gt;&#128170;&lt;/span&gt; Procure une sensation apaisante et revitalisante, améliorant le bien-être du genou.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les tensions dans le creux du genou avec notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées autour du genou aident à stimuler la circulation sanguine, à réduire les sensations inconfortables et à favoriser une détente musculaire optimale. Retrouvez une sensation apaisante, revitalisante et prête à affronter votre quotidien.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7533, 'simple', 'Protocole pour soulager Les douleurs au tendon d’Achille', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulagez les douleurs au tendon d''Achille avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt; Stimulez la circulation sanguine, contribuant ainsi à atténuer les douleurs et favorisant une récupération optimale.  &lt;span&gt;&#128170;&lt;/span&gt; Retrouvez un soulagement apaisant, permettant une mobilité plus confortable et une meilleure souplesse du tendon d''Achille.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les douleurs au tendon d''Achille avec notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées autour du tendon d''Achille stimulent la circulation sanguine, contribuant à atténuer les douleurs et favorisant une récupération optimale. Retrouvez un soulagement apaisant, permettant une mobilité plus confortable et une meilleure souplesse du tendon d''Achille.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7535, 'simple', 'Protocole pour soulager Les tensions à la plante des pieds', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulagez les tensions à la plante des pieds avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt; Stimulez la circulation sanguine, favorisant ainsi un soulagement efficace. &lt;span&gt;&#128170;&lt;/span&gt; Procurez-vous une sensation apaisante et revitalisante, améliorant le bien-être de la plante des pieds.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les tensions à la plante des pieds avec notre protocole spécialisé utilisant des ventouses sèches. &lt;span&gt;⚡&lt;/span&gt; Les ventouses appliquées sur la plante des pieds stimulent la circulation sanguine, réduisant ainsi les sensations de tension et favorisant un soulagement durable. Retrouvez des pieds légers, détendus et prêts à marcher avec aisance.', 39.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7541, 'simple', 'Protocole pour soulager les Adducteurs pubalgie avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les douleurs de la pubalgie au niveau des adducteurs avec des ventouses sèches. &lt;span&gt;&#128524;&lt;/span&gt; Détend les muscles, réduit les inflammations et soulage les douleurs. &lt;span&gt;&#127775;&lt;/span&gt; Améliore la mobilité et permet un retour aux activités habituelles.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les douleurs de la pubalgie au niveau des adducteurs grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à réduire les inflammations et à soulager les douleurs associées à la pubalgie. Retrouvez une meilleure mobilité, un soulagement efficace et un retour à vos activités quotidiennes.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7543, 'simple', 'Protocole pour soulager les Courbatures épaules arrière avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les courbatures à l''arrière des épaules avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt;Détend les muscles, améliore la circulation sanguine et favorise la récupération. &lt;span&gt;&#128524;&lt;/span&gt; Procure une mobilité accrue et une sensation de bien-être.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les courbatures à l''arrière des épaules grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des épaules.', 69.99, 4);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7544, 'simple', 'Protocole pour soulager les Courbatures épaules avant avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les courbatures à l''avant des épaules avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt;Détend les muscles, améliore la circulation sanguine et favorise la récupération. &lt;span&gt;&#128524;&lt;/span&gt; Procure une mobilité accrue et une sensation de bien-être.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les courbatures à l''avant des épaules grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des épaules.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7550, 'simple', 'Protocole pour soulager les Courbatures pectoraux avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les courbatures au niveau des pectoraux avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt;Détend les muscles, améliore la circulation sanguine et favorise la récupération. &lt;span&gt;&#128524;&lt;/span&gt; Procure une mobilité accrue et une sensation de bien-être.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les courbatures au niveau des pectoraux grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des pectoraux.', 69.99, 5);
+            INSERT INTO protocol (id, `type`, name, short_description, description, price, pose_time) VALUES(7553, 'simple', 'Protocole pour soulager les Courbatures quadriceps avec ventouse sèche', '&lt;span&gt;&#x1F4A1;&lt;/span&gt; Soulage les courbatures des quadriceps avec des ventouses sèches. &lt;span&gt;&#9889;&lt;/span&gt;Détend les muscles, améliore la circulation sanguine et favorise la récupération. &lt;span&gt;&#128524;&lt;/span&gt; Procure une mobilité accrue et une sensation de bien-être.', '&lt;span&gt;&#128308;&lt;/span&gt; Soulagez les courbatures des quadriceps grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des quadriceps.', 69.99, 5);
+        </sql>
+    </changeSet>
+
+    <changeSet id="v0.0.1-INSERT_PROTOCOL_CATEGORY_DATA" author="cupme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Protocol Category
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7480, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7484, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7485, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7486, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7487, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7488, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7490, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7492, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7496, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7529, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7530, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7531, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7533, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7535, 5);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7541, 6);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7543, 6);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7544, 6);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7550, 6);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7553, 6);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7550, 7);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7541, 8);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7553, 8);
+            INSERT INTO protocol_category (protocol_id, category_id) VALUES(7543, 9);
+        </sql>
+    </changeSet>
+
+    <changeSet id="v0.0.1-INSERT_PROTOCOL_PRODUCT_DATA" author="cupme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Protocol Product
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7480, 4840);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7485, 4840);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7490, 4840);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7529, 4840);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7484, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7486, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7487, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7492, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7496, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7535, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7544, 5540);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7488, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7530, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7531, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7533, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7541, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7543, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7550, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7553, 5569);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7480, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7484, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7485, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7486, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7487, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7488, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7490, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7492, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7496, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7529, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7530, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7531, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7533, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7535, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7541, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7543, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7544, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7550, 5570);
+            INSERT INTO protocol_product (protocol_id, product_id) VALUES(7553, 5570);
+        </sql>
+    </changeSet>
+
+    <changeSet id="v0.0.1-INSERT_PICTURE_DATA" author="cupme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Picture
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(1, 'main', 'content/images/4839/main.png', 1, NULL, 4839);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(2, 'product4839-cup_me_6-scaled', 'content/images/4839/product4839-cup_me_6-scaled.jpg', 0, NULL, 4839);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(3, 'product4839-cup_me_10-scaled', 'content/images/4839/product4839-cup_me_10-scaled.jpg', 0, NULL, 4839);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(4, 'product4839-20230131_205646', 'content/images/4839/product4839-20230131_205646.png', 0, NULL, 4839);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(5, 'main', 'content/images/7484/main.png', 1, 7484, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(6, 'main', 'content/images/7480/main.png', 1, 7480, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(7, 'main', 'content/images/7485/main.png', 1, 7485, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(8, 'main', 'content/images/7486/main.png', 1, 7486, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(9, 'main', 'content/images/7487/main.png', 1, 7487, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(10, 'main', 'content/images/7488/main.png', 1, 7488, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(11, 'main', 'content/images/7490/main.png', 1, 7490, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(12, 'main', 'content/images/7492/main.png', 1, 7492, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(14, 'main', 'content/images/7496/main.png', 1, 7496, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(15, 'main', 'content/images/7530/main.png', 1, 7530, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(16, 'main', 'content/images/7531/main.png', 1, 7531, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(17, 'main', 'content/images/7533/main.png', 1, 7533, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(19, 'main', 'content/images/7535/main.png', 1, 7535, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(22, 'main', 'content/images/7541/main.png', 1, 7541, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(26, 'main', 'content/images/7529/main.png', 1, 7529, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(27, 'main', 'content/images/7543/main.png', 1, 7543, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(28, 'main', 'content/images/7544/main.png', 1, 7544, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(29, 'main', 'content/images/7550/main.png', 1, 7550, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(30, 'main', 'content/images/7553/main.png', 1, 7553, NULL);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(32, 'main', 'content/images/4839/main.png', 1, NULL, 4840);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(33, 'main', 'content/images/5540/main.png', 1, NULL, 5540);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(34, 'main', 'content/images/5541/main.png', 1, NULL, 5541);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(35, 'main', 'content/images/5569/main.png', 1, NULL, 5569);
+            INSERT INTO picture (id, name, file, main, protocol_id, product_id) VALUES(36, 'main', 'content/images/5570/main.png', 1, NULL, 5570);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

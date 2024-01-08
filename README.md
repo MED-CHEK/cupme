@@ -128,6 +128,8 @@ docker-compose -f src/main/docker/jhipster-control-center.yml up
 - Change the port of the application in the file `src/main/resources/config/application-prod.yml` and `src/main/resources/config/application.yml`
 - Change the paypal clientID in the index file `src/main/webapp/index.html`
 
+- Change the paypal clientID in the index file `src/main/webapp/index.html`
+
 ### Packaging as jar
 
 To build the final jar and optimize the CupMe application for production, run:
@@ -142,6 +144,7 @@ To ensure everything worked, run:
 ```
 java -jar target/*.jar
 ```
+
 Then navigate to [http://localhost:9000](http://localhost:9000) in your browser.
 
 Refer to [Using JHipster in production][] for more details.
