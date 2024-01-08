@@ -109,20 +109,19 @@
           </ngb-carousel>
         </div>
       </div>
-
-      <div *ngSwitchCase="false" class="auth">
-        <span class="text col-12 col-md-8 col-lg-8 mb-5">
-          <span class="title">
-            {{ 'home.title' | translate }}
-          </span>
-          <span class="message">
-            {{ 'home.login.message' | translate }}
-          </span>
+    </div>
+    <div *ngSwitchCase="false" class="auth">
+      <span class="text col-12 col-md-8 col-lg-8 mb-5">
+        <span class="title">
+          {{ 'home.title' | translate }}
         </span>
-        <div class="buttons">
-          <button class="btn btn-primary" (click)="login()">{{ 'global.messages.info.authenticated.link' | translate }}</button>
-          <button class="btn btn-primary" (click)="register()">{{ 'global.messages.info.register.link' | translate }}</button>
-        </div>
+        <span class="message">
+          {{ 'home.login.message' | translate }}
+        </span>
+      </span>
+      <div class="buttons">
+        <button class="btn btn-primary" (click)="login()">{{ 'global.messages.info.authenticated.link' | translate }}</button>
+        <button class="btn btn-primary" (click)="register()">{{ 'global.messages.info.register.link' | translate }}</button>
       </div>
     </div>
   </div>
