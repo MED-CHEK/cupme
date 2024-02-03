@@ -5,6 +5,7 @@
     "menu": {
       "home": "Accueil",
       "myProtocols": "Mes protocoles",
+      "store": "Boutique",
       "panier": "Panier",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
 
@@ -53,9 +54,9 @@
       "age.label": "Âge",
       "age.placeholder": "Entrez votre Âge",
       "weight.label": "Poids",
-      "weight.placeholder": "Entrez votre poids",
+      "weight.placeholder": "Entrez votre poids en kg",
       "size.label": "Taille",
-      "size.placeholder": "Entrez votre Taille"
+      "size.placeholder": "Entrez votre Taille en cm"
     },
     "messages": {
       "info": {
@@ -101,14 +102,21 @@
     "myprotocol.title": "Mes protocoles",
     "detail": {
       "title": "Détail",
-      "message": "ces protocoles sont faite pour vous !",
+      "message": "Ce protocole est fait pour vous !",
       "panier": "Ajouter au panier",
       "categories": "Catégories",
       "shortDescription": "En bref",
       "description": "Description",
       "protocol.label": "Protocoles",
+      "protocol.label.generic": "Protocole généraux",
       "product.label": "Produits pour ce protocole",
-      "myprotocol.label": "Mes protocoles"
+      "myprotocol.label": "Mes protocoles",
+      "myprotocol.noProtocols": "Explorez dès maintenant notre collection exclusive de protocoles. Si vous n'avez pas encore découvert ces méthodes bien-être, c'est le moment idéal pour plonger dans l'expérience !"
+    },
+    "store": {
+      "title": "Boutique",
+      "protocol.label": "Protocoles",
+      "product.label": "Produits"
     },
     "cart": {
       "title": "Mon panier",
@@ -125,7 +133,9 @@
         "quantity": "Quantité",
         "total": "Sous Total"
       },
-      "subTotal": "Récapitulatif de votre commande"
+      "subTotal": "Récapitulatif de votre commande",
+      "cgv": "En validant votre commande, vous acceptez nos ",
+      "cgv.link": " conditions générales de vente"
     },
     "success.title": "Transaction réussie"
   },

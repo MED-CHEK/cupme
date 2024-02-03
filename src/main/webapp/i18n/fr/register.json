@@ -51,12 +51,12 @@
           "required": "Votre genre est obligatoire."
         },
         "weight": {
-          "required": "Votre poids est obligatoire.",
+          "required": "Afin de vous proposer votre protocole personnalisé, vous devez compléter ces informations.",
           "min": "Votre poids doit être supérieur à 0.",
           "max": "Votre poids doit être inférieur à 999."
         },
         "size": {
-          "required": "Votre taille est obligatoire.",
+          "required": "Afin de vous proposer votre protocole personnalisé, vous devez compléter ces informations.",
           "min": "Votre taille doit être supérieur à 0.",
           "max": "Votre taille doit être inférieur à 999."
         }
