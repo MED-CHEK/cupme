@@ -4,7 +4,7 @@
       <div class="bg col-12 col-lg-10">
         <div class="text">
           <span>
-            <span class="title">{{ 'home.title' | translate }}</span>
+            <span class="title">{{ 'home.douleur' | translate }}</span>
           </span>
           <span>
             <span>{{ 'home.chooseZones' | translate }}</span>
@@ -14,47 +14,41 @@
           <ngb-carousel [interval]="100000" [showNavigationIndicators]="false">
             <ng-template ngbSlide>
               <div class="picsum-img-wrapper">
-                <img
-                  src="../../content/images/zones-front.png"
-                  class="img-fluid"
-                  alt=""
-                  usemap="#front-zones-reactives"
-                  name="front-zones-reactives"
-                />
+                <img src="../../content/images/zones-front.png" alt="" usemap="#front-zones-reactives" name="front-zones-reactives" />
               </div>
               <map id="front-zones-reactives" name="front-zones-reactives">
-                <area coords="161,124,22" shape="circle" (click)="selectZone(7484)" />
-                <area coords="258,138,21" shape="circle" (click)="selectZone(7544)" />
-                <area coords="227,174,21" shape="circle" (click)="selectZone(7550)" />
-                <area coords="277,206,22" shape="circle" (click)="selectZone(7487)" />
-                <area coords="194,238,25" shape="circle" (click)="selectZone(7530)" />
-                <area coords="194,295,25" shape="circle" (click)="selectZone(7541)" />
-                <area coords="229,368,26" shape="circle" (click)="selectZone(7488)" />
-                <area coords="243,435,17" shape="circle" (click)="selectZone(7529)" />
-                <area coords="152,388,31" shape="circle" (click)="selectZone(7553)" />
+                <area coords="237,171,15" shape="circle" (click)="selectZone(7484)" />
+                <area coords="126,203,17" shape="circle" (click)="selectZone(7544)" />
+                <area coords="236,227,27" shape="circle" (click)="selectZone(7550)" />
+                <area coords="294,270,15" shape="circle" (click)="selectZone(7487)" />
+                <area coords="197,303,16" shape="circle" (click)="selectZone(7530)" />
+                <area coords="86,325,14" shape="circle" (click)="selectZone(7506)" />
+                <area coords="197,373,16" shape="circle" (click)="selectZone(7541)" />
+                <area coords="223,437,17" shape="circle" (click)="selectZone(7488)" />
+                <area coords="152,475,28" shape="circle" (click)="selectZone(7553)" />
+                <area coords="255,534,17" shape="circle" (click)="selectZone(7529)" />
               </map>
             </ng-template>
             <ng-template ngbSlide>
               <div class="picsum-img-wrapper">
-                <img
-                  src="../../content/images/zones-back.png"
-                  class="img-fluid"
-                  alt=""
-                  usemap="#back-zones-reactives"
-                  name="back-zones-reactives"
-                />
+                <img src="../../content/images/zones-back.png" alt="" usemap="#back-zones-reactives" name="back-zones-reactives" />
               </div>
               <map id="back-zones-reactives" name="back-zones-reactives">
-                <area coords="189,104,21" shape="circle" (click)="selectZone(7496)" />
-                <area coords="153,129,18" shape="circle" (click)="selectZone(7484)" />
-                <area coords="255,154,22" shape="circle" (click)="selectZone(7543)" />
-                <area coords="155,174,22" shape="circle" (click)="selectZone(7486)" />
-                <area coords="140,211,189,292" shape="rect" (click)="selectZone(7490)" />
-                <area coords="211,366,268,442" shape="rect" (click)="selectZone(7492)" />
-                <area coords="119,516,28" shape="circle" (click)="selectZone(7480)" />
-                <area coords="258,461,20" shape="circle" (click)="selectZone(7531)" />
-                <area coords="273,580,13" shape="circle" (click)="selectZone(7533)" />
-                <area coords="116,606,15" shape="circle" (click)="selectZone(7535)" />
+                <area coords="213,87,14" shape="circle" (click)="selectZone(7496)" />
+                <area coords="201,118,14" shape="circle" (click)="selectZone(7513)" />
+                <area coords="240,137,13" shape="circle" (click)="selectZone(7484)" />
+                <area coords="123,163,18" shape="circle" (click)="selectZone(7543)" />
+                <area coords="219,209,19" shape="circle" (click)="selectZone(7486)" />
+                <area coords="104,227,18" shape="circle" (click)="selectZone(7527)" />
+                <area coords="332,303,18" shape="circle" (click)="selectZone(7506)" />
+                <area coords="239,309,18" shape="circle" (click)="selectZone(7490)" />
+                <area coords="160,341,17" shape="circle" (click)="selectZone(7555)" />
+                <area coords="237,432,17" shape="circle" (click)="selectZone(7522)" />
+                <area coords="143,470,26" shape="circle" (click)="selectZone(7492)" />
+                <area coords="131,536,18" shape="circle" (click)="selectZone(7531)" />
+                <area coords="285,597,24" shape="circle" (click)="selectZone(7480)" />
+                <area coords="117,698,15" shape="circle" (click)="selectZone(7533)" />
+                <area coords="296,728,13" shape="circle" (click)="selectZone(7535)" />
               </map>
             </ng-template>
           </ngb-carousel>
@@ -65,21 +59,21 @@
               <div class="picsum-img-wrapper">
                 <img
                   src="../../content/images/zones-front-mobile.png"
-                  class="img-fluid"
                   alt=""
                   usemap="#front-zones-reactives-mobile"
                   name="front-zones-reactives-mobile"
                 />
                 <map id="front-zones-reactives-mobile" name="front-zones-reactives-mobile">
-                  <area coords="123,93,16" shape="circle" (click)="selectZone(7484)" />
-                  <area coords="198,106,16" shape="circle" (click)="selectZone(7544)" />
-                  <area coords="174,134,16" shape="circle" (click)="selectZone(7550)" />
-                  <area coords="213,156,17" shape="circle" (click)="selectZone(7487)" />
-                  <area coords="149,180,17" shape="circle" (click)="selectZone(7530)" />
-                  <area coords="148,224,19" shape="circle" (click)="selectZone(7541)" />
-                  <area coords="174,282,18" shape="circle" (click)="selectZone(7488)" />
-                  <area coords="185,332,13" shape="circle" (click)="selectZone(7529)" />
-                  <area coords="114,295,24" shape="circle" (click)="selectZone(7553)" />
+                  <area coords="178,128,12" shape="circle" (click)="selectZone(7484)" />
+                  <area coords="94,151,14" shape="circle" (click)="selectZone(7544)" />
+                  <area coords="177,169,20" shape="circle" (click)="selectZone(7550)" />
+                  <area coords="220,203,13" shape="circle" (click)="selectZone(7487)" />
+                  <area coords="149,227,13" shape="circle" (click)="selectZone(7530)" />
+                  <area coords="65,244,13" shape="circle" (click)="selectZone(7506)" />
+                  <area coords="148,280,13" shape="circle" (click)="selectZone(7541)" />
+                  <area coords="168,326,12" shape="circle" (click)="selectZone(7488)" />
+                  <area coords="114,356,22" shape="circle" (click)="selectZone(7553)" />
+                  <area coords="191,401,14" shape="circle" (click)="selectZone(7529)" />
                 </map>
               </div>
             </ng-template>
@@ -87,41 +81,65 @@
               <div class="picsum-img-wrapper">
                 <img
                   src="../../content/images/zones-back-mobile.png"
-                  class="img-fluid"
                   alt=""
                   usemap="#back-zones-reactives-mobile"
                   name="back-zones-reactives-mobile"
                 />
                 <map id="back-zones-reactives-mobile" name="back-zones-reactives-mobile">
-                  <area coords="145,75,15" shape="circle" (click)="selectZone(7496)" />
-                  <area coords="117,93,14" shape="circle" (click)="selectZone(7484)" />
-                  <area coords="194,108,16" shape="circle" (click)="selectZone(7543)" />
-                  <area coords="120,128,16" shape="circle" (click)="selectZone(7486)" />
-                  <area coords="147,213,108,153" shape="rect" (click)="selectZone(7490)" />
-                  <area coords="161,266,204,321" shape="rect" (click)="selectZone(7492)" />
-                  <area coords="94,378,20" shape="circle" (click)="selectZone(7480)" />
-                  <area coords="197,351,15" shape="circle" (click)="selectZone(7531)" />
-                  <area coords="209,441,11" shape="circle" (click)="selectZone(7533)" />
-                  <area coords="89,462,11" shape="circle" (click)="selectZone(7535)" />
+                  <area coords="159,64,11" shape="circle" (click)="selectZone(7496)" />
+                  <area coords="151,88,11" shape="circle" (click)="selectZone(7513)" />
+                  <area coords="180,103,12" shape="circle" (click)="selectZone(7484)" />
+                  <area coords="93,123,13" shape="circle" (click)="selectZone(7543)" />
+                  <area coords="163,158,13" shape="circle" (click)="selectZone(7486)" />
+                  <area coords="80,170,14" shape="circle" (click)="selectZone(7527)" />
+                  <area coords="248,228,13" shape="circle" (click)="selectZone(7506)" />
+                  <area coords="179,231,14" shape="circle" (click)="selectZone(7490)" />
+                  <area coords="119,257,14" shape="circle" (click)="selectZone(7555)" />
+                  <area coords="177,325,13" shape="circle" (click)="selectZone(7522)" />
+                  <area coords="106,352,19" shape="circle" (click)="selectZone(7492)" />
+                  <area coords="99,403,15" shape="circle" (click)="selectZone(7531)" />
+                  <area coords="213,448,18" shape="circle" (click)="selectZone(7480)" />
+                  <area coords="88,525,12" shape="circle" (click)="selectZone(7533)" />
+                  <area coords="221,546,10" shape="circle" (click)="selectZone(7535)" />
                 </map>
               </div>
             </ng-template>
           </ngb-carousel>
         </div>
       </div>
+      <div class="protos col-12 col-lg-10">
+        <div class="row col-12">
+          <div class="label">
+            <span>
+              {{ 'global.detail.protocol.label.generic' | translate }}
+            </span>
+          </div>
+          <div class="protocols">
+            <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols" (click)="selectProtocol(protocol)">
+              <jhi-proto [protocol]="protocol"></jhi-proto>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div *ngSwitchCase="false" class="auth">
-      <span class="text col-12 col-md-8 col-lg-8 mb-5">
-        <span class="title">
-          {{ 'home.title' | translate }}
+      <div class="home-page col-12 col-lg-10">
+        <div class="video col-12 col-lg-7">
+          <app-video></app-video>
+        </div>
+        <span class="text col-12 col-md-8 mt-2 mb-3">
+          <span class="title">
+            {{ 'home.title' | translate }}
+          </span>
+          <span class="message">
+            {{ 'home.login.message' | translate }}
+          </span>
         </span>
-        <span class="message">
-          {{ 'home.login.message' | translate }}
-        </span>
-      </span>
-      <div class="buttons">
-        <button class="btn btn-primary" (click)="login()">{{ 'global.messages.info.authenticated.link' | translate }}</button>
-        <button class="btn btn-primary" (click)="register()">{{ 'global.messages.info.register.link' | translate }}</button>
+        <div class="buttons">
+          <button class="btn btn-primary" (click)="login()">{{ 'global.messages.info.authenticated.link' | translate }}</button>
+          <button class="btn btn-primary" (click)="register()">{{ 'global.messages.info.register.link' | translate }}</button>
+        </div>
+        <span class="logo-img mt-3"></span>
       </div>
     </div>
   </div>

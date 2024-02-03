@@ -5,6 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { ProtocolService } from 'app/protocol/protocol.service';
+import { ProtocolCartDTO } from 'app/entities/protocol.model';
 
 @Component({
   selector: 'jhi-home',
@@ -15,10 +17,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   screenWidth!: number;
   isMobileDisplay!: boolean;
+  protocols: ProtocolCartDTO[] = [];
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(private accountService: AccountService, private router: Router, private protocolService: ProtocolService) {}
 
   ngOnInit(): void {
     this.onWindowResize();
@@ -26,6 +29,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))
       .subscribe(account => (this.account = account));
+
+    this.protocolService.getGenericProtocols().subscribe(protocols => (this.protocols = protocols));
   }
 
   @HostListener('window:resize', ['$event'])
@@ -53,5 +58,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   selectZone(id: number): void {
     this.router.navigate(['/protocols/' + id]);
+  }
+
+  selectProtocol(protocol: any) {
+    this.router.navigate(['/protocols', protocol.id]);
   }
 }

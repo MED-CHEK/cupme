@@ -26,6 +26,14 @@
         </li>
 
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="account">
+          <a class="nav-link" routerLink="/store" (click)="collapseNavbar()">
+            <span>
+              <span>{{ 'global.menu.store' | translate }}</span>
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="account">
           <a class="nav-link" routerLink="/myprotocols" (click)="collapseNavbar()">
             <span>
               <span>{{ 'global.menu.myProtocols' | translate }}</span>

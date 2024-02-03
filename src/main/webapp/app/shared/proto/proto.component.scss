@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../../../../content/scss/custom-variables.scss';
+@import '../../../content/scss/custom-variables.scss';
 
 .proto {
   background-color: #e7e6e6;
@@ -67,4 +67,27 @@
   }
 }
 
-/* ========================================================================== */
+.proto-icon {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+
+  &.cart-icon {
+    background: url('../../../content/images/cart.svg') no-repeat center top;
+    background-size: 90%;
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .proto-icon {
+    height: 16px;
+    width: 16px;
+
+    &.cart-icon {
+      background: url('../../../content/images/cart.svg') no-repeat center top;
+      background-size: 85%;
+    }
+  }
+}

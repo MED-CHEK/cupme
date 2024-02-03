@@ -9,6 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 import { CartService } from '../../cart/cart.service';
+import { OrderService } from 'app/order/order.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -16,7 +17,6 @@ import { CartService } from '../../cart/cart.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  inProductDTOion?: boolean;
   isNavbarCollapsed = true;
   languages = LANGUAGES;
   openAPIEnabled?: boolean;
@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
     });
+
     let cartItems = localStorage.getItem('jhi-cart-items');
     if (cartItems) {
       this.cartSize = JSON.parse(cartItems).length;

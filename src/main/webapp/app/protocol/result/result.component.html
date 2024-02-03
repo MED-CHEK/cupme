@@ -6,9 +6,11 @@
       </span>
     </div>
     <div class="protocols">
-      <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols" (click)="selectProtocol(protocol)">
+      <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols">
         <jhi-proto [protocol]="protocol"></jhi-proto>
       </div>
     </div>
   </div>
 </div>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

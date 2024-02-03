@@ -3,7 +3,7 @@
 
 .login {
   position: relative;
-  top: -1rem;
+  padding-top: 6%;
 
   .row {
     height: 78vh;
@@ -31,7 +31,7 @@ login page styles
   width: 12rem;
   display: inline-block;
   vertical-align: middle;
-  background: url('../../content/images/logo.svg') no-repeat center center;
+  background: url('../../content/images/logo.png') no-repeat center center;
   background-size: contain;
 }
 
@@ -47,6 +47,7 @@ login page styles
 @media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
   .login {
     font-size: small !important;
+    padding-top: 0;
 
     .check-pwd,
     .noaccount {
@@ -60,14 +61,14 @@ login page styles
   }
 
   .row {
-    height: 86vh !important;
+    height: 100vh !important;
 
     .info {
-      height: 62%;
+      height: 59%;
     }
 
     .img {
-      min-height: 38%;
+      min-height: 41%;
       height: auto;
     }
   }

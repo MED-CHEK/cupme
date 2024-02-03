@@ -18,6 +18,7 @@ import { VideoComponent } from './video/video.component';
 import { NgbdRatingDecimal } from './rating/rating-decimal';
 import { LoadingComponent } from './loading/loading.component';
 import { ToastsContainer } from './toast/toasts-container.component';
+import { ProtoComponent } from './proto/proto.component';
 
 @NgModule({
   imports: [SharedLibsModule],
@@ -39,6 +40,7 @@ import { ToastsContainer } from './toast/toasts-container.component';
     LoadingComponent,
     NgbdRatingDecimal,
     ToastsContainer,
+    ProtoComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -59,6 +61,7 @@ import { ToastsContainer } from './toast/toasts-container.component';
     LoadingComponent,
     NgbdRatingDecimal,
     ToastsContainer,
+    ProtoComponent,
   ],
 })
 export class SharedModule {}

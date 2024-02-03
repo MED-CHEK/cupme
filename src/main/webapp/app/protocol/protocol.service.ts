@@ -18,6 +18,10 @@ export class ProtocolService {
     return this.http.get<ProtocolCartDTO[]>(this.applicationConfigService.getEndpointFor('api/protocol'));
   }
 
+  getGenericProtocols(): Observable<ProtocolCartDTO[]> {
+    return this.http.get<ProtocolCartDTO[]>(this.applicationConfigService.getEndpointFor('api/protocol/generic'));
+  }
+
   createProtocol(protocol: ProtocolDTO): Observable<ProtocolDTO> {
     return this.http.post<ProtocolDTO>(this.applicationConfigService.getEndpointFor('api/protocol'), protocol);
   }

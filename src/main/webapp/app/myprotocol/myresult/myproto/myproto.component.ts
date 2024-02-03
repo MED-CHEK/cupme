@@ -20,11 +20,6 @@ export class MyProtoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProtoImage();
-
-    /*  this.route.queryParams.pipe(mergeMap(params => this.detailService.get(params.key))).subscribe({
-      next: () => (this.success = true),
-      error: () => (this.error = true),
-    }); */
   }
 
   getProtoImage() {

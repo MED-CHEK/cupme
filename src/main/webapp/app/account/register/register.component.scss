@@ -3,41 +3,42 @@
 
 .register {
   position: relative;
-  top: -4rem;
+  padding: 4rem 0.5rem;
+  padding-bottom: 4.5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
 
-.content {
-  min-height: 60vh;
-  background-color: white;
-  padding: 2rem;
-}
-
-.video {
-  height: 25rem;
-}
-
-.hide-step {
-  display: none;
-}
-
-.form-label {
-  margin-bottom: 0.125rem;
-}
-
-.sexRadios {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: start;
-
-  .sexRadio:first-child {
-    margin-right: 1.5rem;
+  .content {
+    min-height: 60vh;
+    background-color: white;
+    padding: 2rem;
   }
 
-  .form-check-label {
-    margin-right: 1.5rem;
+  .video {
+    height: 100%;
+  }
+
+  .hide-step {
+    display: none;
+  }
+
+  .form-label {
+    margin-bottom: 0.125rem;
+  }
+
+  .sexRadios {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: start;
+
+    .sexRadio:first-child {
+      margin-right: 1.5rem;
+    }
+
+    .form-check-label {
+      margin-right: 1.5rem;
+    }
   }
 }
 

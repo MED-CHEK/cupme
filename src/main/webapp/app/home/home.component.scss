@@ -2,12 +2,12 @@
 @import '../../content/scss/custom-variables.scss';
 
 .home {
-  height: 84vh;
-
   .corps {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 84vh;
+    align-items: center;
+    padding: 4rem 0;
 
     .bg {
       background-color: #f0f0f0;
@@ -22,7 +22,7 @@
     .zone {
       height: 100%;
       width: 50%;
-      padding: 5.5rem 0;
+      padding: 2rem 0;
       background: url('../../content/images/bg.jpg') no-repeat center top;
       background-size: cover;
       border-radius: 1rem;
@@ -42,6 +42,35 @@
       font-weight: 600;
       text-align: center;
     }
+
+    .protos {
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+
+      .label {
+        font-size: 1.75rem;
+        font-weight: 500;
+        padding-bottom: 1.5rem;
+        color: black;
+        border-radius: 0.275rem;
+        line-height: 1.5rem;
+      }
+
+      .protocols {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .protocol {
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+          min-width: 15rem;
+          height: 18rem;
+        }
+      }
+    }
   }
 
   .auth {
@@ -50,7 +79,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 72vh;
+    height: 100vh;
+
+    .home-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem;
+
+      .video {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ::ng-deep video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
 
     .text {
       display: flex;
@@ -66,13 +114,17 @@
         font-weight: 600;
         margin-bottom: 1rem;
       }
+
+      .message {
+        color: black;
+      }
     }
 
     .buttons {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 2rem;
+      margin-top: 1rem;
 
       .btn {
         border-radius: 0.5rem;
@@ -86,15 +138,31 @@
 }
 
 ::ng-deep .carousel {
-  height: 100%;
+  button {
+    width: 15%;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    opacity: 1;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
 
   .carousel-inner {
-    display: flex;
-    height: 100%;
+    padding: 0;
 
     .picsum-img-wrapper {
       display: flex;
       justify-content: center;
+
+      .img-fluid {
+        padding: 0 6rem;
+      }
     }
   }
 }
@@ -102,11 +170,13 @@
 @media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
   .home {
     height: unset;
+    padding-top: 0;
 
     .corps {
-      height: unset;
+      padding-top: 3.75rem;
 
       .bg {
+        background-color: unset;
         padding: 0rem;
         justify-content: center;
         align-items: center;
@@ -115,7 +185,7 @@
         .text {
           width: 100%;
           text-align: center;
-          padding: 2rem 0 !important;
+          padding: 1rem 0 !important;
           font-size: 1rem !important;
 
           .title {
@@ -126,13 +196,39 @@
         .zone {
           width: 100%;
           padding: 3rem 0 1rem;
-          height: 85%;
           border-radius: 0.25rem !important;
+
+          ::ng-deep .carousel {
+            button {
+              width: 8%;
+            }
+
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+              height: 1.5rem;
+              width: 1.5rem;
+            }
+          }
         }
       }
     }
 
     .auth {
+      .home-page {
+        width: 100%;
+        padding: 3rem 0.5rem;
+
+        .video {
+          ::ng-deep video {
+            height: 100%;
+          }
+        }
+
+        .logo-img {
+          width: 14rem;
+        }
+      }
+
       .text {
         font-size: 1rem !important;
 
@@ -158,7 +254,15 @@
 
 @media screen and (max-width: calc(map.get($grid-breakpoints, 'sm') - 1px)) {
   .zone {
-    padding: 0.5rem 0 0.5rem !important;
-    height: 80% !important;
+    padding: 1rem 0 !important;
   }
+}
+
+.logo-img {
+  height: 8rem;
+  width: 14rem;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../../content/images/logo.png') no-repeat center center;
+  background-size: contain;
 }

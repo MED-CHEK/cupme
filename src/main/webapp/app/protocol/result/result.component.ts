@@ -37,8 +37,4 @@ export class ResultComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  selectProtocol(protocol: any) {
-    this.router.navigate(['/protocols', protocol.id]);
-  }
 }

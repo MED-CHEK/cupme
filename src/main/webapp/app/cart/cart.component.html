@@ -109,6 +109,82 @@
           <div #paymentRef></div>
         </div>
       </div>
+      <div class="cgv">
+        <span class="label">
+          <span class="asterisk">*</span>
+          {{ 'global.cart.cgv' | translate }}
+        </span>
+        <span class="link" (click)="showCGV(content)">
+          {{ 'global.cart.cgv.link' | translate }}
+        </span>
+      </div>
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title">{{ 'cgv.title' | translate }}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('')"></button>
+  </div>
+  <div class="modal-body">
+    <h6>{{ 'cgv.acceptanceConditions' | translate }}</h6>
+    <p>{{ 'cgv.acceptanceConditionsDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.deviceNature' | translate }}</h6>
+    <p>{{ 'cgv.deviceNatureDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.responsibleUse' | translate }}</h6>
+    <p>{{ 'cgv.responsibleUseDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.cupQuality' | translate }}</h6>
+    <p>{{ 'cgv.cupQualityDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.maintenance' | translate }}</h6>
+    <p>{{ 'cgv.maintenanceDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.personalApp' | translate }}</h6>
+    <p>{{ 'cgv.personalAppDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.sensitiveSkinContact' | translate }}</h6>
+    <p>{{ 'cgv.sensitiveSkinContactDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.individualEffects' | translate }}</h6>
+    <p>{{ 'cgv.individualEffectsDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.infoAndWarnings' | translate }}</h6>
+    <p>{{ 'cgv.infoAndWarningsDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.medicalConsultation' | translate }}</h6>
+    <p>{{ 'cgv.medicalConsultationDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.limitedLiability' | translate }}</h6>
+    <p>{{ 'cgv.limitedLiabilityDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.intellectualProperty' | translate }}</h6>
+    <p>{{ 'cgv.intellectualPropertyDesc' | translate }}</p>
+
+    <h6>{{ 'cgv.useLicense' | translate }}</h6>
+    <p [innerHTML]="'cgv.useLicenseDesc1' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc2' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc3' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc4' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc5' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc6' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc7' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc8' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc9' | translate"></p>
+    <p [innerHTML]="'cgv.useLicenseDesc10' | translate"></p>
+
+    <h6>{{ 'cgv.responsibilityDisclaimer' | translate }}</h6>
+    <p>{{ 'cgv.responsibilityDisclaimerDesc1' | translate }}</p>
+    <p>{{ 'cgv.responsibilityDisclaimerDesc2' | translate }}</p>
+    <p>{{ 'cgv.responsibilityDisclaimerDesc3' | translate }}</p>
+    <p>{{ 'cgv.responsibilityDisclaimerDesc4' | translate }}</p>
+    <p>{{ 'cgv.responsibilityDisclaimerDesc5' | translate }}</p>
+    <p>{{ 'cgv.responsibilityDisclaimerDesc6' | translate }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>

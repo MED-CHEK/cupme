@@ -1,0 +1,178 @@
+@use 'sass:map';
+@import '../../content/scss/custom-variables.scss';
+
+.store {
+  display: flex;
+  justify-content: center;
+  padding: 5rem 0;
+
+  .label {
+    font-size: 1.75rem;
+    font-weight: 500;
+    padding-bottom: 1.5rem;
+    color: black;
+    border-radius: 0.275rem;
+    line-height: 1.5rem;
+  }
+
+  .tabs-container {
+    height: 2rem;
+
+    .tabs {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transform: translateX(0px);
+      transition: transform 300ms ease-in-out;
+
+      .tab {
+        height: 100%;
+        margin: 0 1rem 0 0;
+        flex-shrink: 0;
+        border-bottom: solid 0.1875rem transparent;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: $dataTextColor;
+        opacity: 0.64;
+        cursor: pointer;
+
+        &.active {
+          opacity: 1;
+          border-bottom-color: $textColor;
+          transition: all 300ms linear;
+        }
+      }
+    }
+  }
+
+  .protocols {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .protocol {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      height: 18rem;
+    }
+  }
+
+  .products {
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .product {
+      height: 16rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+
+      .prod {
+        background-color: #e7e6e6;
+        padding: 0.75rem 0.75rem;
+        border-radius: 0.5rem;
+      }
+
+      .image {
+        position: relative;
+
+        .avis {
+          position: absolute;
+          top: 0.25rem;
+          left: 0.25rem;
+
+          .avis-text {
+            font-size: 0.75rem;
+            color: white;
+            background-color: goldenrod;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 10rem;
+          border-radius: 0.25rem;
+        }
+      }
+
+      .name {
+        padding-top: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        height: 2.75rem;
+      }
+
+      .cart-price {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .price {
+          font-size: 1rem;
+          font-weight: 500;
+          color: goldenrod;
+        }
+
+        .cart {
+          border-radius: 0.5rem;
+          color: white;
+          font-size: 1.125rem;
+
+          .btn {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.store-icon {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+
+  &.cart-icon {
+    background: url('../../content/images/cart.svg') no-repeat center top;
+    background-size: 90%;
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .protocol,
+  .product {
+    padding: 0.125rem !important;
+  }
+
+  .product .name {
+    font-size: 0.75rem !important;
+  }
+  .store-icon {
+    height: 16px;
+    width: 16px;
+
+    &.cart-icon {
+      background: url('../../content/images/cart.svg') no-repeat center top;
+      background-size: 85%;
+    }
+  }
+}
+
+/* ==========================================================================
+Main page styles
+========================================================================== */

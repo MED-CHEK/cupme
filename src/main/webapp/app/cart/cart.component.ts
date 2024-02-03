@@ -4,6 +4,7 @@ import { CartService } from './cart.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { OrderService } from '../order/order.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-cart',
@@ -24,7 +25,8 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private sanitizer: DomSanitizer,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {
     this.cartService.loadCartFromLocalStorage();
     this.cartItems = this.cartService.getCartItems();
@@ -39,7 +41,7 @@ export class CartComponent implements OnInit {
           return actions.order.create({
             purchase_units: [
               {
-                description: 'Commande sur le site de la boutique',
+                description: "Commande sur le site Cup'me",
                 amount: {
                   currency_code: 'EUR',
                   value: this.subTotal.toFixed(2),
@@ -148,5 +150,12 @@ export class CartComponent implements OnInit {
       imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
     }
     return imagePath;
+  }
+
+  showCGV(content: any) {
+    this.modalService.open(content, { modalDialogClass: 'cgv-modal', centered: true }).result.then(
+      result => {},
+      reason => {}
+    );
   }
 }

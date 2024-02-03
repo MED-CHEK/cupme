@@ -5,8 +5,13 @@
         {{ 'global.detail.myprotocol.label' | translate }}
       </span>
     </div>
-    <div class="protocols">
-      <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols" (click)="selectProtocol(protocol)">
+    <div class="noProtocol" *ngIf="protocols.length === 0">
+      <span>
+        {{ 'global.detail.myprotocol.noProtocols' | translate }}
+      </span>
+    </div>
+    <div class="protocols" *ngIf="protocols.length !== 0">
+      <div class="protocol col-6 col-lg-4" *ngFor="let protocol of protocols" (click)="selectProtocol(protocol)">
         <jhi-my-proto [protocol]="protocol"></jhi-my-proto>
       </div>
     </div>

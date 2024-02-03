@@ -1,0 +1,20 @@
+<div class="proto">
+  <div class="image" (click)="selectProtocol(protocol)">
+    <img [src]="imagePath" alt="product.name" />
+  </div>
+  <div class="name">
+    <span>
+      {{ protocol.name }}
+    </span>
+  </div>
+  <div class="cart-price">
+    <div class="price">
+      <span> {{ protocol.price }} €</span>
+    </div>
+    <div class="cart">
+      <button class="btn btn-primary" (mousedown)="addProtocolToCart(protocol)">
+        <span class="proto-icon cart-icon"></span>
+      </button>
+    </div>
+  </div>
+</div>

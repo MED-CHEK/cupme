@@ -1,6 +1,10 @@
+@use 'sass:map';
+@import '../../../content/scss/custom-variables.scss';
+
 .protos {
   display: flex;
   justify-content: center;
+  padding: 5rem 0;
 
   .label {
     font-size: 1.75rem;
@@ -9,6 +13,18 @@
     color: black;
     border-radius: 0.275rem;
     line-height: 1.5rem;
+  }
+
+  .noProtocol {
+    padding: 3rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    color: #868e96;
   }
 
   .protocols {
@@ -20,8 +36,20 @@
     .protocol {
       padding: 0.5rem;
       margin-bottom: 1rem;
-      min-width: 15rem;
       height: 18rem;
+    }
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .protocol {
+    padding: 0.125rem !important;
+  }
+
+  .protos {
+    .noProtocol {
+      padding: 0.5rem;
+      text-align: -webkit-center;
     }
   }
 }

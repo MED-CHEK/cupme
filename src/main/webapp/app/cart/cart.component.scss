@@ -4,6 +4,7 @@
 .cart {
   display: flex;
   justify-content: center;
+  padding-top: 5rem;
 
   .head {
     display: flex;
@@ -185,6 +186,74 @@
       }
     }
   }
+
+  .cgv {
+    margin: 1rem 0 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    .asterisk {
+      color: red;
+    }
+
+    .link {
+      color: var(--button-secondary-color);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-left: 0.25rem;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+::ng-deep .cgv-modal {
+  max-width: 75%;
+  margin: 5rem auto 1rem;
+
+  .modal-content {
+    .modal-header {
+      font-size: 1rem;
+
+      .modal-title {
+        font-weight: 600;
+        color: var(--button-secondary-color);
+      }
+    }
+
+    .modal-body {
+      padding: 1rem 1rem 0;
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-align: justify;
+
+      h6 {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--button-secondary-color);
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .modal-footer {
+      padding: 0 calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5)
+        calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5);
+
+      .btn {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.25rem 1rem;
+        border-radius: 0.25rem;
+        text-transform: uppercase;
+      }
+    }
+  }
 }
 
 .cart-icon {
@@ -292,7 +361,7 @@
     }
 
     .sub-total {
-      margin-top: 4.25rem;
+      margin-top: 0.25rem !important;
       padding: 0.25rem;
       border: goldenrod 0.125rem solid;
       border-radius: 0.5rem;
@@ -336,6 +405,21 @@
   .cart-icon {
     &.trash-icon {
       background-size: 80%;
+    }
+  }
+
+  ::ng-deep .cgv-modal {
+    max-width: unset;
+    margin: 5rem 1rem 1rem;
+
+    .modal-header {
+      .modal-title {
+        font-size: 0.875rem !important;
+      }
+
+      .btn-close {
+        box-sizing: border-box;
+      }
     }
   }
 }

@@ -46,6 +46,10 @@ import { HomeComponent } from './home/home.component';
           loadChildren: () => import('./myprotocol/myprotocol.module').then(m => m.MyProtocolModule),
         },
         {
+          path: 'store',
+          loadChildren: () => import('./store/store.module').then(m => m.StoreModule),
+        },
+        {
           path: '',
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },

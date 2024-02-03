@@ -7,6 +7,7 @@ import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Howl } from 'howler';
 import { Genre } from '../../entities/genre.enum';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-my-detail',
@@ -31,7 +32,12 @@ export class MyDetailComponent implements OnInit {
   timerInterval: any;
   isTimerRunning: boolean = false;
 
-  constructor(private route: ActivatedRoute, private accountService: AccountService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private route: ActivatedRoute,
+    private accountService: AccountService,
+    private sanitizer: DomSanitizer,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.sound = new Howl({
@@ -165,5 +171,12 @@ export class MyDetailComponent implements OnInit {
 
   playSound() {
     this.sound.play();
+  }
+
+  showTuto(content: any) {
+    this.modalService.open(content, { modalDialogClass: 'tuto-modal', centered: true }).result.then(
+      result => {},
+      reason => {}
+    );
   }
 }

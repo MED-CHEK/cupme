@@ -28,6 +28,7 @@ import { ProtocolModule } from './protocol/protocol.module';
 import { MyProtocolModule } from './myprotocol/myprotocol.module';
 import { CartModule } from './cart/cart.module';
 import { SuccessModule } from './success/success.module';
+import { ProtoComponent } from './shared/proto/proto.component';
 
 @NgModule({
   imports: [

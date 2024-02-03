@@ -5,7 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 5rem 0 0;
+
+  .alert {
+    text-align: justify;
+  }
 
   .desc {
     text-align: justify;
@@ -23,6 +27,24 @@
         border-radius: 0.5rem;
         width: 100%;
         height: 18rem;
+      }
+    }
+  }
+
+  .tuto-button {
+    button {
+      width: 100%;
+      height: 3rem;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 1.125rem;
+      font-weight: 400;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $primary-dark;
       }
     }
   }
@@ -165,6 +187,13 @@
   vertical-align: middle;
   background-size: contain;
 
+  &.tuto-icon {
+    background: url('../../../content/images/video-player.svg') no-repeat center top;
+    width: 5rem;
+    height: 4rem;
+    background-size: 100%;
+    cursor: pointer;
+  }
   &.cup-icon {
     background: url('../../../content/images/cupping.png') no-repeat center top;
     background-size: 100%;
@@ -175,6 +204,86 @@
     background-size: 100%;
     cursor: pointer;
     height: 2.5rem;
+  }
+}
+
+::ng-deep .tuto-modal {
+  max-width: 40%;
+  margin: 4rem auto 1rem;
+
+  .modal-content {
+    .modal-header {
+      font-size: 1rem;
+
+      .modal-title {
+        font-weight: 600;
+        color: var(--button-secondary-color);
+      }
+    }
+
+    .modal-body {
+      padding: 1rem 1rem 0;
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-align: justify;
+
+      .carousel {
+        button {
+          width: 10%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          opacity: 1;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+          height: 2.5rem;
+          width: 2.5rem;
+        }
+
+        .carousel-control-prev-icon {
+          background-image: url('../../../content/images/arrow-left-square.svg');
+        }
+
+        .carousel-control-next-icon {
+          background-image: url('../../../content/images/arrow-left-square.svg');
+          transform: scaleX(-1);
+        }
+
+        .carousel-inner {
+          padding: 0;
+        }
+      }
+
+      .tuto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .title {
+          font-size: 1.5rem;
+        }
+
+        .video {
+          width: 75%;
+        }
+      }
+    }
+
+    .modal-footer {
+      padding: 0 calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5)
+        calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5);
+
+      .btn {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.25rem 1rem;
+        border-radius: 0.25rem;
+        text-transform: uppercase;
+      }
+    }
   }
 }
 
@@ -211,10 +320,44 @@
   }
 }
 
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'xxl') - 1px)) {
+  ::ng-deep .tuto-modal {
+    max-width: 65%;
+    margin: 4rem auto 1rem;
+
+    .modal-content {
+      .modal-body {
+        .tuto {
+          .video {
+            width: 65%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'lg') - 1px)) {
+  ::ng-deep .tuto-modal {
+    max-width: 80%;
+    margin: 4rem auto 1rem;
+
+    .modal-content {
+      .modal-body {
+        .tuto {
+          .video {
+            width: 78%;
+          }
+        }
+      }
+    }
+  }
+}
+
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
   .detail {
-    padding: 0.5rem !important;
+    padding: 5rem 0.5rem 0 !important;
 
     .step0,
     .step1,
@@ -228,7 +371,6 @@
         img {
           border-radius: 0.5rem;
           width: 100%;
-          height: 20rem;
         }
       }
     }
@@ -282,6 +424,53 @@
     }
   }
 
+  ::ng-deep .tuto-modal {
+    max-width: unset;
+    margin: 3.75rem 0 0;
+
+    .modal-content {
+      .modal-header {
+        .modal-title {
+          font-size: 0.875rem !important;
+        }
+
+        .btn-close {
+          box-sizing: border-box;
+        }
+      }
+
+      .modal-body {
+        padding: 1rem 0.5rem 0;
+
+        .carousel {
+          button {
+            width: 8%;
+          }
+
+          .carousel-control-prev-icon,
+          .carousel-control-next-icon {
+            height: 1.5rem;
+            width: 1.5rem;
+          }
+
+          .carousel-inner {
+            padding: 0;
+          }
+        }
+
+        .tuto {
+          .title {
+            font-size: 1rem !important;
+          }
+
+          .video {
+            width: 80%;
+          }
+        }
+      }
+    }
+  }
+
   .timer-icon {
     height: 1.25rem !important;
     width: 1.25rem !important;
@@ -294,5 +483,11 @@
     .desc {
       margin-top: 0.25rem;
     }
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'sm') - 1px)) {
+  ::ng-deep .tuto-modal {
+    margin: 2.25rem 0 0;
   }
 }

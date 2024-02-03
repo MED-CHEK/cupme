@@ -4,24 +4,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-video',
   template: `
-    <iframe
-      width="560"
-      height="315"
-      src="https://www.youtube.com/embed/HlccR8PS-dk?si=J_myXHL4PuBFH4fX"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
+    <video width="100%" autoplay autoplay loop poster="../../../content/images/main.png" controls>
+      <source src="../../../content/videos/PUB_CUPME.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
   `,
-  styles: [
-    `
-      iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-    `,
-  ],
+  styles: [],
 })
 export class VideoComponent {}
