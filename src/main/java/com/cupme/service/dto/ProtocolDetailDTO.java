@@ -1,6 +1,7 @@
 package com.cupme.service.dto;
 
 import com.cupme.domain.Protocol;
+import com.cupme.domain.enumeration.ProtocolType;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class ProtocolDetailDTO implements Serializable {
 
     private String name;
 
-    private String type;
+    private ProtocolType type;
 
     private String shortDescription;
 
@@ -37,7 +38,7 @@ public class ProtocolDetailDTO implements Serializable {
     public ProtocolDetailDTO(
         Long id,
         String name,
-        String type,
+        ProtocolType type,
         String shortDescription,
         String description,
         Double price,
@@ -95,11 +96,11 @@ public class ProtocolDetailDTO implements Serializable {
         this.name = name;
     }
 
-    public String getType() {
+    public ProtocolType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ProtocolType type) {
         this.type = type;
     }
 

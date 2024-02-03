@@ -66,6 +66,11 @@ public class OrderItemService {
         this.assetFilesService = assetFilesService;
     }
 
+    public boolean hasProtocols() {
+        User user = userService.getUserWithAuthorities().get();
+        return orderItemRepository.existsByOrderUserIdAndProtocolIsNotNull(user.getId());
+    }
+
     public List<OrderItemDTO> getOrderItems() {
         return orderItemMapper.orderItemsToOrderItemDTOs(orderItemRepository.findAll());
     }

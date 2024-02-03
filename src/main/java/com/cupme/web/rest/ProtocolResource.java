@@ -41,6 +41,20 @@ public class ProtocolResource {
     }
 
     /**
+     * {@code GET /protocol} : get all protocol with only the public informations - calling this are allowed for anyone.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all protocol.
+     */
+    @GetMapping("/protocol/generic")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<List<ProtocolCartDTO>> getGenericProtocols() {
+        log.debug("REST request to get all public Protocol names");
+
+        final List<ProtocolCartDTO> protocoles = protocolService.getGenericProtocol();
+        return ResponseEntity.ok().body(protocoles);
+    }
+
+    /**
      * {@code GET /protocol/:id} : get the "id" protocol.
      * @param id the id of the protocolDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the protocolDTO, or with status {@code 404 (Not Found)}.

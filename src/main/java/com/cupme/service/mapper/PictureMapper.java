@@ -37,8 +37,6 @@ public class PictureMapper {
             picture.setName(pictureDTO.getName());
             picture.setFile(pictureDTO.getFile());
             picture.setMain(pictureDTO.getMain());
-            picture.setProtocol(pictureDTO.getProtocol());
-            picture.setProduct(pictureDTO.getProduct());
 
             return picture;
         }

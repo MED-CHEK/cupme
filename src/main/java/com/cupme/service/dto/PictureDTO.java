@@ -20,19 +20,13 @@ public class PictureDTO implements Serializable {
 
     private Boolean main;
 
-    private Protocol protocol;
-
-    private Product product;
-
     public PictureDTO() {}
 
-    public PictureDTO(Long id, String name, String file, Boolean main, Protocol protocol, Product product) {
+    public PictureDTO(Long id, String name, String file, Boolean main) {
         this.id = id;
         this.name = name;
         this.file = file;
         this.main = main;
-        this.protocol = protocol;
-        this.product = product;
     }
 
     public PictureDTO(Picture picture) {
@@ -40,8 +34,6 @@ public class PictureDTO implements Serializable {
         this.name = picture.getName();
         this.file = picture.getFile();
         this.main = picture.getMain();
-        this.protocol = picture.getProtocol();
-        this.product = picture.getProduct();
     }
 
     public Long getId() {
@@ -76,41 +68,8 @@ public class PictureDTO implements Serializable {
         this.main = main;
     }
 
-    public Protocol getProtocol() {
-        return protocol;
-    }
-
-    public void setProtocol(Protocol protocol) {
-        this.protocol = protocol;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     @Override
     public String toString() {
-        return (
-            "PictureDTO{" +
-            "id=" +
-            id +
-            ", name='" +
-            name +
-            '\'' +
-            ", file='" +
-            file +
-            '\'' +
-            ", main=" +
-            main +
-            ", protocol=" +
-            protocol +
-            ", product=" +
-            product +
-            '}'
-        );
+        return ("PictureDTO{" + "id=" + id + ", name='" + name + '\'' + ", file='" + file + '\'' + ", main=" + main + '}');
     }
 }

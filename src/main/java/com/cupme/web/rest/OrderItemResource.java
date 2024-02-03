@@ -26,6 +26,18 @@ public class OrderItemResource {
     }
 
     /**
+     *
+     */
+    @GetMapping("/hasProtocols")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<Boolean> hasProtocols() {
+        log.debug("REST request to check if the user has protocols");
+
+        final boolean hasProtocols = orderItemService.hasProtocols();
+        return ResponseEntity.ok(hasProtocols);
+    }
+
+    /**
      * {@code GET /orderItems} : get all orderItems with only the public informations - calling this are allowed for anyone.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all orderItemes.

@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
     List<OrderItem> findByOrderUserId(Long userId);
+
+    boolean existsByOrderUserIdAndProtocolIsNotNull(Long userId);
 }

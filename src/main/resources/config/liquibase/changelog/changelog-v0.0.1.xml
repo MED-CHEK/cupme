@@ -36,4 +36,7 @@
 
     <!-- Insert data -->
     <include file="config/liquibase/changelog/v0.0.1/20231215124300_insert_data.xml" relativeToChangelogFile="false"/>
+
+    <!-- Add all protocols to user -->
+    <include file="config/liquibase/changelog/v0.0.1/20240202012500_insert_my_protocols_user.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

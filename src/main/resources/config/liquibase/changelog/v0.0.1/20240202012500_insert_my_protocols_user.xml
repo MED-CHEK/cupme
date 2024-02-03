@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="v0.0.1-INSERT_MY_PROTOCOLS_TO_USER" author="cupme">
+        <sql>
+            -- Insert command
+            INSERT INTO command (user_id, paid, created_date, total_price, transaction_id)
+            VALUES ((SELECT id FROM users WHERE login = 'user'), 1, NOW(), 0.0, 'new_transaction_id');
+        </sql>
+
+        <sql>
+            -- Insert Order items
+            INSERT INTO order_item (order_id, protocol_id, product_id, quantity)
+            SELECT MAX(id), protocol_id, NULL, 1
+            FROM (SELECT 7480 AS protocol_id UNION ALL
+            SELECT 7484 UNION ALL
+            SELECT 7485 UNION ALL
+            SELECT 7486 UNION ALL
+            SELECT 7487 UNION ALL
+            SELECT 7488 UNION ALL
+            SELECT 7490 UNION ALL
+            SELECT 7492 UNION ALL
+            SELECT 7494 UNION ALL
+            SELECT 7496 UNION ALL
+            SELECT 7506 UNION ALL
+            SELECT 7513 UNION ALL
+            SELECT 7522 UNION ALL
+            SELECT 7527 UNION ALL
+            SELECT 7529 UNION ALL
+            SELECT 7530 UNION ALL
+            SELECT 7531 UNION ALL
+            SELECT 7533 UNION ALL
+            SELECT 7535 UNION ALL
+            SELECT 7537 UNION ALL
+            SELECT 7539 UNION ALL
+            SELECT 7541 UNION ALL
+            SELECT 7543 UNION ALL
+            SELECT 7544 UNION ALL
+            SELECT 7550 UNION ALL
+            SELECT 7552 UNION ALL
+            SELECT 7553 UNION ALL
+            SELECT 7554 UNION ALL
+            SELECT 7555) AS protocols;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

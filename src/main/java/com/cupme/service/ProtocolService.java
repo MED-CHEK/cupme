@@ -1,5 +1,6 @@
 package com.cupme.service;
 
+import com.cupme.domain.enumeration.ProtocolType;
 import com.cupme.repository.ProtocolRepository;
 import com.cupme.service.dto.MyProtocolDetailDTO;
 import com.cupme.service.dto.ProtocolCartDTO;
@@ -50,7 +51,6 @@ public class ProtocolService {
                 .getPictures()
                 .forEach(pictureDTO -> {
                     pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-                    pictureDTO.setProtocol(null);
                 });
         });
         return protocols;
@@ -61,7 +61,18 @@ public class ProtocolService {
 
         protocols.forEach(protocolDTO -> {
             protocolDTO.getPicture().setFile(assetFilesService.getFile(protocolDTO.getPicture().getFile()));
-            protocolDTO.getPicture().setProtocol(null);
+        });
+
+        return protocols;
+    }
+
+    public List<ProtocolCartDTO> getGenericProtocol() {
+        List<ProtocolCartDTO> protocols = protocolMapper.protocolsToProtocolCartDTOs(
+            protocolRepository.findProtocolByType(ProtocolType.GENERIC)
+        );
+
+        protocols.forEach(protocolDTO -> {
+            protocolDTO.getPicture().setFile(assetFilesService.getFile(protocolDTO.getPicture().getFile()));
         });
 
         return protocols;
@@ -73,7 +84,6 @@ public class ProtocolService {
             .getPictures()
             .forEach(pictureDTO -> {
                 pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-                pictureDTO.setProtocol(null);
             });
         protocolDTO
             .getProductDTOs()
@@ -82,7 +92,6 @@ public class ProtocolService {
                     .getPictures()
                     .forEach(pictureDTO -> {
                         pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-                        pictureDTO.setProduct(null);
                     });
             });
         return protocolDTO;
@@ -91,13 +100,11 @@ public class ProtocolService {
     public ProtocolDetailDTO getProtocolDetail(long id) {
         ProtocolDetailDTO protocolDetailDTO = protocolMapper.protocolToProtocolDetailDTO(protocolRepository.findById(id).get());
         protocolDetailDTO.getPicture().setFile(assetFilesService.getFile(protocolDetailDTO.getPicture().getFile()));
-        protocolDetailDTO.getPicture().setProtocol(null);
 
         protocolDetailDTO
             .getProductDTOs()
             .forEach(productDTO -> {
                 productDTO.getPicture().setFile(assetFilesService.getFile(productDTO.getPicture().getFile()));
-                productDTO.getPicture().setProduct(null);
             });
 
         return protocolDetailDTO;

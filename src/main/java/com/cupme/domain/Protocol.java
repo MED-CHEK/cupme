@@ -1,5 +1,6 @@
 package com.cupme.domain;
 
+import com.cupme.domain.enumeration.ProtocolType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -31,8 +32,9 @@ public class Protocol implements Serializable {
     @Column(length = 50, unique = true, nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    private String type;
+    private ProtocolType type;
 
     @Column(name = "short_description", nullable = false)
     private String shortDescription;
@@ -84,7 +86,7 @@ public class Protocol implements Serializable {
     public Protocol(
         Long id,
         String name,
-        String type,
+        ProtocolType type,
         String shortDescription,
         String description,
         Double price,
@@ -123,11 +125,11 @@ public class Protocol implements Serializable {
         this.name = name;
     }
 
-    public String getType() {
+    public ProtocolType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ProtocolType type) {
         this.type = type;
     }
 

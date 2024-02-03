@@ -2,6 +2,7 @@ package com.cupme.web.rest;
 
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.service.ProductService;
+import com.cupme.service.dto.ProductCartDTO;
 import com.cupme.service.dto.ProductDTO;
 import java.util.List;
 import javax.validation.Valid;
@@ -30,11 +31,11 @@ public class ProductResource {
      */
     @GetMapping("/products")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+    public ResponseEntity<List<ProductCartDTO>> getAllProducts() {
         log.debug("REST request to get all public Product names");
 
-        final List<ProductDTO> productes = productService.getProducts();
-        return ResponseEntity.ok().body(productes);
+        final List<ProductCartDTO> products = productService.getProducts();
+        return ResponseEntity.ok().body(products);
     }
 
     /**

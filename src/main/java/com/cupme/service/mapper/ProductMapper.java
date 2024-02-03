@@ -1,8 +1,10 @@
 package com.cupme.service.mapper;
 
 import com.cupme.domain.Product;
+import com.cupme.service.dto.PictureDTO;
 import com.cupme.service.dto.ProductCartDTO;
 import com.cupme.service.dto.ProductDTO;
+import com.cupme.service.dto.ProtocolCartDTO;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -54,7 +56,7 @@ public class ProductMapper {
         }
     }
 
-    public Product productCartDTOToProduct(ProductCartDTO productCartDTO) {
+    public Product productToProductCartDTO(ProductCartDTO productCartDTO) {
         if (productCartDTO == null) {
             return null;
         } else {
@@ -65,5 +67,23 @@ public class ProductMapper {
 
             return product;
         }
+    }
+
+    public ProductCartDTO productToProductCartDTO(Product product) {
+        if (product == null) {
+            return null;
+        } else {
+            ProductCartDTO productCartDTO = new ProductCartDTO();
+            productCartDTO.setId(product.getId());
+            productCartDTO.setName(product.getName());
+            productCartDTO.setPrice(product.getPrice());
+            productCartDTO.setPicture(new PictureDTO(product.getPictures().stream().filter(p -> p.getMain()).findFirst().orElse(null)));
+
+            return productCartDTO;
+        }
+    }
+
+    public List<ProductCartDTO> productsToProductCartDTO(List<Product> products) {
+        return products.stream().filter(Objects::nonNull).map(this::productToProductCartDTO).collect(Collectors.toList());
     }
 }

@@ -1,8 +1,10 @@
 package com.cupme.service;
 
 import com.cupme.repository.ProductRepository;
+import com.cupme.service.dto.ProductCartDTO;
 import com.cupme.service.dto.ProductDTO;
 import com.cupme.service.mapper.ProductMapper;
+import com.cupme.service.utils.AssetFilesService;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,16 +24,29 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     private final ProductMapper productMapper;
+
+    private final AssetFilesService assetFilesService;
     private final CacheManager cacheManager;
 
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper, CacheManager cacheManager) {
+    public ProductService(
+        ProductRepository productRepository,
+        ProductMapper productMapper,
+        AssetFilesService assetFilesService,
+        CacheManager cacheManager
+    ) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.assetFilesService = assetFilesService;
         this.cacheManager = cacheManager;
     }
 
-    public List<ProductDTO> getProducts() {
-        return productMapper.productsToProductDTOs(productRepository.findAll());
+    public List<ProductCartDTO> getProducts() {
+        List<ProductCartDTO> productCartDTOs = productMapper.productsToProductCartDTO(productRepository.findAll());
+        productCartDTOs.forEach(protocolDTO -> {
+            protocolDTO.getPicture().setFile(assetFilesService.getFile(protocolDTO.getPicture().getFile()));
+        });
+
+        return productCartDTOs;
     }
 
     public ProductDTO getProduct(long id) {

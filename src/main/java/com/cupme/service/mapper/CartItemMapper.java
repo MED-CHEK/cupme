@@ -47,7 +47,7 @@ public class CartItemMapper {
             CartItem cartItem = new CartItem();
             cartItem.setId(cartItemDTO.getId());
             cartItem.setQuantity(cartItemDTO.getQuantity());
-            cartItem.setProduct(productMapper.productCartDTOToProduct(cartItemDTO.getProductCartDTO()));
+            cartItem.setProduct(productMapper.productToProductCartDTO(cartItemDTO.getProductCartDTO()));
             cartItem.setCart(cartMapper.cartDTOToCart(cartItemDTO.getCartDTO()));
             cartItem.setProtocol(protocolMapper.protocolCartDTOToProtocol(cartItemDTO.getProtocolCartDTO()));
             cartItem.setCreatedDate(cartItemDTO.getCreatedDate());
