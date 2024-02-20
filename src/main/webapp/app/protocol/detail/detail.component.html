@@ -39,7 +39,7 @@
           <span> {{ 'global.detail.shortDescription' | translate }} : </span>
         </div>
         <div class="text">
-          <span [innerHTML]="protocol.shortDescription"></span>
+          <span [innerHTML]="'global.detail.' + protocol.id + '.short_description' | translate"></span>
         </div>
       </div>
       <hr />
@@ -90,7 +90,7 @@
           </span>
         </div>
         <div class="text">
-          <span [innerHTML]="protocol.description"></span>
+          <span [innerHTML]="'global.detail.' + protocol.id + '.long_description' | translate"></span>
         </div>
       </div>
     </div>
