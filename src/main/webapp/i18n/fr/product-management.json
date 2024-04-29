@@ -1,0 +1,35 @@
+{
+  "productManagement": {
+    "home": {
+      "title": "Gestion des produits",
+      "refreshListLabel": "Actualiser la liste",
+      "createLabel": "Créer un nouveau produit",
+      "createOrEditLabel": "Créer ou éditer un produit"
+    },
+    "name": "Nom",
+    "shortDescription": "Description courte",
+    "description": "Description",
+    "price": "Prix",
+    "stock": "Stock",
+    "lastModifiedDate": "Dernière modification",
+    "picture": "Picture",
+    "created": "Le produit {{ param }} a été créé.",
+    "updated": "Le produit {{ param }} a été mis à jour.",
+    "deleted": "Le produit {{ param }} a été supprimé.",
+    "delete": {
+      "question": "Etes-vous certain de vouloir supprimer le produit {{ param }} ?"
+    },
+    "detail": {
+      "title": "Détail du produit"
+    },
+    "list": {
+      "title": "Liste des produits",
+      "category": "Catégorie",
+      "actions": "Actions",
+      "edit": "Editer",
+      "delete": "Supprimer",
+      "stockAvailable": "En stock",
+      "stockUnavailable": "Bientôt épuisé"
+    }
+  }
+}

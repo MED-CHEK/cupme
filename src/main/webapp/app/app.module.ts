@@ -30,6 +30,7 @@ import { CartModule } from './cart/cart.module';
 import { SuccessModule } from './success/success.module';
 import { ProtoComponent } from './shared/proto/proto.component';
 
+// Add the import statement for MatPaginatorModule
 @NgModule({
   imports: [
     BrowserModule,

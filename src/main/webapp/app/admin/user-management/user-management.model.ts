@@ -1,3 +1,5 @@
+import { Address } from 'app/entities/address.model';
+
 export interface IUser {
   id: number | null;
   login?: string;
@@ -11,6 +13,7 @@ export interface IUser {
   createdDate?: Date;
   lastModifiedBy?: string;
   lastModifiedDate?: Date;
+  Addresses?: Address[];
 }
 
 export class User implements IUser {

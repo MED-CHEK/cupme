@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ProtocolDTO } from 'app/entities/protocol.model';
+import { MyProtocolDTO, ProtocolDTO } from 'app/entities/protocol.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
@@ -15,11 +15,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./mydetail.component.scss'],
 })
 export class MyDetailComponent implements OnInit {
-  protocol!: ProtocolDTO;
+  protocol!: MyProtocolDTO;
   account!: Account;
-
-  imagePath!: string;
-
+  duree!: number;
   step: number = 0;
   poseTime: number = 0;
   aspiration: number = 0;
@@ -32,12 +30,7 @@ export class MyDetailComponent implements OnInit {
   timerInterval: any;
   isTimerRunning: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private accountService: AccountService,
-    private sanitizer: DomSanitizer,
-    private modalService: NgbModal
-  ) {}
+  constructor(private route: ActivatedRoute, private accountService: AccountService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.sound = new Howl({
@@ -51,8 +44,17 @@ export class MyDetailComponent implements OnInit {
     });
 
     this.getAspirationAndPoseTime();
-    this.getProtoImage();
+
+    this.getDuree();
     this.initTimer();
+  }
+
+  getDuree() {
+    if (this.protocol.id === 7537 || this.protocol.id === 7539) this.duree = this.initialTime * 4;
+    else if (this.protocol.id === 7555 || this.protocol.id === 7527 || this.protocol.id === 7494)
+      this.duree = this.initialTime * 2 + this.getPoseTime() * 2;
+    else if (this.protocol.id === 7530 || this.protocol.id === 7486) this.duree = this.initialTime + this.getPoseTime() * 2;
+    else this.duree = this.initialTime + this.getPoseTime();
   }
 
   getAspirationAndPoseTime() {
@@ -85,16 +87,6 @@ export class MyDetailComponent implements OnInit {
     if (this.poseTime == 8) return 6;
     else if (this.poseTime == 6 && this.account.sex == Genre.FEMME) return 5;
     else return this.poseTime;
-  }
-
-  getProtoImage() {
-    let path = this.protocol.pictures?.filter(picture => picture.main)[0].file;
-
-    if (path == undefined) {
-      this.imagePath = '../../../../assets/images/Pictos/No-picture.svg';
-    } else {
-      this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
   }
 
   nextStep() {

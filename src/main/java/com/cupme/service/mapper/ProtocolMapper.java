@@ -1,10 +1,7 @@
 package com.cupme.service.mapper;
 
 import com.cupme.domain.Protocol;
-import com.cupme.service.dto.MyProtocolDetailDTO;
-import com.cupme.service.dto.ProtocolCartDTO;
-import com.cupme.service.dto.ProtocolDTO;
-import com.cupme.service.dto.ProtocolDetailDTO;
+import com.cupme.service.dto.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,10 +22,13 @@ public class ProtocolMapper {
 
     private final ProductMapper productMapper;
 
-    public ProtocolMapper(TagMapper tagMapper, CategoryMapper categoryMapper, ProductMapper productMapper) {
+    private final PictureMapper pictureMapper;
+
+    public ProtocolMapper(TagMapper tagMapper, CategoryMapper categoryMapper, ProductMapper productMapper, PictureMapper pictureMapper) {
         this.tagMapper = tagMapper;
         this.categoryMapper = categoryMapper;
         this.productMapper = productMapper;
+        this.pictureMapper = pictureMapper;
     }
 
     public List<ProtocolDTO> protocolsToProtocolDTOs(List<Protocol> protocols) {
@@ -78,6 +78,7 @@ public class ProtocolMapper {
             protocol.setTags(tagMapper.tagDTOsToTags(protocolDTO.getTagDTOs()));
             protocol.setCategories(categoryMapper.categoryDTOsToCategories(protocolDTO.getCategoryDTOs()));
             protocol.setProducts(productMapper.productDTOsToProducts(protocolDTO.getProductDTOs()));
+            protocol.setPictures(pictureMapper.pictureDtosToPictures(protocolDTO.getPictures()));
 
             return protocol;
         }
@@ -93,6 +94,27 @@ public class ProtocolMapper {
             protocol.setPrice(protocolCartDTO.getPrice());
 
             return protocol;
+        }
+    }
+
+    public ProtocolCartDTO protocolDTOToProtocolCartDTO(ProtocolDTO protocolDTO) {
+        if (protocolDTO == null) {
+            return null;
+        } else {
+            ProtocolCartDTO protocolCartDTO = new ProtocolCartDTO();
+            protocolCartDTO.setId(protocolDTO.getId());
+            protocolCartDTO.setName(protocolDTO.getName());
+            protocolCartDTO.setPrice(protocolDTO.getPrice());
+            protocolCartDTO.setPicture(
+                protocolDTO.getPictures() != null
+                    ? new PictureDTO(
+                        pictureMapper.pictureDtoToPicture(
+                            protocolDTO.getPictures().stream().filter(p -> p.getMain()).collect(Collectors.toList()).get(0)
+                        )
+                    )
+                    : null
+            );
+            return protocolCartDTO;
         }
     }
 }

@@ -1,0 +1,46 @@
+<div class="protocol-mgmt">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <div class="produits-tab">
+      <h2>
+        <span id="protocol-management-page-heading" jhiTranslate="protocolManagement.list.title" data-cy="protocolManagementPageHeading"
+          >Liste des produits</span
+        >
+
+        <div class="d-flex justify-content-md-end justify-content-center">
+          <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+            <span jhiTranslate="protocolManagement.home.refreshListLabel">Actualiser la liste</span>
+          </button>
+          <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
+            <fa-icon icon="plus"></fa-icon> <span jhiTranslate="protocolManagement.home.createLabel">Créer un nouvel produit</span>
+          </button>
+        </div>
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+      <div class="protocols" *ngIf="!isLoading">
+        <div class="protocol col-6 col-lg-4" *ngFor="let protocol of protocols">
+          <div class="prod" (click)="view(protocol)">
+            <div class="image">
+              <img [src]="getProtocolImage(protocol)" alt="protocol.name" />
+            </div>
+            <div class="name">
+              <span>
+                {{ protocol.name }}
+              </span>
+            </div>
+            <div class="cart-price">
+              <div class="price">
+                <span>{{ protocol.price }} € </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

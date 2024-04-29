@@ -1,0 +1,172 @@
+<div class="d-flex justify-content-center protocol-update">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="myUserLabel" jhiTranslate="protocolManagement.home.createOrEditLabel">Créer ou éditer un produit</h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <div class="mb-3" [hidden]="!editForm.value.id">
+        <label jhiTranslate="global.field.id">ID</label>
+        <span class="asterisk">*</span>
+        <input type="text" class="form-control disabled" name="id" formControlName="id" readonly />
+      </div>
+
+      <div class="col-12 mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.type.title">Type</label>
+        <span class="asterisk">*</span>
+        <ng-select class="form-control" [clearable]="false" [searchable]="false" bindLabel="name" formControlName="type">
+          <ng-option *ngFor="let type of types" [value]="type">
+            {{ 'protocolManagement.type.' + type | translate }}
+          </ng-option>
+        </ng-select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.name">Nom</label>
+        <span class="asterisk">*</span>
+        <input type="text" class="form-control" name="name" formControlName="name" />
+
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.shortDescription">Description courte</label>
+        <span class="asterisk">*</span>
+        <textarea type="text" class="form-control" name="shortDescription" formControlName="shortDescription"></textarea>
+
+        <div
+          *ngIf="
+            editForm.get('shortDescription')!.invalid &&
+            (editForm.get('shortDescription')!.dirty || editForm.get('shortDescription')!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('shortDescription')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.description">Description</label>
+        <span class="asterisk">*</span>
+        <textarea class="form-control" name="description" formControlName="description"></textarea>
+
+        <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('description')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.price">Prix</label>
+        <span class="asterisk">*</span>
+        <input type="number" class="form-control" name="price" formControlName="price" />
+
+        <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.poseTime">Prix</label>
+        <span class="asterisk">*</span>
+        <input type="number" class="form-control" name="poseTime" formControlName="poseTime" />
+
+        <div *ngIf="editForm.get('poseTime')!.invalid && (editForm.get('poseTime')!.dirty || editForm.get('poseTime')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('poseTime')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div [formGroup]="uploadForm" class="uploadForm" [ngClass]="uploadForm.disabled ? 'formDisabled' : null">
+        <div class="form upload">
+          <div>
+            <sec-upload-photo [uploadForm]="uploadForm"></sec-upload-photo>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="protocolManagement.products">products</label>
+        <div class="productsToAdd">
+          <div class="products" *ngIf="this.editForm.value.productDTOs && this.editForm.value.productDTOs.length > 0">
+            <div class="product col-6 col-lg-4" *ngFor="let product of editForm.value.productDTOs">
+              <div class="prod">
+                <div class="image">
+                  <img [src]="getProductImage(product)" alt="product.name" />
+                  <span class="update-icon remove-icon remove" (click)="removeProduct(product)"></span>
+                </div>
+                <div class="name">
+                  <span>
+                    {{ product.name }}
+                  </span>
+                </div>
+                <div class="cart-price">
+                  <div class="price">
+                    <span>{{ product.price }} € </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message" *ngIf="this.editForm.value.productDTOs && this.editForm.value.productDTOs.length == 0">
+            <span>{{ 'protocolManagement.message' | translate }}</span>
+          </div>
+          <div class="prodsToAdd" *ngIf="products && products.length > 0">
+            <label class="form-label" jhiTranslate="protocolManagement.productsToAdd">products</label>
+            <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+            <div class="products" *ngIf="!isLoading">
+              <div class="product col-6 col-lg-4" *ngFor="let product of products">
+                <div class="prod">
+                  <div class="image">
+                    <img [src]="getProductImage(product)" alt="product.name" />
+                  </div>
+                  <div class="name">
+                    <span>
+                      {{ product.name }}
+                    </span>
+                  </div>
+                  <div class="cart-price">
+                    <div class="price">
+                      <span>{{ product.price }} € </span>
+                    </div>
+                    <div class="add-icon" (click)="addProduct(product)"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      </button>
+
+      <button
+        type="submit"
+        [ngClass]="editForm.invalid || uploadForm.invalid || isSaving ? 'disabled' : null"
+        [disabled]="editForm.invalid || uploadForm.invalid || isSaving"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+      </button>
+    </form>
+  </div>
+</div>

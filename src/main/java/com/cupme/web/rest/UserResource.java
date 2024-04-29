@@ -6,14 +6,17 @@ import com.cupme.repository.UserRepository;
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.service.MailService;
 import com.cupme.service.UserService;
+import com.cupme.service.dto.ClientUserDTO;
 import com.cupme.service.dto.UserDTO;
 import com.cupme.web.rest.errors.BadRequestAlertException;
 import com.cupme.web.rest.errors.EmailAlreadyUsedException;
 import com.cupme.web.rest.errors.LoginAlreadyUsedException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import org.slf4j.Logger;
@@ -172,6 +175,15 @@ public class UserResource {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/client")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<List<ClientUserDTO>> getAllUsers() {
+        log.debug("REST request to get all User for an admin");
+
+        final List<ClientUserDTO> clients = userService.getAllClients();
+        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
 
     private boolean onlyContainsAllowedProperties(Pageable pageable) {

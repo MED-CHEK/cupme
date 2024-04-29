@@ -43,20 +43,17 @@ public class ProductMapper {
             product.setShortDescription(productDTO.getShortDescription());
             product.setDescription(productDTO.getDescription());
             product.setPrice(productDTO.getPrice());
-            product.setWeight(productDTO.getWeight());
-            product.setSize(productDTO.getSize());
-            product.setWidth(productDTO.getWidth());
-            product.setHeight(productDTO.getHeight());
+            product.setWeight(0);
+            product.setSize(0);
+            product.setWidth(0);
+            product.setHeight(0);
             product.setStock(productDTO.getStock());
-            product.setTags(productDTO.getTags());
-            product.setCategories(productDTO.getCategories());
-            product.setProtocols(productDTO.getProtocols());
-
+            product.setLastModifiedDate(productDTO.getLastModifiedDate());
             return product;
         }
     }
 
-    public Product productToProductCartDTO(ProductCartDTO productCartDTO) {
+    public Product productCartDTOToProduct(ProductCartDTO productCartDTO) {
         if (productCartDTO == null) {
             return null;
         } else {
@@ -64,7 +61,7 @@ public class ProductMapper {
             product.setId(productCartDTO.getId());
             product.setName(productCartDTO.getName());
             product.setPrice(productCartDTO.getPrice());
-
+            product.setStock(productCartDTO.getStock());
             return product;
         }
     }
@@ -77,6 +74,7 @@ public class ProductMapper {
             productCartDTO.setId(product.getId());
             productCartDTO.setName(product.getName());
             productCartDTO.setPrice(product.getPrice());
+            productCartDTO.setStock(product.getStock());
             productCartDTO.setPicture(new PictureDTO(product.getPictures().stream().filter(p -> p.getMain()).findFirst().orElse(null)));
 
             return productCartDTO;
@@ -85,5 +83,23 @@ public class ProductMapper {
 
     public List<ProductCartDTO> productsToProductCartDTO(List<Product> products) {
         return products.stream().filter(Objects::nonNull).map(this::productToProductCartDTO).collect(Collectors.toList());
+    }
+
+    public ProductCartDTO productDTOToProductCartDTO(ProductDTO productDTO) {
+        if (productDTO == null) {
+            return null;
+        } else {
+            ProductCartDTO productCartDTO = new ProductCartDTO();
+            productCartDTO.setId(productDTO.getId());
+            productCartDTO.setName(productDTO.getName());
+            productCartDTO.setPrice(productDTO.getPrice());
+            productCartDTO.setStock(productDTO.getStock());
+            productCartDTO.setPicture(
+                productDTO.getPictures() != null
+                    ? productDTO.getPictures().stream().filter(p -> p.getMain()).collect(Collectors.toList()).get(0)
+                    : null
+            );
+            return productCartDTO;
+        }
     }
 }

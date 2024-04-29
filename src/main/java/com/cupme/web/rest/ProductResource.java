@@ -4,6 +4,7 @@ import com.cupme.security.AuthoritiesConstants;
 import com.cupme.service.ProductService;
 import com.cupme.service.dto.ProductCartDTO;
 import com.cupme.service.dto.ProductDTO;
+import com.cupme.service.mapper.ProductMapper;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -19,9 +20,11 @@ public class ProductResource {
     private final Logger log = LoggerFactory.getLogger(ProductResource.class);
 
     private final ProductService productService;
+    private final ProductMapper productMapper;
 
-    public ProductResource(ProductService productService) {
+    public ProductResource(ProductService productService, ProductMapper productMapper) {
         this.productService = productService;
+        this.productMapper = productMapper;
     }
 
     /**
@@ -44,8 +47,8 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the productDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/products/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<ProductDTO> getProduct(long id) {
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable long id) {
         log.debug("REST request to get Product : {}", id);
 
         final ProductDTO product = productService.getProduct(id);
@@ -59,7 +62,7 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new productDTO, or with status {@code 400 (Bad Request)} if the product has already an ID.
      */
     @PostMapping("/products")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         log.debug("REST request to save Product : {}", productDTO);
 
@@ -80,7 +83,7 @@ public class ProductResource {
      * or with status {@code 500 (Internal Server Error)} if the productDTO couldn't be updated.
      */
     @PutMapping("/products")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<ProductDTO> updateProduct(@Valid @RequestBody ProductDTO productDTO) {
         log.debug("REST request to update Product : {}", productDTO);
 
@@ -99,8 +102,8 @@ public class ProductResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/products/{id}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<Void> deleteProduct(long id) {
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
         log.debug("REST request to delete Product : {}", id);
 
         productService.deleteProduct(id);

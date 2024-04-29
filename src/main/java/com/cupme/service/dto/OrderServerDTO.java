@@ -1,14 +1,16 @@
 package com.cupme.service.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.List;
 
 public class OrderServerDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Long orderId;
+    private Long userId;
     private Double totalPrice;
+    private boolean paid;
 
     private String transactionId;
 
@@ -16,10 +18,36 @@ public class OrderServerDTO implements Serializable {
 
     public OrderServerDTO() {}
 
-    public OrderServerDTO(Double totalPrice, String transactionId, List<OrderItemServerDTO> orderItemServerDTOs) {
+    public OrderServerDTO(
+        Long orderId,
+        Long userId,
+        Double totalPrice,
+        boolean paid,
+        String transactionId,
+        List<OrderItemServerDTO> orderItemServerDTOs
+    ) {
+        this.orderId = orderId;
+        this.userId = userId;
         this.totalPrice = totalPrice;
+        this.paid = paid;
         this.transactionId = transactionId;
         this.orderItemServerDTOs = orderItemServerDTOs;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Double getTotalPrice() {
@@ -28,6 +56,14 @@ public class OrderServerDTO implements Serializable {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
     public String getTransactionId() {
@@ -50,8 +86,14 @@ public class OrderServerDTO implements Serializable {
     public String toString() {
         return (
             "OrderServerDTO{" +
-            "totalPrice=" +
+            "orderId=" +
+            orderId +
+            ", userId=" +
+            userId +
+            ", totalPrice=" +
             totalPrice +
+            ", paid=" +
+            paid +
             ", transactionId='" +
             transactionId +
             '\'' +

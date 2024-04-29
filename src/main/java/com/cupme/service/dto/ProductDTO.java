@@ -2,41 +2,21 @@ package com.cupme.service.dto;
 
 import com.cupme.domain.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private Long id;
-
     private String name;
-
     private String type;
-
     private String shortDescription;
-
     private String description;
-
     private Double price;
-
     private Integer stock;
-
-    private Integer width;
-
-    private Integer size;
-
-    private Integer height;
-
-    private Integer weight;
-
-    private Set<Protocol> protocols = new HashSet<>();
-
-    private Set<Tag> tags = new HashSet<>();
-
-    private Set<Category> categories = new HashSet<>();
-
+    private Instant lastModifiedDate;
     private Set<PictureDTO> pictures = new HashSet<>();
 
     public ProductDTO() {}
@@ -49,13 +29,7 @@ public class ProductDTO implements Serializable {
         String description,
         Double price,
         Integer stock,
-        Integer width,
-        Integer size,
-        Integer height,
-        Integer weight,
-        Set<Protocol> protocols,
-        Set<Tag> tags,
-        Set<Category> categories,
+        Instant lastModifiedDate,
         Set<PictureDTO> pictures
     ) {
         this.id = id;
@@ -65,13 +39,7 @@ public class ProductDTO implements Serializable {
         this.description = description;
         this.price = price;
         this.stock = stock;
-        this.width = width;
-        this.size = size;
-        this.height = height;
-        this.weight = weight;
-        this.protocols = protocols;
-        this.tags = tags;
-        this.categories = categories;
+        this.lastModifiedDate = lastModifiedDate;
         this.pictures = pictures;
     }
 
@@ -83,13 +51,7 @@ public class ProductDTO implements Serializable {
         this.description = product.getDescription();
         this.price = product.getPrice();
         this.stock = product.getStock();
-        this.width = product.getWidth();
-        this.size = product.getSize();
-        this.height = product.getHeight();
-        this.weight = product.getWeight();
-        this.protocols = product.getProtocols();
-        this.tags = product.getTags();
-        this.categories = product.getCategories();
+        this.lastModifiedDate = product.getLastModifiedDate();
         this.pictures =
             product.getPictures() != null
                 ? product.getPictures().stream().map(PictureDTO::new).collect(java.util.stream.Collectors.toSet())
@@ -152,60 +114,12 @@ public class ProductDTO implements Serializable {
         this.stock = stock;
     }
 
-    public Integer getWidth() {
-        return width;
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
     }
 
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public Set<Protocol> getProtocols() {
-        return protocols;
-    }
-
-    public void setProtocols(Set<Protocol> protocols) {
-        this.protocols = protocols;
-    }
-
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public Set<PictureDTO> getPictures() {
@@ -238,20 +152,8 @@ public class ProductDTO implements Serializable {
             price +
             ", stock=" +
             stock +
-            ", width=" +
-            width +
-            ", size=" +
-            size +
-            ", height=" +
-            height +
-            ", weight=" +
-            weight +
-            ", protocols=" +
-            protocols +
-            ", tags=" +
-            tags +
-            ", categories=" +
-            categories +
+            ", lastModifiedDate=" +
+            lastModifiedDate +
             ", pictures=" +
             pictures +
             "}"

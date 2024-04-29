@@ -16,6 +16,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderItemMapper {
 
+    private final ProductMapper productMapper;
+    private final ProtocolMapper protocolMapper;
+    private final OrderMapper orderMapper;
+
+    public OrderItemMapper(ProductMapper productMapper, ProtocolMapper protocolMapper, OrderMapper orderMapper) {
+        this.productMapper = productMapper;
+        this.protocolMapper = protocolMapper;
+        this.orderMapper = orderMapper;
+    }
+
     public List<OrderItemDTO> orderItemsToOrderItemDTOs(List<OrderItem> orderItems) {
         return orderItems.stream().filter(Objects::nonNull).map(this::orderItemToOrderItemDTO).collect(Collectors.toList());
     }
@@ -35,9 +45,9 @@ public class OrderItemMapper {
             OrderItem orderItem = new OrderItem();
             orderItem.setId(orderItemDTO.getId());
             orderItem.setQuantity(orderItemDTO.getQuantity());
-            orderItem.setProduct(orderItemDTO.getProduct());
-            orderItem.setProtocol(orderItemDTO.getProtocol());
-            orderItem.setOrder(orderItemDTO.getOrder());
+            orderItem.setProduct(productMapper.productCartDTOToProduct(orderItemDTO.getProduct()));
+            orderItem.setProtocol(protocolMapper.protocolCartDTOToProtocol(orderItemDTO.getProtocol()));
+            orderItem.setOrder(orderMapper.orderDTOToOrder(orderItemDTO.getOrder()));
 
             return orderItem;
         }

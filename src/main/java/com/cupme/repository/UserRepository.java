@@ -1,6 +1,7 @@
 package com.cupme.repository;
 
 import com.cupme.domain.User;
+import com.cupme.repository.projection.UserView;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByLogin(String login);
 
     @EntityGraph(attributePaths = { "authorities", "addresses" })
+    Optional<User> findOneWithAuthoritiesById(Long id);
+
+    @EntityGraph(attributePaths = { "authorities", "addresses" })
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+
+    List<UserView> findBy();
 }

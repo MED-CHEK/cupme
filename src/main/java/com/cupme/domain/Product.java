@@ -2,14 +2,15 @@ package com.cupme.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * A Product.
@@ -27,8 +28,7 @@ public class Product implements Serializable {
 
     // Other fields
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(length = 50, unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @Column(name = "type", nullable = false)
@@ -57,6 +57,10 @@ public class Product implements Serializable {
 
     @Column(name = "weight", nullable = false)
     private Integer weight;
+
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate = Instant.now();
 
     @ManyToMany
     @JoinTable(
@@ -106,6 +110,7 @@ public class Product implements Serializable {
         Integer size,
         Integer height,
         Integer weight,
+        Instant lastModifiedDate,
         Set<Protocol> protocols,
         Set<Tag> tags,
         Set<Category> categories,
@@ -122,6 +127,7 @@ public class Product implements Serializable {
         this.size = size;
         this.height = height;
         this.weight = weight;
+        this.lastModifiedDate = lastModifiedDate;
         this.protocols = protocols;
         this.tags = tags;
         this.categories = categories;
@@ -216,6 +222,14 @@ public class Product implements Serializable {
         this.weight = weight;
     }
 
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
     public Set<Protocol> getProtocols() {
         return protocols;
     }
@@ -265,6 +279,7 @@ public class Product implements Serializable {
             Objects.equals(getSize(), product.getSize()) &&
             Objects.equals(getHeight(), product.getHeight()) &&
             Objects.equals(getWeight(), product.getWeight()) &&
+            Objects.equals(getLastModifiedDate(), product.getLastModifiedDate()) &&
             Objects.equals(getProtocols(), product.getProtocols()) &&
             Objects.equals(getTags(), product.getTags()) &&
             Objects.equals(getCategories(), product.getCategories()) &&
@@ -286,6 +301,7 @@ public class Product implements Serializable {
             getSize(),
             getHeight(),
             getWeight(),
+            getLastModifiedDate(),
             getProtocols(),
             getTags(),
             getCategories(),
@@ -323,6 +339,8 @@ public class Product implements Serializable {
             height +
             ", weight=" +
             weight +
+            ", lastModifiedDate=" +
+            lastModifiedDate +
             ", protocols=" +
             protocols +
             ", tags=" +

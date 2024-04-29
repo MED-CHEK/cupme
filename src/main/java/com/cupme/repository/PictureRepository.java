@@ -8,4 +8,11 @@ import org.springframework.stereotype.Repository;
  * Spring Data JPA repository for the {@link Picture} entity.
  */
 @Repository
-public interface PictureRepository extends JpaRepository<Picture, Long> {}
+public interface PictureRepository extends JpaRepository<Picture, Long> {
+    void deleteByProductId(long productId);
+
+    void deleteAllByProductId(long productId);
+    void deleteByProtocolId(long protocolId);
+
+    void deleteAllByProtocolId(long protocolId);
+}

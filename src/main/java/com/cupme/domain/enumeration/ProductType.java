@@ -2,7 +2,8 @@ package com.cupme.domain.enumeration;
 
 public enum ProductType {
     PRODUCT("product"),
-    PROTOCOL("protocol");
+    PROTOCOL("protocol"),
+    SESSION("session");
 
     private String value;
 

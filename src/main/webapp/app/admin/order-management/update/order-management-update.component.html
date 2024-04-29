@@ -1,0 +1,194 @@
+<div class="d-flex justify-content-center protocol-update">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="myUserLabel" jhiTranslate="orderManagement.home.createOrEditLabel">Créer ou éditer un produit</h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <div class="mb-3" [hidden]="!editForm.value.orderId">
+        <label jhiTranslate="global.field.id">ID</label>
+        <span class="asterisk">*</span>
+        <input type="text" class="form-control disabled" name="orderId" formControlName="orderId" readonly />
+      </div>
+
+      <div class="col-12 mb-3">
+        <label class="form-label" jhiTranslate="orderManagement.user">Client</label>
+        <span class="asterisk">*</span>
+        <ng-select class="form-control" [clearable]="false" [searchable]="false" bindLabel="name" formControlName="orderUserId">
+          <ng-option *ngFor="let user of users" [value]="user.id">
+            {{ user.firstName + ' ' + user.lastName | titlecase }}
+          </ng-option>
+        </ng-select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="orderManagement.orderTotalPrice">Prix total</label>
+        <span class="asterisk">*</span>
+        <input
+          type="number"
+          class="form-control"
+          name="orderTotalPrice"
+          formControlName="orderTotalPrice"
+          [value]="getTotalPrice()"
+          [disabled]="true"
+        />
+
+        <div
+          *ngIf="
+            editForm.get('orderTotalPrice')!.invalid && (editForm.get('orderTotalPrice')!.dirty || editForm.get('orderTotalPrice')!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('orderTotalPrice')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Nouveau prix</label>
+        <input type="number" class="form-control" name="newPrice" formControlName="newPrice" />
+      </div>
+
+      <div class="mb-3 filter-checkbox">
+        <label for="orderPaid" class="label">
+          <input type="checkbox" id="orderPaid" name="orderPaid" formControlName="orderPaid" />
+          <span>{{ 'orderManagement.orderPaid' | translate }}</span>
+          <span class="asterisk">*</span>
+          <span class="checkmark"></span>
+        </label>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="orderManagement.protocols">Protocoles</label>
+        <div class="productsToAdd">
+          <div class="protocols" *ngIf="editForm.value.protocols && editForm.value.protocols.length > 0">
+            <div class="protocol col-6 col-lg-4" *ngFor="let protocol of editForm.value.protocols">
+              <div class="prod">
+                <div class="image">
+                  <img [src]="getImage(protocol)" alt="product.name" />
+                  <span class="update-icon remove-icon remove" (click)="removeProtocol(protocol)"></span>
+                </div>
+                <div class="name">
+                  <span>
+                    {{ protocol.name }}
+                  </span>
+                </div>
+                <div class="cart-price">
+                  <div class="price">
+                    <span>{{ protocol.price }} € </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message" *ngIf="this.editForm.value.protocols && this.editForm.value.protocols.length == 0">
+            <span>{{ 'orderManagement.addProtoMessage' | translate }}</span>
+          </div>
+          <div class="prodsToAdd" *ngIf="protocols && protocols.length > 0">
+            <label class="form-label" jhiTranslate="orderManagement.protocolsToAdd">Protocoles</label>
+            <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+            <div class="protocols" *ngIf="!isLoading">
+              <div class="protocol col-6 col-lg-4" *ngFor="let protocol of protocols">
+                <div class="prod">
+                  <div class="image">
+                    <img [src]="getImage(protocol)" alt="product.name" />
+                  </div>
+                  <div class="name">
+                    <span>
+                      {{ protocol.name }}
+                    </span>
+                  </div>
+                  <div class="cart-price">
+                    <div class="price">
+                      <span>{{ protocol.price }} € </span>
+                    </div>
+                    <div class="add-icon" (click)="addProtocol(protocol)"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="orderManagement.products">products</label>
+        <div class="productsToAdd">
+          <div class="products" *ngIf="editForm.value.orderProducts && editForm.value.orderProducts.length > 0">
+            <div class="product col-6 col-lg-4" *ngFor="let product of editForm.value.orderProducts">
+              <div class="prod">
+                <div class="image">
+                  <img [src]="getImage(product.product)" alt="product.name" />
+                  <span class="update-icon remove-icon remove" (click)="removeProduct(product.product)"></span>
+                </div>
+                <div class="name">
+                  <span>
+                    {{ product.product.name }}
+                  </span>
+                </div>
+                <div class="cart-price">
+                  <div class="price">
+                    <span>{{ product.product.price }} € </span>
+                  </div>
+                  <div class="add-">
+                    <span class="minus" (click)="reduceQuantity(product)">
+                      <span class="order-icon minus-icon"></span>
+                    </span>
+                    <span class="text">{{ product.quantity }}</span>
+                    <span class="plus" (click)="increaseQuantity(product)">
+                      <span class="order-icon plus-icon"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="message" *ngIf="this.editForm.value.orderProducts && this.editForm.value.orderProducts.length == 0">
+            <span>{{ 'orderManagement.addProdMessage' | translate }}</span>
+          </div>
+          <div class="prodsToAdd" *ngIf="products && products.length > 0">
+            <label class="form-label" jhiTranslate="orderManagement.productsToAdd">products</label>
+            <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+            <div class="products" *ngIf="!isLoading">
+              <div class="product col-6 col-lg-4" *ngFor="let product of products">
+                <div class="prod">
+                  <div class="image">
+                    <img [src]="getImage(product)" alt="product.name" />
+                  </div>
+                  <div class="name">
+                    <span>
+                      {{ product.name }}
+                    </span>
+                  </div>
+                  <div class="cart-price">
+                    <div class="price">
+                      <span>{{ product.price }} € </span>
+                    </div>
+                    <div class="add-icon" (click)="addProduct(product)"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      </button>
+
+      <button
+        type="submit"
+        [ngClass]="editForm.invalid || isSaving ? 'disabled' : null"
+        [disabled]="editForm.invalid || isSaving"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+      </button>
+    </form>
+  </div>
+</div>

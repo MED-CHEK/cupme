@@ -184,6 +184,186 @@
         border-radius: 0 0 0.25rem 0.25rem;
         text-align: center;
       }
+
+      .new-price {
+        font-size: 1.125rem;
+        font-weight: 600;
+        padding: 0.5rem;
+        border-radius: 0 0 0.25rem 0.25rem;
+        text-align: center;
+        color: goldenrod;
+      }
+
+      .old-price {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #868e96;
+        text-decoration: line-through;
+      }
+    }
+
+    .addShippingAddress {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+
+      .btn {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.25rem 1rem;
+        border-radius: 0.25rem;
+        text-transform: uppercase;
+      }
+    }
+
+    /* Style for the address form */
+    .address-form {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    .address-form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .address-form label {
+      font-weight: bold;
+    }
+
+    /* Style for the address details */
+    .address-details,
+    .promoForm {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 1rem;
+
+      .title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: goldenrod;
+      }
+
+      .address,
+      .promoCode {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .button {
+          margin-top: 0.5rem;
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    .address-details p {
+      margin: 0;
+    }
+
+    /* Style for the asterisk */
+    .asterisk {
+      color: red;
+      font-size: 18px;
+      margin-right: 5px;
+    }
+
+    .addressForm {
+      margin-top: 0.5rem;
+
+      h2 {
+        color: #00205a;
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 1rem;
+
+        .btn {
+          font-size: 0.875rem;
+          font-weight: 600;
+          padding: 0.25rem 1rem;
+          border-radius: 0.25rem;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  .cgv {
+    margin: 1rem 0 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    .asterisk {
+      color: red;
+    }
+
+    .link {
+      color: var(--button-secondary-color);
+      text-decoration: underline;
+      cursor: pointer;
+      margin-left: 0.25rem;
+
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+}
+
+::ng-deep .cgv-modal {
+  max-width: 75%;
+  margin: 5rem auto 1rem;
+
+  .modal-content {
+    .modal-header {
+      font-size: 1rem;
+
+      .modal-title {
+        font-weight: 600;
+        color: var(--button-secondary-color);
+      }
+    }
+
+    .modal-body {
+      padding: 1rem 1rem 0;
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-align: justify;
+
+      h6 {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--button-secondary-color);
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    .modal-footer {
+      padding: 0 calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5)
+        calc(var(--bs-modal-padding) - var(--bs-modal-footer-gap) * 0.5);
+
+      .btn {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.25rem 1rem;
+        border-radius: 0.25rem;
+        text-transform: uppercase;
+      }
     }
   }
 
@@ -399,6 +579,18 @@
           text-align: center;
         }
       }
+    }
+  }
+
+  .address,
+  .promoCode {
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn-primary {
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
     }
   }
 

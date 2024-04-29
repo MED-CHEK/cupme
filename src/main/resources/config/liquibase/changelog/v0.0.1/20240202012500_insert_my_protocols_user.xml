@@ -9,14 +9,14 @@
     <changeSet id="v0.0.1-INSERT_MY_PROTOCOLS_TO_USER" author="cupme">
         <sql>
             -- Insert command
-            INSERT INTO command (user_id, paid, created_date, total_price, transaction_id)
-            VALUES ((SELECT id FROM users WHERE login = 'user'), 1, NOW(), 0.0, 'new_transaction_id');
+            INSERT INTO command (id, user_id, paid, created_date, total_price, transaction_id)
+            VALUES (222, (SELECT id FROM user WHERE login = 'user'), 1, NOW(), 0.0, 'new_transaction_id');
         </sql>
 
         <sql>
             -- Insert Order items
             INSERT INTO order_item (order_id, protocol_id, product_id, quantity)
-            SELECT MAX(id), protocol_id, NULL, 1
+            SELECT 222, protocol_id, NULL, 1
             FROM (SELECT 7480 AS protocol_id UNION ALL
             SELECT 7484 UNION ALL
             SELECT 7485 UNION ALL

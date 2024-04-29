@@ -15,8 +15,8 @@ import dayjs from 'dayjs/esm';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements AfterViewInit {
-  @ViewChild('login', { static: false })
-  login?: ElementRef;
+  @ViewChild('firstName', { static: false })
+  firstName?: ElementRef;
   doNotMatch = false;
   error = false;
   errorEmailExists = false;
@@ -75,8 +75,8 @@ export class RegisterComponent implements AfterViewInit {
   constructor(private translateService: TranslateService, private registerService: RegisterService) {}
 
   ngAfterViewInit(): void {
-    if (this.login) {
-      this.login.nativeElement.focus();
+    if (this.firstName) {
+      this.firstName.nativeElement.focus();
     }
   }
 

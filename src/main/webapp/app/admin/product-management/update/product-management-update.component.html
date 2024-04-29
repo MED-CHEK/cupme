@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-center product-update">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="myUserLabel" jhiTranslate="productManagement.home.createOrEditLabel">Créer ou éditer un produit</h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <div class="mb-3" [hidden]="!editForm.value.id">
+        <label jhiTranslate="global.field.id">ID</label>
+        <input type="text" class="form-control disabled" name="id" formControlName="id" readonly />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="productManagement.name">Nom</label>
+        <input type="text" class="form-control" name="name" formControlName="name" />
+
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+
+          <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength">
+            Ce champ doit faire moins de 50 caractères.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="productManagement.shortDescription">Description courte</label>
+        <textarea type="text" class="form-control" name="shortDescription" formControlName="shortDescription"></textarea>
+
+        <div
+          *ngIf="
+            editForm.get('shortDescription')!.invalid &&
+            (editForm.get('shortDescription')!.dirty || editForm.get('shortDescription')!.touched)
+          "
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('shortDescription')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="productManagement.description">Description</label>
+        <textarea class="form-control" name="description" formControlName="description"></textarea>
+
+        <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('description')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="productManagement.price">Prix</label>
+        <input type="number" class="form-control" name="price" formControlName="price" />
+
+        <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="productManagement.stock">Stock</label>
+        <input type="number" class="form-control" name="stock" formControlName="stock" />
+
+        <div *ngIf="editForm.get('stock')!.invalid && (editForm.get('stock')!.dirty || editForm.get('stock')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('stock')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+      </div>
+
+      <div [formGroup]="uploadForm" class="uploadForm" [ngClass]="uploadForm.disabled ? 'formDisabled' : null">
+        <div class="form upload">
+          <div>
+            <sec-upload-photo [uploadForm]="uploadForm"></sec-upload-photo>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" (click)="previousState()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      </button>
+
+      <button
+        type="submit"
+        [ngClass]="editForm.invalid || uploadForm.invalid || isSaving ? 'disabled' : null"
+        [disabled]="editForm.invalid || isSaving"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+      </button>
+    </form>
+  </div>
+</div>

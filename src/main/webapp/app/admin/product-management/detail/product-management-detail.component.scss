@@ -1,0 +1,85 @@
+.product-detail {
+  padding: 5rem 0.5rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail .title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.product-detail .details {
+  margin-bottom: 30px;
+}
+
+.product-detail .detail-item {
+  margin-bottom: 15px;
+}
+
+.product-detail .detail-item label {
+  font-weight: bold;
+}
+
+.product-detail .product-images {
+  margin-bottom: 30px;
+}
+
+.product-detail .product-images {
+  .image-container {
+    display: flex;
+    justify-content: center;
+    height: 25rem;
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+.product-detail .actions {
+  text-align: center;
+}
+
+.divider {
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.btn-primary,
+.btn-info {
+  border-radius: 0.375rem !important;
+}
+
+::ng-deep .carousel {
+  height: 25rem;
+
+  button {
+    width: 10%;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    opacity: 1;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .carousel-control-prev-icon {
+    background-image: url('../../../../content/images/arrow-left-square.svg');
+  }
+
+  .carousel-control-next-icon {
+    background-image: url('../../../../content/images/arrow-left-square.svg');
+    transform: scaleX(-1);
+  }
+
+  .carousel-inner {
+    padding: 0;
+  }
+}

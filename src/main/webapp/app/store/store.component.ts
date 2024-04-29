@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from 'app/cart/cart.service';
 import { CartItemDisplayDTO } from 'app/entities/cartItem.model';
+import { ProductType } from 'app/entities/product-type.enum';
 import { ProductCartDTO } from 'app/entities/product.model';
 import { ProtocolCartDTO } from 'app/entities/protocol.model';
 import { ProtocolService } from 'app/protocol/protocol.service';
@@ -19,7 +20,7 @@ export class StoreComponent implements OnInit {
   isProtocolsTab: boolean = true;
   isProtocolsLoading = true;
   isProductsLoading = true;
-
+  type = ProductType;
   constructor(
     private protocolService: ProtocolService,
     private productService: ProductService,
@@ -50,7 +51,7 @@ export class StoreComponent implements OnInit {
       name: product.name,
       price: product.price,
       picture: (('../../content/images/' + product.id + '/' + product.picture.name) as string) + '.png',
-      protocol: false,
+      type: this.type.PRODUCT,
       createdDate: new Date().toISOString(),
       quantity: 1,
     };

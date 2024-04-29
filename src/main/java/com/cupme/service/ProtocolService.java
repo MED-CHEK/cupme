@@ -1,17 +1,20 @@
 package com.cupme.service;
 
+import com.cupme.domain.Picture;
+import com.cupme.domain.Product;
+import com.cupme.domain.Protocol;
 import com.cupme.domain.enumeration.ProtocolType;
+import com.cupme.repository.PictureRepository;
+import com.cupme.repository.ProductRepository;
 import com.cupme.repository.ProtocolRepository;
-import com.cupme.service.dto.MyProtocolDetailDTO;
-import com.cupme.service.dto.ProtocolCartDTO;
-import com.cupme.service.dto.ProtocolDTO;
-import com.cupme.service.dto.ProtocolDetailDTO;
+import com.cupme.service.dto.*;
+import com.cupme.service.mapper.PictureMapper;
 import com.cupme.service.mapper.ProtocolMapper;
 import com.cupme.service.utils.AssetFilesService;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,21 +28,26 @@ public class ProtocolService {
     private final Logger log = LoggerFactory.getLogger(ProtocolService.class);
 
     private final ProtocolRepository protocolRepository;
-
+    private final ProductRepository productRepository;
+    private final PictureRepository pictureRepository;
     private final ProtocolMapper protocolMapper;
-    private final CacheManager cacheManager;
+    private final PictureMapper pictureMapper;
 
     private final AssetFilesService assetFilesService;
 
     public ProtocolService(
         ProtocolRepository protocolRepository,
+        ProductRepository productRepository,
+        PictureRepository pictureRepository,
         ProtocolMapper protocolMapper,
-        CacheManager cacheManager,
+        PictureMapper pictureMapper,
         AssetFilesService assetFilesService
     ) {
         this.protocolRepository = protocolRepository;
+        this.productRepository = productRepository;
+        this.pictureRepository = pictureRepository;
         this.protocolMapper = protocolMapper;
-        this.cacheManager = cacheManager;
+        this.pictureMapper = pictureMapper;
         this.assetFilesService = assetFilesService;
     }
 
@@ -99,7 +107,11 @@ public class ProtocolService {
 
     public ProtocolDetailDTO getProtocolDetail(long id) {
         ProtocolDetailDTO protocolDetailDTO = protocolMapper.protocolToProtocolDetailDTO(protocolRepository.findById(id).get());
-        protocolDetailDTO.getPicture().setFile(assetFilesService.getFile(protocolDetailDTO.getPicture().getFile()));
+        protocolDetailDTO
+            .getPictures()
+            .forEach(pictureDTO -> {
+                pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
+            });
 
         protocolDetailDTO
             .getProductDTOs()
@@ -117,14 +129,61 @@ public class ProtocolService {
     }
 
     public ProtocolDTO createProtocol(ProtocolDTO protocolDTO) {
-        return protocolMapper.protocolToProtocolDTO(protocolRepository.save(protocolMapper.protocolDTOToProtocol(protocolDTO)));
+        Protocol protocol = protocolMapper.protocolDTOToProtocol(protocolDTO);
+        ProtocolDTO dto = protocolMapper.protocolToProtocolDTO(protocolRepository.save(protocol));
+
+        assetFilesService.addFolder(dto.getId() + "");
+
+        if (protocolDTO.getPictures() != null && protocolDTO.getPictures().size() > 0) {
+            protocolDTO
+                .getPictures()
+                .forEach(picture -> {
+                    if (picture.getMain()) {
+                        picture.setName("main");
+                    }
+                    picture.setFile(assetFilesService.savePicture(picture, dto.getId()));
+                    Picture toPicture = pictureMapper.pictureDtoToPicture(picture);
+                    toPicture.setProtocol(protocol);
+                    toPicture.setFile("content/images/" + dto.getId() + "/" + picture.getName());
+                    pictureRepository.save(toPicture);
+                });
+        }
+        return dto;
     }
 
     public ProtocolDTO updateProtocol(ProtocolDTO protocolDTO) {
-        return protocolMapper.protocolToProtocolDTO(protocolRepository.save(protocolMapper.protocolDTOToProtocol(protocolDTO)));
+        Protocol protocol = protocolMapper.protocolDTOToProtocol(protocolDTO);
+        ProtocolDTO dto = protocolMapper.protocolToProtocolDTO(protocolRepository.save(protocol));
+
+        pictureRepository.deleteAllByProtocolId(dto.getId());
+
+        if (protocolDTO.getPictures() != null && protocolDTO.getPictures().size() > 0) {
+            protocolDTO
+                .getPictures()
+                .forEach(picture -> {
+                    if (picture.getMain()) {
+                        picture.setName("main");
+                    }
+                    picture.setFile(assetFilesService.savePicture(picture, protocolDTO.getId()));
+                    Picture toPicture = pictureMapper.pictureDtoToPicture(picture);
+                    toPicture.setProtocol(protocol);
+                    toPicture.setFile("content/images/" + protocolDTO.getId() + "/" + picture.getName());
+                    pictureRepository.save(toPicture);
+                });
+        }
+        return dto;
     }
 
     public void deleteProtocol(long id) {
-        protocolRepository.deleteById(id);
+        pictureRepository.deleteByProtocolId(id);
+        Optional<Protocol> protocolOptional = protocolRepository.findById(id);
+        if (protocolOptional.isPresent()) {
+            Protocol protocol = protocolOptional.get();
+            for (Product product : protocol.getProducts()) {
+                product.getProtocols().remove(protocol);
+                productRepository.save(product);
+            }
+            protocolRepository.delete(protocol);
+        }
     }
 }

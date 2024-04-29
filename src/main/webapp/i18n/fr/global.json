@@ -21,6 +21,10 @@
       "admin": {
         "main": "Mon cockpit",
         "userManagement": "Gestion des utilisateurs",
+        "protocolManagement": "Gestion des protocoles",
+        "productManagement": "Gestion des produits",
+        "orderManagement": "Gestion des commandes",
+        "promoCodeManagement": "Gestion des codes promo",
         "tracker": "Suivi des utilisateurs",
         "metrics": "Métriques",
         "health": "Diagnostics",
@@ -30,7 +34,18 @@
         "database": "Base de données",
         "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
       },
-      "language": "Langue"
+      "language": "Langue",
+      "sessions": {
+        "title": "Séance particulière en ligne",
+        "email": "Séance par email",
+        "email.label": "Email",
+        "whatsapp": "Séance par whatsApp",
+        "whatsapp.label": "WhatsApp",
+        "session15": "Séance 15 min",
+        "session30": "Séance 30 min",
+        "modal.session15": "Rendez-vous pour une séance en ligne 15 min",
+        "modal.session30": "Rendez-vous pour une séance en ligne 30 min"
+      }
     },
     "form": {
       "username.label": "Login",
@@ -111,66 +126,9 @@
       "protocol.label.generic": "Protocole généraux",
       "product.label": "Produits pour ce protocole",
       "myprotocol.label": "Mes protocoles",
-      "myprotocol.noProtocols": "Explorez dès maintenant notre collection exclusive de protocoles. Si vous n'avez pas encore découvert ces méthodes bien-être, c'est le moment idéal pour plonger dans l'expérience !",
-      "7480.short_description": "⭐️ Soulagez les contractures et tensions dans les mollets grâce à notre protocole spécialisé. 🚩 Améliore la circulation sanguine et favorise la récupération. ⚠️ Procure une sensation de légèreté et de bien-être.",
-      "7480.long_description": "🔍 Soulagez les contractures et les tensions dans vos mollets avec notre protocole spécialisé. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles et à réduire les douleurs. Grâce à une meilleure circulation sanguine dans la région, vous bénéficierez d\'une récupération plus rapide. Ressentez une sensation de légèreté et de bien-être dans vos mollets grâce à ce protocole efficace.",
-      "7484.short_description": "⭐️ Soulage les tensions dans les trapèzes et améliore la mobilité des épaules et du cou. 😄 Procure un soulagement durable et une détente profonde.",
-      "7484.long_description": "🔍 Dites adieu aux tensions dans les trapèzes grâce à notre protocole spécialisé. Les ventouses appliquées sur les points clés aident à relâcher les muscles tendus. Réduisez les douleurs et améliorez votre mobilité au niveau des épaules et du cou. Offrez-vous un soulagement durable et une détente profonde grâce à ce protocole efficace.",
-      "7485.short_description": "⭐️ Soulage les migraines et les tensions. 🌟 Soulagement naturel sans médicaments. 🌀 Favorise le bien-être général et la détente.",
-      "7485.long_description": "🔍 Oubliez les migraines grâce à notre protocole spécialement conçu. Les ventouses appliquées sur les points spécifiques du crâne aident à réduire les douleurs et les tensions. Profitez d\'un soulagement naturel sans avoir à recourir à des médicaments. Améliorez votre bien-être général et retrouvez une sensation de calme et de sérénité.",
-      "7486.short_description": "⭐️ Élimine les douleurs dans la pointe du dos. 😌 Soulage les tensions musculaires. 🕊️ Améliore la posture et le confort.",
-      "7486.long_description": "🔍 Éliminez les douleurs persistantes dans la pointe de votre dos grâce à notre protocole spécialisé. Les ventouses ciblées aident à détendre les muscles et à soulager les tensions. Améliorez votre posture et votre confort au quotidien. Retrouvez une liberté de mouvement et une sensation de soulagement durable.",
-      "7487.short_description": "⭐️ Soulage les courbatures dans les biceps. 🏋️‍♂️ Favorise la récupération musculaire. ⚠️ Améliore la force et la mobilité.",
-      "7487.long_description": "🔍 Dites adieu aux courbatures dans les biceps grâce à notre protocole spécialisé. Les ventouses appliquées sur les muscles sollicités aident à favoriser la récupération. Réduisez les douleurs et retrouvez une force et une mobilité optimales. Profitez d\'une meilleure performance lors de vos activités sportives et de vos entraînements.",
-      "7488.short_description": "⭐️ Soulage les tensions dans les adducteurs. 🏋️‍♀️ Améliore la flexibilité et le confort. ⚠️ Soulagement des douleurs et liberté de mouvement retrouvée.",
-      "7488.long_description": "🔍 Libérez-vous des tensions dans les adducteurs grâce à notre protocole spécialisé. Les ventouses appliquées sur les zones ciblées aident à relâcher les muscles et à réduire les tensions. Améliorez votre flexibilité et votre confort au niveau de l\'aine. Profitez d\'un soulagement efficace des douleurs et retrouvez une liberté de mouvement totale.",
-      "7490.short_description": "⭐️ Soulage les douleurs lombaires. 🌟 Améliore la posture et le confort. 🚩 Procure un soulagement durable pour une meilleure qualité de vie.",
-      "7490.long_description": "🔍 Dites adieu aux douleurs lombaires grâce à notre protocole spécialisé. Les ventouses appliquées sur les zones lombaires aident à soulager les douleurs et à détendre les muscles. Améliorez votre posture, réduisez les inconforts et retrouvez une meilleure qualité de vie. Profitez d'une sensation de soulagement et de bien-être durable.",
-      "7492.short_description": "⭐️ Soulage les courbatures des ischio-jambiers. 🏋️‍♂️ Améliore la souplesse et la mobilité. ⚠️ Favorise la récupération musculaire pour une meilleure performance.",
-      "7492.long_description": "🔍 Dites adieu aux courbatures dans les ischio-jambiers grâce à notre protocole spécialisé. Les ventouses appliquées sur les muscles sollicités aident à améliorer la récupération musculaire et à réduire les douleurs. Améliorez votre souplesse et votre mobilité au niveau des jambes. Retrouvez un soulagement rapide et une meilleure performance lors de vos activités physiques.",
-      "7494.short_description": "⭐️ Soulage les douleurs lombaires. 🌟 Améliore la posture et le confort. 🚩 Procure un soulagement durable pour une meilleure qualité de vie.",
-      "7494.long_description": "🔍 Dites adieu aux douleurs lombaires grâce à notre protocole spécialisé. Les ventouses appliquées sur les zones lombaires aident à soulager les douleurs et à détendre les muscles. Améliorez votre posture, réduisez les inconforts et retrouvez une meilleure qualité de vie. Profitez d'une sensation de soulagement et de bien-être durable.",
-      "7496.short_description": "⭐️ Soulage les tensions cervicales. 🌟 Améliore la posture et la mobilité. 🚩 Procure un soulagement durable pour une meilleure qualité de vie.",
-      "7496.long_description": "🔍 Oubliez les tensions cervicales grâce à notre protocole spécialisé. Les ventouses appliquées sur les points clés aident à détendre les muscles et à soulager les douleurs au niveau du cou. Améliorez votre posture et retrouvez une mobilité sans inconfort. Profitez d'une relaxation profonde et d'un soulagement durable des tensions cervicales.",
-      "7506.short_description": "⭐️ Etirement immédiats des muscles tendus de l'avant-bras. ⚠️ Amélioration de la souplesse des tissus et des articulations de l'avant-bras",
-      "7506.long_description": "🔍 La libération de la tension musculaire va réduire la sensation de douleur associée à des muscles fatigués. Les ventouses peuvent aider à augmenter le flux sanguin, favorisant ainsi une meilleure oxygénation des tissus et une élimination plus efficace des déchets métaboliques",
-      "7513.short_description": "⭐️ Aide à relâcher immédiatement les muscles tendus ⚠️ Procure une sensation de soulagement et de détente.",
-      "7513.long_description": "🔍 Les tensions dans la nuque peuvent être inconfortables et peuvent résulter de divers facteurs tels que le stress, la mauvaise posture, le surmenage ou d'autres problèmes de santé. Relâcher ces tensions par le cupping vous sera très rapidement agréable",
-      "7522.short_description": "⭐️ Adapté en cas de douleur liée à une tension musculaire dans la région fessière ⚠️ Apporte soulagement et bien-être ",
-      "7522.long_description": "🔍 Protocole adapté pour les personnes qui passent de longues périodes assises, comme celles qui travaillent à un bureau ou conduisent beaucoup. Une solution adaptée, facilement accessible et fortement relaxante",
-      "7527.short_description": "⭐️ Contribue à relâcher la tension musculaire vous offrant ainsi un soulagement potentiel ⚠️ Permet immédiatement une meilleure mobilité",
-      "7527.long_description": "🔍'L'utilisation' de ventouses pour détendre les triceps courbaturés offre plusieurs avantages.<ul><li>Cela réduit la tension musculaire et peut accélérer la récupération en stimulant le flux lymphatique. </li><li>Cela peut atténuer la douleur ressentie de la courbature, améliore la souplesse musculaire et contribue à une récupération plus rapide après un effort physique intense.</li></ul>",
-      "7529.short_description": "⭐️ Soulage les douleurs aux genoux avec des ventouses sèches. 🚴‍♀️Améliore la circulation sanguine et la mobilité. ⚠️ Procure un soulagement naturel et durable.",
-      "7529.long_description": "🔍 Soulagez efficacement les douleurs aux genoux grâce à notre protocoles pécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à améliorer la circulation sanguine et à réduire les douleurs articulaires. Profitez d'un soulagement naturel et 'd''une meilleure mobilité au niveau de vos genoux, vous permettant de retrouver votre rythme de vie habituel.",
-      "7530.short_description": "⭐️ Soulage le stress \"Boule au ventre\" . 😴 Améliore la posture et le confort. ⚠️ Procure un soulagement durable pour une meilleure qualité de vie.",
-      "7530.long_description": "🔍 Dites adieu au stress et à la sensation de \"boule au ventre\" grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les points clés aident à détendre les muscles abdominaux, à favoriser la relaxation et à réduire les sensations d'inconfort. Retrouvez un équilibre émotionnel et une sérénité intérieure grâce à cette technique apaisante.",
-      "7531.short_description": "⭐️ Soulage les tensions dans le creux du genou avec des ventouses sèches. ⚠️ Stimule la circulation sanguine, favorisant ainsi un soulagement efficace. 🌟 Procure une sensation apaisante et revitalisante, améliorant le bien-être du genou.",
-      "7531.long_description": "🔍 Soulagez les tensions dans le creux du genou avec notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées autour du genou aident à stimuler la circulation sanguine, à réduire les sensations inconfortables et à favoriser une détente musculaire optimale. Retrouvez une sensation apaisante, revitalisante et prête à affronter votre quotidien.",
-      "7533.short_description": "⭐️ Soulagez les douleurs au tendon d'Achille avec des ventouses sèches. ⚠️ Stimulez la circulation sanguine, contribuant ainsi à atténuer les douleurs et favorisant une récupération optimale.  🌟 Retrouvez un soulagement apaisant, permettant une mobilité plus confortable et une meilleure souplesse du tendon d'Achille.",
-      "7533.long_description": "🔍 Soulagez les douleurs au tendon d'Achille avec notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées autour du tendon d'Achille stimulent la circulation sanguine, contribuant à atténuer les douleurs et favorisant une récupération optimale. Retrouvez un soulagement apaisant, permettant une mobilité plus confortable et une meilleure souplesse du tendon d'Achille.",
-      "7535.short_description": "⭐️ Soulagez les tensions à la plante des pieds avec des ventouses sèches. ⚠️ Stimulez la circulation sanguine, favorisant ainsi un soulagement efficace. 🌟 Procurez-vous une sensation apaisante et revitalisante, améliorant le bien-être de la plante des pieds.",
-      "7535.long_description": "🔍 Soulagez les tensions à la plante des pieds avec notre protocole spécialisé utilisant des ventouses sèches. ⚡ Les ventouses appliquées sur la plante des pieds stimulent la circulation sanguine, réduisant ainsi les sensations de tension et favorisant un soulagement durable. Retrouvez des pieds légers, détendus et prêts à marcher avec aisance.",
-      "7537.short_description": "⭐️ Sur la base du lien entre le corps et l’esprit, détendre votre corps par les ventouses détendra votre esprit. ⚠️ Sensation rapide de bien-être musculaire. ",
-      "7537.long_description": "🔍 Le protocole de soulagement du burnout se base sur le relâchement musculaire et aspire ainsi à une détente mentale.  En ciblant les muscles impactés par le stress, les symptômes du burnout sont atténués et favorise à la fois la détente musculaire et mentale. La libération simultanée des tensions physiques tend à la libération des",
-      "7539.short_description": "⭐️ Détente de points de tension favorisant une relaxation globale du corps.  🏋️‍♂️ Détente profonde. ⚠️ Apaisement du système nerveux et bien-être général.",
-      "7539.long_description": "🔍 Les protocoles de détente générale par ventouses se concentrent sur le relâchement des points de tension à travers le corps, favorisant un état de détente global. Le processus de détente par ventouses vise à cibler et à relâcher les points de tension, procurant ainsi un relâchement général des muscles vous offrant ainsi une expérience holistique de détente et de relaxation.",
-      "7541.short_description": "⭐️ Soulage les douleurs de la pubalgie au niveau des adducteurs avec des ventouses sèches. 😌 Détend les muscles, réduit les inflammations et soulage les douleurs. 🌟 Améliore la mobilité et permet un retour aux activités habituelles.",
-      "7541.long_description": "🔍 Soulagez les douleurs de la pubalgie au niveau des adducteurs grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à réduire les inflammations et à soulager les douleurs associées à la pubalgie. Retrouvez une meilleure mobilité, un soulagement efficace et un retour à vos activités quotidiennes.",
-      "7543.short_description": "⭐️ Soulage les courbatures à l'arrière des épaules avec des ventouses sèches. ⚠️ Détend les muscles, améliore la circulation sanguine et favorise la récupération. 🌟 Procure une mobilité accrue et une sensation de bien-être.",
-      "7543.long_description": "🔍 Soulagez les courbatures à l'arrière des épaules grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des épaules.",
-      "7544.short_description": "⭐️ Soulage les courbatures à l'avant des épaules avec des ventouses sèches. ⚠️ Détend les muscles, améliore la circulation sanguine et favorise la récupération. 🌟 Procure une mobilité accrue et une sensation de bien-être.",
-      "7544.long_description": "🔍 Soulagez les courbatures à l'avant des épaules grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des épaules.",
-      "7550.short_description": "⭐️ Les ventouses stimulent les muscles intestinaux, favorisant une meilleure motilité digestive.  🏋️‍♂️ Sensation rapide de bien-être musculaire. ",
-      "7550.long_description": "🔍  En relâchant les tensions abdominales, elles contribuent à soulager l'inconfort lié à une",
-      "7553.short_description": "⭐️ Soulage les courbatures des quadriceps avec des ventouses sèches. ⚠️ Détend les muscles, améliore la circulation sanguine et favorise la récupération. 🌟 Procure une mobilité accrue et une sensation de bien-être.",
-      "7553.long_description": "🔍 Soulagez les courbatures des quadriceps grâce à notre protocole spécialisé utilisant des ventouses sèches. Les ventouses appliquées sur les zones ciblées aident à détendre les muscles, à améliorer la circulation sanguine et à favoriser une récupération plus rapide. Retrouvez un soulagement efficace, une mobilité accrue et une sensation de bien-être dans la zone des quadriceps.",
-      "7554.short_description": "⭐️ Les protocoles anti-maux de tête utilisent des techniques telles que l’étirement pour relâcher les tensions musculaires dans la tête et le cou.  🏋️‍♂️ En réduisant les tensions, ces approches contribuent à atténuer les maux de tête et à",
-      "7554.long_description": "🔍  Les protocoles anti-maux de tête ciblent spécifiquement les muscles de la tête et du cou, relâchant les tensions accumulées. En relâchant les tensions musculaires dans la région de la tête et du cou, ces méthodes non invasives aident à réduire la pression exercée sur les zones souvent associées aux maux de tête. Le soulagement des tensions contribue ainsi à une diminution de l'inconfort lié aux maux de tête. Cette approche naturelle de relaxation musculaire, offre une alternative holistique pour soulager les maux de tête. Cette approche centrée sur le bien-être favorise une gestion locale des maux de tête en traitant leurs causes sous-jacentes, souvent musculaires.",
-      "7555.short_description": "⭐️ Le protocole de soulagement de la sciatique propose l'étirement ciblé pour détendre les muscles lombaires et fessiers contractés, favorisant le bien-être par l'assouplissement des musculaire.  🏋️‍♂️ En diminuant ces tensions, ce protocole contribue à atténuer les douleurs associées à la sciatique, améliorant ainsi votre confort par les étirements. ⚠️ La libération des tensions engendrées par l’inflammation du nerf sciatique favorise le bienêtre général",
-      "7555.long_description": "🔍  Le protocole de soulagement de la sciatique incorpore des techniques d'étirement ciblées pour relâcher la tension dans les muscles lombaires et fessiers, favorisant la détente musculaire dans la région affectée. En relâchant la tension musculaire spécifiquement au niveau des lombaires et des fessiers, ces approches contribuent significativement à atténuer les douleurs liées à la sciatique, procurant un soulagement notable et améliorant le confort général. La détente résultant de l'étirement des muscles lombaires et fessiers représente un aspect clé de cette approche holistique, agissant non seulement sur les symptômes, mais également sur la cause sous-jacente de la sciatique, offrant ainsi une solution facilement accessible pour favoriser le bien-être musculaire"
+      "myprotocol.noProtocols": "Explorez dès maintenant notre collection exclusive de protocoles. Si vous n'avez pas encore découvert ces méthodes bien-être, c'est le moment idéal pour plonger dans l'expérience !"
     },
     "store": {
-      "title": "Boutique",
       "protocol.label": "Protocoles",
       "product.label": "Produits"
     },
@@ -189,7 +147,17 @@
         "quantity": "Quantité",
         "total": "Sous Total"
       },
+      "promoCode": "Promo Code",
+      "applyCodePromo": "Appliquer un code promo",
+      "appliedPromoCode": "Ce code promo vous permet de bénéficier de {{ discount }}% de réduction sur votre commande.",
       "subTotal": "Récapitulatif de votre commande",
+      "billing-address": "Adresse de facturation",
+      "shipping-address": "Adresse de livraison",
+      "addShippingAddress": "Ajouter une adresse de livraison",
+      "address": "Adresse",
+      "city": "Ville",
+      "postalCode": "Code postal",
+      "country": "Pays",
       "cgv": "En validant votre commande, vous acceptez nos ",
       "cgv.link": " conditions générales de vente"
     },
@@ -206,7 +174,9 @@
       "open": "Ouvrir",
       "save": "Sauvegarder",
       "view": "Voir",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "apply": "Appliquer",
+      "addToCart": "Ajouter au panier"
     },
     "detail": {
       "field": "Champs",
@@ -251,5 +221,8 @@
       "not.image": "Le fichier doit être une image et non du type \"{{ fileType }}\""
     }
   },
-  "footer": "Ceci est votre pied de page"
+  "footer": "Ceci est votre pied de page",
+  "upload": {
+    "uploadPhotosLabel": "Ajouter des Photos"
+  }
 }

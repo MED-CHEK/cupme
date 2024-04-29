@@ -24,3 +24,9 @@ export interface UserDTO {
   password: string;
   langKey?: string;
 }
+
+export interface ClientUserDTO {
+  id?: number;
+  firstName: string;
+  lastName: string;
+}

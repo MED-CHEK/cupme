@@ -119,9 +119,10 @@ public class AddressDTO implements Serializable {
             ", postalCode='" +
             postalCode +
             '\'' +
-            ", type='" +
+            ", type=" +
             type +
-            '\'' +
+            ", user=" +
+            user +
             '}'
         );
     }

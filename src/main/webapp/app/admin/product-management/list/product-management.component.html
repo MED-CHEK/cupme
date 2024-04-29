@@ -1,0 +1,54 @@
+<div class="product-mgmt">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <div class="produits-tab">
+      <h2>
+        <span id="product-management-page-heading" jhiTranslate="productManagement.list.title" data-cy="productManagementPageHeading"
+          >Liste des produits</span
+        >
+
+        <div class="d-flex justify-content-md-end justify-content-center">
+          <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+            <span jhiTranslate="productManagement.home.refreshListLabel">Actualiser la liste</span>
+          </button>
+          <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
+            <fa-icon icon="plus"></fa-icon> <span jhiTranslate="productManagement.home.createLabel">Créer un nouvel produit</span>
+          </button>
+        </div>
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+      <div class="products" *ngIf="!isLoading">
+        <div class="product col-6 col-lg-4" *ngFor="let product of products">
+          <div class="prod" (click)="view(product)">
+            <div class="image">
+              <img [src]="getProductImage(product)" alt="product.name" />
+            </div>
+            <div class="name">
+              <span>
+                {{ product.name }}
+              </span>
+            </div>
+            <div class="cart-price">
+              <div class="price">
+                <span>{{ product.price }} € </span>
+              </div>
+              <div class="stock">
+                <span *ngIf="product.stock > 10" class="text-success">
+                  <span>{{ 'productManagement.list.stockAvailable' | translate }}: {{ product.stock }}</span>
+                </span>
+                <span *ngIf="product.stock <= 10" class="text-danger">
+                  <span>{{ 'productManagement.list.stockUnavailable' | translate }}: {{ product.stock }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

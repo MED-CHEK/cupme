@@ -24,7 +24,9 @@
             <column name="age" type="int"/>
             <column name="weight" type="int"/>
             <column name="size" type="int"/>
-
+            <column name="sex" type="varchar(10)">
+                <constraints nullable="true" />
+            </column>
             <column name="image_url" type="varchar(256)"/>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
@@ -35,7 +37,7 @@
             <column name="created_by" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_date" type="timestamp"/>
+            <column name="created_date" type="datetime" defaultValueDate="CURRENT_TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
             <column name="reset_date" type="timestamp">
                 <constraints nullable="true"/>
             </column>

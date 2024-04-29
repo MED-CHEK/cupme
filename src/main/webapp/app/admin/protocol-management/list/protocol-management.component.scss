@@ -1,0 +1,102 @@
+@use 'sass:map';
+@import '../../../../content/scss/custom-variables.scss';
+
+.protocol-mgmt {
+  display: flex;
+  justify-content: center;
+  padding: 5rem 0;
+
+  .btn-primary,
+  .btn-info {
+    border-radius: 0.375rem !important;
+  }
+
+  .protocols {
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .protocol {
+      height: 16rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+
+      .prod {
+        background-color: #e7e6e6;
+        padding: 0.75rem 0.75rem;
+        border-radius: 0.5rem;
+      }
+
+      .image {
+        position: relative;
+
+        .avis {
+          position: absolute;
+          top: 0.25rem;
+          left: 0.25rem;
+
+          .avis-text {
+            font-size: 0.75rem;
+            color: white;
+            background-color: goldenrod;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+          }
+        }
+
+        img {
+          width: 100%;
+          height: 10rem;
+          border-radius: 0.25rem;
+        }
+      }
+
+      .name {
+        padding-top: 0.25rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        height: 2.75rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .cart-price {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .price {
+          font-size: 1rem;
+          font-weight: 500;
+          color: goldenrod;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: calc(map.get($grid-breakpoints, 'md') - 1px)) {
+  .protocol-mgmt {
+    .btn-primary,
+    .btn-info {
+      font-size: small !important;
+      padding: 0.25rem 0.65rem;
+    }
+
+    .protocols .protocol {
+      padding: 0.125rem !important;
+      margin-bottom: 0;
+
+      .prod {
+        padding: 0.5rem 0.5rem;
+      }
+
+      .name {
+        font-size: 0.75rem !important;
+      }
+    }
+  }
+}

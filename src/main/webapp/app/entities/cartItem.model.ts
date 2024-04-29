@@ -1,8 +1,8 @@
 import { CartDTO } from './cart.model';
-import { PictureDTO } from './picture.model';
 import { ProductType } from './product-type.enum';
 import { ProductCartDTO } from './product.model';
 import { ProtocolCartDTO } from './protocol.model';
+import { AppointmentInfo } from './session.model';
 
 export interface CartItemDTO {
   id?: number;
@@ -20,7 +20,8 @@ export interface CartItemDisplayDTO {
   picture: string;
   createdDate: string;
   quantity: number;
-  protocol: boolean;
+  type: ProductType;
+  appointmentInfo?: AppointmentInfo;
 }
 
 export interface CartItemSession {

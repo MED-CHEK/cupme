@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { CartService } from '../cart/cart.service';
+import { ToastService } from 'app/shared/toast/toast.service';
 
 @Component({
   selector: 'jhi-login',
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private accountService: AccountService,
     private cartService: CartService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -50,11 +52,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (!this.router.getCurrentNavigation()) {
           // There were no routing during login (eg from navigationToStoredUrl)
           this.router.navigate(['']);
-          console.log('login');
           this.cartService.loadCartFromBD();
         }
       },
-      error: () => (this.authenticationError = true),
+      error: () => {
+        this.authenticationError = true;
+        this.toastService.show("Erreur d'authentification ! Veuillez vérifier vos identifiants de connexion.", {
+          classname: 'bg-danger text-light',
+          delay: 3000,
+        });
+      },
     });
   }
 }

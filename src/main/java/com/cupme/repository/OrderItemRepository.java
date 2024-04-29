@@ -12,5 +12,9 @@ import org.springframework.stereotype.Repository;
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
     List<OrderItem> findByOrderUserId(Long userId);
 
+    List<OrderItem> findAllByOrderId(Long orderId);
+
     boolean existsByOrderUserIdAndProtocolIsNotNull(Long userId);
+
+    void deleteByOrderId(Long orderId);
 }

@@ -6,6 +6,7 @@ import { ProtocolCartDTO } from '../../entities/protocol.model';
 import { CartItemDisplayDTO } from 'app/entities/cartItem.model';
 import { CartService } from 'app/cart/cart.service';
 import { ToastService } from '../toast/toast.service';
+import { ProductType } from 'app/entities/product-type.enum';
 
 @Component({
   selector: 'jhi-proto',
@@ -17,6 +18,7 @@ export class ProtoComponent implements OnInit {
   protocol!: ProtocolCartDTO;
 
   imagePath!: string;
+  type = ProductType;
 
   constructor(
     private router: Router,
@@ -54,7 +56,7 @@ export class ProtoComponent implements OnInit {
       name: protocol.name,
       price: protocol.price,
       picture: (('../../content/images/' + protocol.id + '/' + protocol.picture.name) as string) + '.png',
-      protocol: true,
+      type: this.type.PROTOCOL,
       createdDate: new Date().toISOString(),
       quantity: 1,
     };

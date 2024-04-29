@@ -2,8 +2,8 @@ package com.cupme.service.mapper;
 
 import com.cupme.domain.Address;
 import com.cupme.service.dto.AddressDTO;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +16,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AddressMapper {
 
-    public List<AddressDTO> addressesToAddressDTOs(List<Address> addresses) {
-        return addresses.stream().filter(Objects::nonNull).map(this::addressToAddressDTO).collect(Collectors.toList());
+    public Set<AddressDTO> addressesToAddressDTOs(Set<Address> addresses) {
+        return addresses.stream().filter(Objects::nonNull).map(this::addressToAddressDTO).collect(Collectors.toSet());
     }
 
     public AddressDTO addressToAddressDTO(Address address) {
         return new AddressDTO(address);
     }
 
-    public List<Address> addressDTOsToAddresses(List<AddressDTO> addressDTOS) {
-        return addressDTOS.stream().filter(Objects::nonNull).map(this::addressDTOToAddress).collect(Collectors.toList());
+    public Set<Address> addressDTOsToAddresses(Set<AddressDTO> addressDTOS) {
+        return addressDTOS.stream().filter(Objects::nonNull).map(this::addressDTOToAddress).collect(Collectors.toSet());
     }
 
     public Address addressDTOToAddress(AddressDTO addressDTO) {

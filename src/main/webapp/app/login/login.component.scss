@@ -5,10 +5,45 @@
   position: relative;
   padding-top: 6%;
 
-  .row {
-    height: 78vh;
+  .columns {
     padding: 1rem 0.5rem;
     background-color: white;
+    flex-direction: row;
+
+    .info {
+      padding: 0.5rem;
+    }
+
+    .img {
+      ::ng-deep .carousel {
+        background-color: #fefefe;
+
+        button {
+          width: 20%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          opacity: 1;
+        }
+
+        .carousel-inner {
+          .picsum-img-wrapper {
+            display: flex;
+            justify-content: center;
+            height: 32rem;
+
+            img {
+              border-radius: 0.25rem;
+            }
+
+            .img-fluid {
+              padding: 0 6rem;
+            }
+          }
+        }
+      }
+    }
   }
 
   .check-pwd,
@@ -23,12 +58,20 @@
   }
 }
 
+.toast-mobile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  top: 0 !important;
+}
+
 /* ==========================================================================
 login page styles
 ========================================================================== */
 .logo-img {
-  height: 12rem;
-  width: 12rem;
+  height: 7rem;
+  width: 14rem;
   display: inline-block;
   vertical-align: middle;
   background: url('../../content/images/logo.png') no-repeat center center;
@@ -49,6 +92,16 @@ login page styles
     font-size: small !important;
     padding-top: 0;
 
+    .columns {
+      background-color: transparent;
+
+      .img {
+        ::ng-deep .carousel {
+          background-color: transparent;
+        }
+      }
+    }
+
     .check-pwd,
     .noaccount {
       font-size: 0.6875rem !important;
@@ -56,25 +109,42 @@ login page styles
   }
 
   .logo-img {
-    width: 6rem;
-    height: 4rem;
+    width: 11rem;
+    height: 7rem;
   }
 
-  .row {
-    height: 100vh !important;
+  .columns {
+    flex-direction: column !important;
+    justify-content: flex-start !important;
 
-    .info {
-      height: 59%;
+    .row {
+      height: 100vh !important;
+
+      .info {
+        height: 59%;
+      }
+
+      .img {
+        ::ng-deep .carousel {
+          .carousel-inner {
+            .picsum-img-wrapper {
+              height: 21rem !important;
+
+              .img-fluid {
+                padding: 0 6rem;
+              }
+            }
+          }
+        }
+
+        min-height: 41%;
+        height: auto;
+      }
     }
 
-    .img {
-      min-height: 41%;
-      height: auto;
+    .alert {
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 0.5rem;
     }
-  }
-
-  .alert {
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 0.5rem;
   }
 }

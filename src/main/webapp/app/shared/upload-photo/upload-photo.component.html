@@ -1,0 +1,57 @@
+<div class="upload-photos">
+  <div class="upload-photos-label">
+    <span>{{ 'upload.uploadPhotosLabel' | translate }}</span>
+    <span class="asterisk">*</span>
+  </div>
+  <ng-container *ngIf="images.length == 0; then show1; else show2"></ng-container>
+  <ng-template #show1>
+    <div
+      class="upload-photos-box"
+      [ngClass]="uploadForm.invalid && !uploadForm.get('pictures')?.untouched ? 'upload-photos-box-error' : ''"
+    >
+      <div class="upload-photos-icon">
+        <span class="upload-icon image-icon"></span>
+      </div>
+      <div class="upload-photos-plus">
+        <input
+          type="file"
+          class="form-control"
+          name="photos"
+          accept="image/*"
+          multiple="multiple"
+          (change)="imageChange($event)"
+          hidden
+          #imageInput
+        />
+        <div class="cursor-pointer" (click)="openInput(imageInput)">
+          <span class="upload-icon plus-icon"></span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #show2>
+    <div class="upload-photos-img row">
+      <div class="image-container col-4" *ngFor="let url of images | slice: 0:maxImageUpload">
+        <img [src]="url.file" />
+        <span class="upload-icon remove-icon remove" (click)="removeImage(url)"></span>
+      </div>
+      <div class="col-4" *ngIf="images.length < maxImageUpload">
+        <div class="upload-photos-plus">
+          <input
+            type="file"
+            class="form-control"
+            name="photos"
+            accept="image/*"
+            multiple="multiple"
+            (change)="imageChange($event)"
+            hidden
+            #imageInput
+          />
+          <div class="cursor-pointer" (click)="openInput(imageInput)">
+            <span class="upload-icon plus-icon"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

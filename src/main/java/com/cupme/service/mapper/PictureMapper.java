@@ -4,6 +4,7 @@ import com.cupme.domain.Picture;
 import com.cupme.service.dto.PictureDTO;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,8 @@ public class PictureMapper {
         return new PictureDTO(picture);
     }
 
-    public List<Picture> pictureDtoToPictures(List<PictureDTO> pictureDTOS) {
-        return pictureDTOS.stream().filter(Objects::nonNull).map(this::pictureDtoToPicture).collect(Collectors.toList());
+    public Set<Picture> pictureDtosToPictures(Set<PictureDTO> pictureDTOS) {
+        return pictureDTOS.stream().filter(Objects::nonNull).map(this::pictureDtoToPicture).collect(Collectors.toSet());
     }
 
     public Picture pictureDtoToPicture(PictureDTO pictureDTO) {

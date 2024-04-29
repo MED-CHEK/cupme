@@ -308,7 +308,6 @@
               placeholder="{{ 'global.form.username.placeholder' | translate }}"
               formControlName="login"
               data-cy="username"
-              #login
             />
 
             <div *ngIf="regesterForm.get('login')!.invalid && (regesterForm.get('login')!.dirty || regesterForm.get('login')!.touched)">

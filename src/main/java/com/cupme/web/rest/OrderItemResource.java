@@ -43,12 +43,12 @@ public class OrderItemResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all orderItemes.
      */
     @GetMapping("/orderItems")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<List<OrderItemDTO>> getAllOrderItemes() {
         log.debug("REST request to get all public OrderItem names");
 
-        final List<OrderItemDTO> orderItemes = orderItemService.getOrderItems();
-        return ResponseEntity.ok().body(orderItemes);
+        final List<OrderItemDTO> orderItems = orderItemService.getOrderItems();
+        return ResponseEntity.ok().body(orderItems);
     }
 
     /**
@@ -72,11 +72,25 @@ public class OrderItemResource {
      */
     @GetMapping("/orderItems/{id}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<OrderItemDTO> getOrderItem(long id) {
+    public ResponseEntity<OrderItemDTO> getOrderItem(@PathVariable long id) {
         log.debug("REST request to get OrderItem : {}", id);
 
         final OrderItemDTO orderItem = orderItemService.getOrderItem(id);
         return ResponseEntity.ok().body(orderItem);
+    }
+
+    /**
+     * {@code GET /orderItems/order/:id} : get the "id" orderItem.
+     * @param id the id of the orderItemDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the orderItemDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/orderItems/order/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    public ResponseEntity<List<OrderItemDTO>> getOrderItemsByOrderId(@PathVariable long id) {
+        log.debug("REST request to get OrderItem : {}", id);
+
+        final List<OrderItemDTO> orderItems = orderItemService.getOrderItemsByOrderId(id);
+        return ResponseEntity.ok().body(orderItems);
     }
 
     /**
@@ -92,5 +106,29 @@ public class OrderItemResource {
 
         final Long orderId = orderItemService.createOrderItem(orderServerDTO);
         return ResponseEntity.ok().body(orderId);
+    }
+
+    @PutMapping("/orderItems")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<Long> updateOrderItem(@Valid @RequestBody OrderServerDTO orderServerDTO) {
+        log.debug("REST request to save orderServerDTO : {}", orderServerDTO);
+
+        final Long orderId = orderItemService.updateOrderItem(orderServerDTO);
+        return ResponseEntity.ok().body(orderId);
+    }
+
+    /**
+     * {@code DELETE  /orderItems/:id} : delete the "id" product.
+     *
+     * @param id the id of the Order to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/orderItems/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<Void> deleteOrder(@PathVariable long id) {
+        log.debug("REST request to delete order : {}", id);
+
+        orderItemService.deleteOrderItem(id);
+        return ResponseEntity.noContent().build();
     }
 }

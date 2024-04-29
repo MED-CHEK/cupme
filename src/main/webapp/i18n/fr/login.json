@@ -9,8 +9,7 @@
     },
     "messages": {
       "error": {
-        "authentication.err": "Erreur d'authentification !",
-        "authentication": "Veuillez vérifier vos identifiants de connexion."
+        "authentication": "Erreur d'authentification ! Veuillez vérifier vos identifiants de connexion."
       }
     },
     "password": {

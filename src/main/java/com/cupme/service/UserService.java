@@ -9,6 +9,7 @@ import com.cupme.repository.UserRepository;
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.security.SecurityUtils;
 import com.cupme.service.dto.CartDTO;
+import com.cupme.service.dto.ClientUserDTO;
 import com.cupme.service.dto.PublicUserDTO;
 import com.cupme.service.dto.UserDTO;
 import com.cupme.service.mapper.CartMapper;
@@ -300,9 +301,19 @@ public class UserService {
         return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(PublicUserDTO::new);
     }
 
+    @Transactional(readOnly = true)
+    public List<ClientUserDTO> getAllClients() {
+        return userRepository.findBy().stream().map(ClientUserDTO::new).collect(Collectors.toList());
+    }
+
     @Transactional
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);
+    }
+
+    @Transactional
+    public Optional<User> getUserWithAuthoritiesById(Long id) {
+        return userRepository.findOneWithAuthoritiesById(id);
     }
 
     @Transactional

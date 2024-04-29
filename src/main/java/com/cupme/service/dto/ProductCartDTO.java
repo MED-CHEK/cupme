@@ -1,12 +1,7 @@
 package com.cupme.service.dto;
 
-import com.cupme.domain.Category;
 import com.cupme.domain.Product;
-import com.cupme.domain.Protocol;
-import com.cupme.domain.Tag;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ProductCartDTO implements Serializable {
 
@@ -17,15 +12,17 @@ public class ProductCartDTO implements Serializable {
     private String name;
 
     private Double price;
+    private Integer stock;
 
     private PictureDTO picture;
 
     public ProductCartDTO() {}
 
-    public ProductCartDTO(Long id, String name, Double price, PictureDTO picture) {
+    public ProductCartDTO(Long id, String name, Double price, Integer stock, PictureDTO picture) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.stock = stock;
         this.picture = picture;
     }
 
@@ -33,6 +30,7 @@ public class ProductCartDTO implements Serializable {
         this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
+        this.stock = product.getStock();
         this.picture =
             product.getPictures() != null
                 ? new PictureDTO(product.getPictures().stream().filter(p -> p.getMain()).findFirst().orElse(null))
@@ -71,8 +69,30 @@ public class ProductCartDTO implements Serializable {
         this.picture = picture;
     }
 
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
     @Override
     public String toString() {
-        return "ProductCartDTO{" + "id=" + id + ", name='" + name + '\'' + ", price=" + price + ", picture=" + picture + '}';
+        return (
+            "ProductCartDTO{" +
+            "id=" +
+            id +
+            ", name='" +
+            name +
+            '\'' +
+            ", price=" +
+            price +
+            ", stock=" +
+            stock +
+            ", picture=" +
+            picture +
+            '}'
+        );
     }
 }

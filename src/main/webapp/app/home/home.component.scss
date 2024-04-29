@@ -26,6 +26,36 @@
       background: url('../../content/images/bg.jpg') no-repeat center top;
       background-size: cover;
       border-radius: 1rem;
+
+      ::ng-deep .carousel {
+        button {
+          width: 15%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          opacity: 1;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+          height: 2.5rem;
+          width: 2.5rem;
+        }
+
+        .carousel-inner {
+          padding: 0;
+
+          .picsum-img-wrapper {
+            display: flex;
+            justify-content: center;
+
+            .img-fluid {
+              padding: 0 6rem;
+            }
+          }
+        }
+      }
     }
 
     area {
@@ -46,7 +76,7 @@
     .protos {
       display: flex;
       justify-content: center;
-      margin-top: 3rem;
+      padding-top: 3rem;
 
       .label {
         font-size: 1.75rem;
@@ -67,10 +97,20 @@
           padding: 0.5rem;
           margin-bottom: 1rem;
           min-width: 15rem;
-          height: 18rem;
+          height: 15rem;
+
+          ::ng-deep .proto .name {
+            height: 2rem;
+          }
         }
       }
     }
+  }
+
+  .localUrl {
+    color: darkblue;
+    text-decoration: underline;
+    cursor: pointer;
   }
 
   .auth {
@@ -79,7 +119,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 
     .home-page {
       display: flex;
@@ -134,34 +173,39 @@
         margin: 0 1.5rem;
       }
     }
-  }
-}
 
-::ng-deep .carousel {
-  button {
-    width: 15%;
-  }
+    ::ng-deep .carousel {
+      margin-top: 2rem;
+      width: 36rem;
+      background-color: #fefefe;
 
-  .carousel-control-prev,
-  .carousel-control-next {
-    opacity: 1;
-  }
+      button {
+        width: 20%;
+      }
 
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    height: 2.5rem;
-    width: 2.5rem;
-  }
+      .carousel-control-prev,
+      .carousel-control-next {
+        opacity: 1;
+      }
 
-  .carousel-inner {
-    padding: 0;
+      .carousel-inner {
+        padding: 1rem 0;
+        height: 34rem;
 
-    .picsum-img-wrapper {
-      display: flex;
-      justify-content: center;
+        .picsum-img-wrapper {
+          display: flex;
+          justify-content: center;
+          width: 36rem;
+          height: 32rem;
 
-      .img-fluid {
-        padding: 0 6rem;
+          img {
+            border-radius: 0.25rem;
+          }
+
+          .img-fluid {
+            padding: 0 6rem;
+          }
+        }
       }
     }
   }
@@ -199,10 +243,6 @@
           border-radius: 0.25rem !important;
 
           ::ng-deep .carousel {
-            button {
-              width: 8%;
-            }
-
             .carousel-control-prev-icon,
             .carousel-control-next-icon {
               height: 1.5rem;
@@ -224,27 +264,48 @@
           }
         }
 
-        .logo-img {
-          width: 14rem;
+        ::ng-deep .carousel {
+          margin-top: 1rem !important;
+          width: 25rem;
+          background-color: unset !important;
+
+          .carousel-inner {
+            padding: 0;
+            height: 20rem;
+
+            .picsum-img-wrapper {
+              width: 25rem;
+              height: 20rem;
+
+              img {
+                border-radius: 0.25rem;
+              }
+
+              .img-fluid {
+                padding: 0 6rem;
+              }
+            }
+          }
         }
       }
 
       .text {
-        font-size: 1rem !important;
+        font-size: 0.875rem !important;
 
         .title {
-          font-size: 2rem !important;
+          font-size: 1.25rem !important;
+          margin-bottom: 0 !important;
         }
       }
 
       .buttons {
-        margin-top: 1.5rem !important;
+        margin-top: 0 !important;
 
         .btn {
           border-radius: 0.5rem !important;
           width: 8rem !important;
           padding: 0.5rem 0.75rem !important;
-          font-size: 1rem !important;
+          font-size: 0.875rem !important;
           margin: 0 0.5rem !important;
         }
       }

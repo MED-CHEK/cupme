@@ -1,0 +1,40 @@
+{
+  "protocolManagement": {
+    "home": {
+      "title": "Gestion des protocoles",
+      "refreshListLabel": "Actualiser la liste",
+      "createLabel": "Créer un nouveau protocole",
+      "createOrEditLabel": "Créer ou éditer un protocole"
+    },
+    "name": "Nom",
+    "type": {
+      "title": "Type",
+      "SIMPLE": "Protocole Simple",
+      "GENERIC": "Protocole Générale"
+    },
+    "shortDescription": "Description courte",
+    "description": "Description",
+    "price": "Prix",
+    "poseTime": "Temps de premier pose des ventouses (en minutes)",
+    "products": "Produits pour ce protocole",
+    "productsToAdd": "Produits à ajouter au protocole",
+    "message": "Le protocole nécessite la présence d'au moins un produit.",
+    "picture": "Picture",
+    "created": "Le protocole {{ param }} a été créé.",
+    "updated": "Le protocole {{ param }} a été mis à jour.",
+    "deleted": "Le protocole {{ param }} a été supprimé.",
+    "delete": {
+      "question": "Etes-vous certain de vouloir supprimer le protocole {{ param }} ?"
+    },
+    "detail": {
+      "title": "Détail du protocole"
+    },
+    "list": {
+      "title": "Liste des protocoles",
+      "category": "Catégorie",
+      "actions": "Actions",
+      "edit": "Editer",
+      "delete": "Supprimer"
+    }
+  }
+}

@@ -8,7 +8,7 @@
   padding: 5rem 0 0;
 
   .alert {
-    text-align: justify;
+    text-align: center;
   }
 
   .desc {
@@ -76,21 +76,21 @@
 
     .tirer {
       background-color: black;
-      width: 1.5rem;
-      height: 0.5rem;
+      width: 4rem;
+      height: 0.375rem;
+      margin-bottom: 0.5rem;
     }
 
     .title {
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: 500;
-      margin-top: 1.5rem;
     }
 
     .text {
-      font-size: 2rem;
+      font-size: 1rem;
       line-height: normal;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      font-weight: 500;
+      margin: 1rem 0 0.5rem;
 
       .tooltip .tooltip-inner {
         background-color: #00205a;
@@ -153,11 +153,39 @@
       }
     }
 
-    .img {
-      img {
-        width: 100%;
+    .imgs {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      background-color: #fefefe;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+      gap: 0.5rem;
+
+      .img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 10rem;
+
+        img {
+          height: 9rem;
+        }
+
+        .text {
+          font-size: 1rem;
+          font-weight: 500;
+          margin-top: 0.25rem;
+          text-align: center;
+        }
       }
     }
+  }
+
+  .trace-text {
+    font-size: 1rem;
+    font-weight: 500;
   }
 
   .ligne {
@@ -194,9 +222,13 @@
     background-size: 100%;
     cursor: pointer;
   }
-  &.cup-icon {
-    background: url('../../../content/images/cupping.png') no-repeat center top;
+
+  &.cup-pistol-icon {
+    background: url('../../../content/images/pistol.png') no-repeat center top;
     background-size: 100%;
+    height: 2rem;
+    width: 4rem;
+    margin-right: 0.5rem;
   }
 
   &.info-icon {
@@ -373,6 +405,20 @@
           width: 100%;
         }
       }
+      .imgs {
+        .img {
+          height: 8rem;
+
+          img {
+            height: 6rem;
+          }
+
+          .text {
+            font-size: 0.75rem !important;
+            margin-top: 0.125rem !important;
+          }
+        }
+      }
     }
   }
 
@@ -391,15 +437,15 @@
   }
 
   .phase {
-    margin-top: 1rem !important;
+    margin-top: 0.25rem !important;
 
     .title {
-      font-size: 0.875rem !important;
-      margin-top: 1rem !important;
+      font-size: 1rem !important;
+      margin-top: 0 !important;
     }
 
     .text {
-      font-size: 1.25rem !important;
+      font-size: 0.875rem !important;
       margin-bottom: 0.5rem !important;
     }
 
@@ -408,6 +454,11 @@
       font-size: 1rem !important;
       margin-bottom: 1rem !important;
     }
+  }
+
+  .trace-text {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .timer {

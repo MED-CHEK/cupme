@@ -31,7 +31,7 @@ public class ProtocolDetailDTO implements Serializable {
 
     private Set<TagDTO> tagDTOs = new HashSet<>();
 
-    private PictureDTO picture;
+    private Set<PictureDTO> pictures = new HashSet<>();
 
     public ProtocolDetailDTO() {}
 
@@ -46,7 +46,7 @@ public class ProtocolDetailDTO implements Serializable {
         Set<ProductCartDTO> productDTOs,
         Set<CategoryDTO> categoryDTOs,
         Set<TagDTO> tagDTOs,
-        PictureDTO picture
+        Set<PictureDTO> pictures
     ) {
         this.id = id;
         this.name = name;
@@ -58,7 +58,7 @@ public class ProtocolDetailDTO implements Serializable {
         this.productDTOs = productDTOs;
         this.categoryDTOs = categoryDTOs;
         this.tagDTOs = tagDTOs;
-        this.picture = picture;
+        this.pictures = pictures;
     }
 
     public ProtocolDetailDTO(Protocol protocol) {
@@ -74,10 +74,8 @@ public class ProtocolDetailDTO implements Serializable {
         this.tagDTOs = protocol.getTags() != null ? protocol.getTags().stream().map(TagDTO::new).collect(Collectors.toSet()) : null;
         this.categoryDTOs =
             protocol.getCategories() != null ? protocol.getCategories().stream().map(CategoryDTO::new).collect(Collectors.toSet()) : null;
-        this.picture =
-            protocol.getPictures() != null
-                ? protocol.getPictures().stream().filter(p -> p.getMain()).findFirst().map(PictureDTO::new).orElse(null)
-                : null;
+        this.pictures =
+            protocol.getPictures() != null ? protocol.getPictures().stream().map(PictureDTO::new).collect(Collectors.toSet()) : null;
     }
 
     public Long getId() {
@@ -160,12 +158,12 @@ public class ProtocolDetailDTO implements Serializable {
         this.tagDTOs = tagDTOs;
     }
 
-    public PictureDTO getPicture() {
-        return picture;
+    public Set<PictureDTO> getPictures() {
+        return pictures;
     }
 
-    public void setPicture(PictureDTO picture) {
-        this.picture = picture;
+    public void setPictures(Set<PictureDTO> pictures) {
+        this.pictures = pictures;
     }
 
     @Override
@@ -177,9 +175,8 @@ public class ProtocolDetailDTO implements Serializable {
             ", name='" +
             name +
             '\'' +
-            ", type='" +
+            ", type=" +
             type +
-            '\'' +
             ", shortDescription='" +
             shortDescription +
             '\'' +
@@ -196,8 +193,8 @@ public class ProtocolDetailDTO implements Serializable {
             categoryDTOs +
             ", tagDTOs=" +
             tagDTOs +
-            ", picture=" +
-            picture +
+            ", pictures=" +
+            pictures +
             '}'
         );
     }

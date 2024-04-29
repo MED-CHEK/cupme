@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-center protocol-detail">
+  <div class="col-12 col-md-8">
+    <div *ngIf="protocol">
+      <h2 class="title">
+        <span jhiTranslate="protocolManagement.detail.title">Product</span> [<strong>{{ protocol.id }}</strong
+        >]
+      </h2>
+
+      <div class="details">
+        <div class="protocol-images mb-3">
+          <ngb-carousel [interval]="10000" [showNavigationIndicators]="false">
+            <ng-template ngbSlide *ngFor="let picture of protocol.pictures">
+              <div class="image-container">
+                <img [src]="getProtocolImage(picture)" [alt]="protocol.name" />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control disabled" name="id" value="{{ protocol.id }}" readonly />
+        </div>
+
+        <div class="col-12 mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.type.title">Type</label>
+          <input type="text" class="form-control" name="type" value="{{ protocol.type }}" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.name">Nom</label>
+          <input type="text" class="form-control" name="name" value="{{ protocol.name }}" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.shortDescription">Description courte</label>
+          <textarea type="text" class="form-control" name="shortDescription" value="{{ protocol.shortDescription }}" readonly></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.description">Description</label>
+          <textarea class="form-control" name="description" value="{{ protocol.description }}" readonly></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.price">Prix</label>
+          <input type="number" class="form-control" name="price" value="{{ protocol.price }}" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.poseTime">poseTime</label>
+          <input type="number" class="form-control" name="poseTime" value="{{ protocol.poseTime }}" readonly />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="protocolManagement.products">products</label>
+          <div class="products" *ngIf="!isLoading">
+            <div class="product col-6 col-lg-4" *ngFor="let product of protocol.productDTOs">
+              <div class="prod">
+                <div class="image">
+                  <img [src]="getProductImage(product)" alt="product.name" />
+                </div>
+                <div class="name">
+                  <span>
+                    {{ product.name }}
+                  </span>
+                  <div class="cart-price">
+                    <div class="price">
+                      <span>{{ product.price }} € </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions mb-3">
+          <button type="submit" routerLink="../../" class="btn btn-info">
+            <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+          </button>
+
+          <button type="submit" [routerLink]="['../edit']" queryParamsHandling="merge" class="btn btn-primary">
+            <fa-icon icon="pencil-alt"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+          </button>
+
+          <button type="button" (click)="deleteProtocol(protocol)" class="btn btn-danger">
+            <fa-icon icon="times"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

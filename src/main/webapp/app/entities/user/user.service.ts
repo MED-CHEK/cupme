@@ -6,7 +6,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { isPresent } from 'app/core/util/operators';
 import { Pagination } from 'app/core/request/request.model';
-import { IUser, getUserIdentifier } from './user.model';
+import { ClientUserDTO, IUser, getUserIdentifier } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -41,5 +41,9 @@ export class UserService {
       return [...usersToAdd, ...userCollection];
     }
     return userCollection;
+  }
+
+  getClients(): Observable<ClientUserDTO[]> {
+    return this.http.get<ClientUserDTO[]>(this.applicationConfigService.getEndpointFor('api/admin/users/client'));
   }
 }

@@ -19,6 +19,7 @@ import { NgbdRatingDecimal } from './rating/rating-decimal';
 import { LoadingComponent } from './loading/loading.component';
 import { ToastsContainer } from './toast/toasts-container.component';
 import { ProtoComponent } from './proto/proto.component';
+import { UploadPhotoComponent } from './upload-photo/upload-photo.component';
 
 @NgModule({
   imports: [SharedLibsModule],
@@ -41,6 +42,7 @@ import { ProtoComponent } from './proto/proto.component';
     NgbdRatingDecimal,
     ToastsContainer,
     ProtoComponent,
+    UploadPhotoComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -62,6 +64,7 @@ import { ProtoComponent } from './proto/proto.component';
     NgbdRatingDecimal,
     ToastsContainer,
     ProtoComponent,
+    UploadPhotoComponent,
   ],
 })
 export class SharedModule {}

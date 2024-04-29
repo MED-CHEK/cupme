@@ -9,6 +9,7 @@ import { CartItemDisplayDTO, CartItemDTO } from '../../entities/cartItem.model';
 import { ProductCartDTO, ProductDTO } from '../../entities/product.model';
 import { ProtocolService } from '../protocol.service';
 import { ToastService } from '../../shared/toast/toast.service';
+import { ProductType } from 'app/entities/product-type.enum';
 
 @Component({
   selector: 'jhi-detail',
@@ -25,6 +26,7 @@ export class DetailComponent implements OnInit {
   rating = 4.2;
   isLoading = true;
   show = false;
+  type = ProductType;
 
   constructor(
     private protocolService: ProtocolService,
@@ -46,7 +48,7 @@ export class DetailComponent implements OnInit {
   }
 
   getAssetImage() {
-    let path = this.protocol.picture.file;
+    let path = this.protocol.pictures.find(picture => picture.main === true)?.file;
 
     if (path == undefined) {
       this.imagePath = '../../../../assets/images/Pictos/No-picture.svg';
@@ -61,7 +63,7 @@ export class DetailComponent implements OnInit {
       name: product.name,
       price: product.price,
       picture: (('../../content/images/' + product.id + '/' + product.picture.name) as string) + '.png',
-      protocol: false,
+      type: this.type.PRODUCT,
       createdDate: new Date().toISOString(),
       quantity: 1,
     };
@@ -73,13 +75,14 @@ export class DetailComponent implements OnInit {
     }
   }
 
-  addProtocolToCart(protocol: ProtocolCartDTO) {
+  addProtocolToCart(protocol: ProtocolDetailDTO) {
     const cartItem: CartItemDisplayDTO = {
       productId: protocol.id,
       name: protocol.name,
       price: protocol.price,
-      picture: (('../../content/images/' + protocol.id + '/' + protocol.picture.name) as string) + '.png',
-      protocol: true,
+      picture:
+        (('../../content/images/' + protocol.id + '/' + protocol.pictures.find(picture => picture.main === true)?.name) as string) + '.png',
+      type: this.type.PROTOCOL,
       createdDate: new Date().toISOString(),
       quantity: 1,
     };

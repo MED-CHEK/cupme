@@ -3,6 +3,16 @@
     <a class="navbar-brand logo" routerLink="/login" (click)="collapseNavbar()">
       <span class="logo-img"></span>
     </a>
+
+    <li class="ms-auto nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="account && isMobileDisplay">
+      <a class="nav-link cart" routerLink="/cart" (click)="collapseNavbar()">
+        <span class="cart">
+          <span>{{ cartSize }}</span>
+          <span class="navbar-icon cart-icon"></span>
+        </span>
+      </a>
+    </li>
+
     <a
       class="navbar-toggler d-lg-none"
       href="javascript:void(0);"
@@ -15,6 +25,7 @@
     >
       <fa-icon icon="bars"></fa-icon>
     </a>
+
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="account">
@@ -42,6 +53,27 @@
         </li>
 
         <li
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="session-menu" data-cy="sessionMenu">
+            <span>
+              <span>{{ 'global.menu.sessions.title' | translate }}</span>
+            </span>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-la>
+            <li *ngFor="let session of onlineSessions" (click)="schedule(session, content)">
+              <a class="dropdown-item" (click)="collapseNavbar(); loadSession()">
+                <span>{{ 'global.menu.sessions.session' + session.duration | translate }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li
           *hasAnyAuthority="'ROLE_ADMIN'"
           ngbDropdown
           class="nav-item dropdown pointer"
@@ -59,6 +91,30 @@
               <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span>{{ 'global.menu.admin.userManagement' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="admin/protocol-management" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
+                <span>{{ 'global.menu.admin.protocolManagement' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="admin/product-management" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
+                <span>{{ 'global.menu.admin.productManagement' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="admin/order-management" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
+                <span>{{ 'global.menu.admin.orderManagement' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="admin/promo-code-management" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
+                <span>{{ 'global.menu.admin.promoCodeManagement' | translate }}</span>
               </a>
             </li>
             <li>
@@ -162,15 +218,71 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="account">
-          <a class="nav-link cart" routerLink="/cart" (click)="collapseNavbar()">
-            <span class="cart">
-              <span>{{ cartSize }}</span>
-              <span class="navbar-icon cart-icon"></span>
-            </span>
-          </a>
-        </li>
       </ul>
     </div>
+
+    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="account && !isMobileDisplay">
+      <a class="nav-link cart" routerLink="/cart" (click)="collapseNavbar()">
+        <span class="cart">
+          <span>{{ cartSize }}</span>
+          <span class="navbar-icon cart-icon"></span>
+        </span>
+      </a>
+    </li>
   </div>
 </nav>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title">{{ 'global.menu.sessions.modal.session' + selectedSession.duration | translate }}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-body" [formGroup]="appointmentForm">
+    <div class="col-12">
+      <div class="type-radios">
+        <div class="type-radio">
+          <label class="form-check-label" for="email">{{ 'global.menu.sessions.email' | translate }}</label>
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="type"
+            name="type"
+            id="email"
+            [value]="type.MAIL"
+            [ngClass]="{ checked: appointmentForm.value.type === type.MAIL }"
+          />
+        </div>
+        <div class="type-radio">
+          <label class="form-check-label" for="whatsapp">{{ 'global.menu.sessions.whatsapp' | translate }}</label>
+          <input class="form-check-input" type="radio" formControlName="type" name="type" id="whatsapp" [value]="type.WHATSAPP" />
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-3" *ngIf="appointmentForm.value.type === type.MAIL">
+      <span>{{ 'global.menu.sessions.email.label' | translate }}</span>
+      <input type="email" name="email" formControlName="email" class="form-control" />
+    </div>
+    <div class="col-12 mt-3" *ngIf="appointmentForm.value.type === type.WHATSAPP">
+      <span>{{ 'global.menu.sessions.whatsapp.label' | translate }}</span>
+      <input type="text" name="telephone" formControlName="telephone" class="form-control" />
+    </div>
+    <div class="col-12 mt-3">
+      <sec-date formControlName="sessionDate"></sec-date>
+    </div>
+    <div class="col-12 mt-3">
+      <input
+        type="time"
+        name="sessionTime"
+        formControlName="sessionTime"
+        class="form-control"
+        placeholder="{{ 'global.menu.sessions.time' | translate }}"
+      />
+    </div>
+  </div>
+  <div class="modal-footer mt-3">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ 'entity.action.cancel' | translate }}</button>
+    <button type="button" class="btn btn-primary" (click)="addToCart()">
+      {{ 'entity.action.addToCart' | translate }}
+    </button>
+  </div>
+</ng-template>

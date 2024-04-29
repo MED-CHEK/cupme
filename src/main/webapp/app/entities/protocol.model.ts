@@ -12,7 +12,6 @@ export interface ProtocolDTO {
   poseTime: number;
   pictures: PictureDTO[];
   productDTOs?: ProductDTO[];
-  categoryDTOs?: CategoryDTO[];
 }
 
 export interface ProtocolCartDTO {
@@ -30,7 +29,16 @@ export interface ProtocolDetailDTO {
   description: string;
   price: number;
   poseTime: number;
-  picture: PictureDTO;
+  pictures: PictureDTO[];
   productDTOs?: ProductCartDTO[];
   categoryDTOs?: CategoryDTO[];
+}
+
+export interface MyProtocolDTO {
+  id: number;
+  name: string;
+  poseTime: number;
+  nbPoseTime: number;
+  productDTO: ProductCartDTO;
+  pictures: PictureDTO[];
 }

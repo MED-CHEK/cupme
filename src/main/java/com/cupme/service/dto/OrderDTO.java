@@ -19,14 +19,17 @@ public class OrderDTO implements Serializable {
 
     private String transactionId;
 
+    private Instant createdDate;
+
     public OrderDTO() {}
 
-    public OrderDTO(Long id, User user, Boolean paid, Double totalPrice, String transactionId) {
+    public OrderDTO(Long id, User user, Boolean paid, Double totalPrice, String transactionId, Instant createdDate) {
         this.id = id;
         this.user = user;
         this.paid = paid;
         this.totalPrice = totalPrice;
         this.transactionId = transactionId;
+        this.createdDate = createdDate;
     }
 
     public OrderDTO(Order order) {
@@ -35,6 +38,7 @@ public class OrderDTO implements Serializable {
         this.paid = order.getPaid();
         this.totalPrice = order.getTotalPrice();
         this.transactionId = order.getTransactionId();
+        this.createdDate = order.getCreatedDate();
     }
 
     public Long getId() {
@@ -77,10 +81,22 @@ public class OrderDTO implements Serializable {
         this.transactionId = transactionId;
     }
 
+    public Boolean getPaid() {
+        return paid;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
     @Override
     public String toString() {
         return (
-            "Order{" +
+            "OrderDTO{" +
             "id=" +
             id +
             ", user=" +
@@ -92,6 +108,8 @@ public class OrderDTO implements Serializable {
             ", transactionId='" +
             transactionId +
             '\'' +
+            ", createdDate=" +
+            createdDate +
             '}'
         );
     }

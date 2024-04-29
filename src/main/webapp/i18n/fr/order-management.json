@@ -1,0 +1,42 @@
+{
+  "orderManagement": {
+    "home": {
+      "title": "Gestion des commandes",
+      "refreshListLabel": "Actualiser la liste",
+      "createLabel": "Créer une nouvelle commande",
+      "createOrEditLabel": "Créer ou éditer une commande"
+    },
+    "name": "Nom",
+    "price": "Prix",
+    "picture": "Picture",
+    "created": "La commande {{ param }} a été créé.",
+    "updated": "La commande {{ param }} a été mis à jour.",
+    "deleted": "La commande {{ param }} a été supprimé.",
+    "delete": {
+      "question": "Etes-vous certain de vouloir supprimer la commande {{ param }} ?"
+    },
+    "detail": {
+      "title": "Détail de la commande"
+    },
+    "list": {
+      "title": "Liste des commandes",
+      "category": "Catégorie",
+      "actions": "Actions",
+      "edit": "Editer",
+      "delete": "Supprimer"
+    },
+    "applist": {
+      "title": "Liste des rendez-vous"
+    },
+    "user": "Client",
+    "date": "Date de la commande",
+    "orderTotalPrice": "Prix total de la commande",
+    "orderPaid": "Commande payée ?",
+    "products": "Products de la commande",
+    "protocols": "Protocoles de la commande",
+    "protocolsToAdd": "Protocoles à ajouter à la commande",
+    "productsToAdd": "Produits à ajouter au protocole",
+    "addProdMessage": "ajouter quelques produits à la commande",
+    "addProtoMessage": "ajouter quelques protocoles à la commande"
+  }
+}

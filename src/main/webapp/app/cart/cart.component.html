@@ -39,33 +39,21 @@
             </div>
             <div class="tr row" *ngFor="let cartItem of cartItems">
               <div class="td name col-9 col-md-7">
-                <div class="row" *ngIf="!cartItem.protocol">
-                  <div class="img col-4 col-sm-3">
+                <div class="row">
+                  <div class="img col-3 col-sm-4">
                     <img [src]="cartItem.picture" [alt]="cartItem.name" />
                   </div>
-                  <div class="name-price col-8 col-sm-9">
+                  <div class="name-price col-9 col-sm-8">
                     <span class="pro-name">{{ cartItem.name }}</span>
                     <div class="price">
                       <span>{{ 'global.cart.price' | translate }}</span>
-                      <span>€ {{ cartItem.price }}</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="row" *ngIf="cartItem.protocol">
-                  <div class="col-4">
-                    <img class="col-4 col-sm-3" [src]="cartItem.picture" [alt]="cartItem.name" />
-                  </div>
-                  <div class="name-price col-8">
-                    <span class="pro-name">{{ cartItem.name }}</span>
-                    <div class="price">
-                      <span class="label">{{ 'global.cart.price' | translate }}</span>
-                      <span>€ {{ cartItem.price }}</span>
+                      <span>{{ cartItem.price }} €</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="td quantity col-3 col-md-3">
-                <div *ngIf="!cartItem.protocol">
+                <div *ngIf="cartItem.type === type.PRODUCT">
                   <div class="add-">
                     <span class="minus" (click)="reduceQuantity(cartItem)">
                       <span class="cart-icon minus-icon"></span>
@@ -76,7 +64,7 @@
                     </span>
                   </div>
                 </div>
-                <span class="text" *ngIf="cartItem.protocol">
+                <span class="text" *ngIf="cartItem.type === type.PROTOCOL">
                   {{ cartItem.quantity }}
                 </span>
                 <div class="remove">
@@ -101,9 +89,167 @@
             {{ 'global.cart.subTotal' | translate }}
           </span>
         </div>
+
+        <div *ngIf="!shippingAddress && !addShippingAddress" class="addShippingAddress">
+          <button (click)="addShippingAddress = true" class="btn btn-primary">{{ 'global.cart.addShippingAddress' | translate }}</button>
+        </div>
+
+        <div *ngIf="addShippingAddress">
+          <form name="addressForm" class="addressForm" role="form" novalidate (ngSubmit)="addAddress()" [formGroup]="addressForm">
+            <h2 id="myUserLabel" jhiTranslate="global.cart.addShippingAddress">Ajouter une Adresse de livraison</h2>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <div class="mb-1">
+              <label class="form-label" jhiTranslate="global.cart.address">Adresse</label>
+              <span class="asterisk">*</span>
+              <input type="text" class="form-control" name="adresse" formControlName="address" />
+
+              <div
+                *ngIf="addressForm.get('address')!.invalid && (addressForm.get('address')!.dirty || addressForm.get('address')!.touched)"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="addressForm.get('address')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  Ce champ est obligatoire.
+                </small>
+              </div>
+            </div>
+
+            <div class="mb-1">
+              <label class="form-label" jhiTranslate="global.cart.city">Ville</label>
+              <span class="asterisk">*</span>
+              <textarea type="text" class="form-control" name="city" formControlName="city"></textarea>
+
+              <div *ngIf="addressForm.get('city')!.invalid && (addressForm.get('city')!.dirty || addressForm.get('city')!.touched)">
+                <small
+                  class="form-text text-danger"
+                  *ngIf="addressForm.get('city')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  Ce champ est obligatoire.
+                </small>
+              </div>
+            </div>
+
+            <div class="mb-1">
+              <label class="form-label" jhiTranslate="global.cart.country">Pays</label>
+              <span class="asterisk">*</span>
+              <textarea class="form-control" name="country" formControlName="country"></textarea>
+
+              <div
+                *ngIf="addressForm.get('country')!.invalid && (addressForm.get('country')!.dirty || addressForm.get('country')!.touched)"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="addressForm.get('country')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  Ce champ est obligatoire.
+                </small>
+              </div>
+            </div>
+
+            <div class="mb-1">
+              <label class="form-label" jhiTranslate="global.cart.postalCode">Code postal</label>
+              <span class="asterisk">*</span>
+              <input type="number" class="form-control" name="postalCode" formControlName="postalCode" />
+
+              <div
+                *ngIf="
+                  addressForm.get('postalCode')!.invalid && (addressForm.get('postalCode')!.dirty || addressForm.get('postalCode')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="addressForm.get('postalCode')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  Ce champ est obligatoire.
+                </small>
+              </div>
+            </div>
+
+            <div class="buttons">
+              <button type="button" class="btn btn-secondary" (click)="addShippingAddress = false">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+              </button>
+
+              <button
+                type="submit"
+                [ngClass]="addressForm.invalid || isSaving ? 'disabled' : null"
+                [disabled]="addressForm.invalid || isSaving"
+                class="btn btn-primary"
+              >
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="address-details" *ngIf="shippingAddress && !addShippingAddress">
+          <div class="title">
+            <span>
+              {{ 'global.cart.shipping-address' | translate }}
+            </span>
+          </div>
+          <div class="address">
+            <div class="address-info">
+              <span>{{ shippingAddress.address | titlecase }},</span>
+              <span>{{ shippingAddress.city | titlecase }}, {{ shippingAddress.postalCode }},</span>
+              <span>{{ shippingAddress.country | titlecase }}</span>
+            </div>
+            <div class="button">
+              <button class="btn btn-primary" (click)="editAddress()">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="codePromo">
+          <form name="promoForm" class="promoForm" role="form" novalidate (ngSubmit)="addAddress()" [formGroup]="promoForm">
+            <div class="title">
+              <span>
+                {{ 'global.cart.applyCodePromo' | translate }}
+              </span>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="promoCodeErrorNotExist || promoCodeErrorNotActivated" data-cy="loginError">
+              <span *ngIf="promoCodeErrorNotExist">
+                {{ 'promoCodeManagement.promoCodeErrorNotExist' | translate }}
+              </span>
+              <span *ngIf="promoCodeErrorNotActivated">
+                {{ 'promoCodeManagement.promoCodeErrorNotActivated' | translate }}
+              </span>
+            </div>
+            <div class="promoCode">
+              <input type="text" class="form-control" name="code" formControlName="code" />
+              <button class="button btn btn-primary" (click)="applyPromoCode()">
+                <fa-icon icon="check"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.apply">Appliquer</span>
+              </button>
+            </div>
+          </form>
+
+          <small
+            class="form-text text-info"
+            *ngIf="promoCode"
+            jhiTranslate="global.cart.appliedPromoCode"
+            [translateValues]="{ discount: promoCode.discount }"
+          >
+            Ce code promo vous permet de bénéficier de {{ promoCode.discount }}% de réduction sur votre commande.
+          </small>
+        </div>
+
         <div class="text">
           <span class="total"> {{ 'global.cart.total' | translate }} : </span>
-          <span class="price"> € {{ subTotal | number: '1.2-2' }} </span>
+          <span class="price" *ngIf="!promoCode || !promoCode.activated"> € {{ subTotal | number: '1.2-2' }} </span>
+          <span class="new-price" *ngIf="promoCode && promoCode.activated"> € {{ subTotal | number: '1.2-2' }} </span>
+          <small class="old-price" *ngIf="promoCode && promoCode.activated"> € {{ subTotalWithoutPromo | number: '1.2-2' }} </small>
         </div>
         <div class="checkout">
           <div #paymentRef></div>
@@ -188,3 +334,5 @@
     <button type="button" class="btn btn-secondary" (click)="modal.close('Save click')">Ok</button>
   </div>
 </ng-template>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

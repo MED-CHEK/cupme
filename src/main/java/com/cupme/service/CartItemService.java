@@ -36,13 +36,10 @@ public class CartItemService {
 
     private final CartMapper cartMapper;
     private final CacheManager cacheManager;
-
-    private final UserService userService;
-
     private final CartService cartservice;
 
+    private final UserService userService;
     private final ProtocolService protocolService;
-
     private final ProtocolMapper protocolMapper;
 
     private final ProductService productService;
@@ -56,8 +53,8 @@ public class CartItemService {
         CartItemMapper cartItemMapper,
         CartMapper cartMapper,
         CacheManager cacheManager,
-        UserService userService,
         CartService cartservice,
+        UserService userService,
         ProtocolService protocolService,
         ProtocolMapper protocolMapper,
         ProductService productService,
@@ -68,8 +65,8 @@ public class CartItemService {
         this.cartItemMapper = cartItemMapper;
         this.cartMapper = cartMapper;
         this.cacheManager = cacheManager;
-        this.userService = userService;
         this.cartservice = cartservice;
+        this.userService = userService;
         this.protocolService = protocolService;
         this.protocolMapper = protocolMapper;
         this.productService = productService;

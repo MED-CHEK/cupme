@@ -14,6 +14,34 @@ import { RouterModule } from '@angular/router';
         },
       },
       {
+        path: 'product-management',
+        loadChildren: () => import('./product-management/product-management.module').then(m => m.ProductManagementModule),
+        data: {
+          pageTitle: 'productManagement.home.title',
+        },
+      },
+      {
+        path: 'protocol-management',
+        loadChildren: () => import('./protocol-management/protocol-management.module').then(m => m.ProtocolManagementModule),
+        data: {
+          pageTitle: 'rotocolManagement.home.title',
+        },
+      },
+      {
+        path: 'order-management',
+        loadChildren: () => import('./order-management/order-management.module').then(m => m.OrderManagementModule),
+        data: {
+          pageTitle: 'rotocolManagement.home.title',
+        },
+      },
+      {
+        path: 'promo-code-management',
+        loadChildren: () => import('./promo-code-management/promo-code-management.module').then(m => m.PromoCodeManagementModule),
+        data: {
+          pageTitle: 'rotocolManagement.home.title',
+        },
+      },
+      {
         path: 'docs',
         loadChildren: () => import('./docs/docs.module').then(m => m.DocsModule),
       },

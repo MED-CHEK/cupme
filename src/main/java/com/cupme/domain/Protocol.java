@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,8 +27,7 @@ public class Protocol implements Serializable {
 
     // Other fields
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(length = 50, unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -92,8 +90,8 @@ public class Protocol implements Serializable {
         Double price,
         Integer poseTime,
         Set<Product> products,
-        Set<Tag> tags,
         Set<Category> categories,
+        Set<Tag> tags,
         Set<Picture> pictures
     ) {
         this.id = id;
@@ -104,8 +102,8 @@ public class Protocol implements Serializable {
         this.price = price;
         this.poseTime = poseTime;
         this.products = products;
-        this.tags = tags;
         this.categories = categories;
+        this.tags = tags;
         this.pictures = pictures;
     }
 

@@ -1,0 +1,28 @@
+{
+  "promoCodeManagement": {
+    "home": {
+      "title": "Code promo",
+      "refreshListLabel": "Actualiser la liste",
+      "createLabel": "Créer un nouveau code promo",
+      "createOrEditLabel": "Créer ou éditer un code promo"
+    },
+    "created": "Le code promo {{ param }} a été créé.",
+    "updated": "Le code promo {{ param }} a été mis à jour.",
+    "deleted": "Le code promo {{ param }} a été supprimé.",
+    "delete": {
+      "question": "Etes-vous certain de vouloir supprimer le code promo {{ param }} ?"
+    },
+    "detail": {
+      "title": "Code promo"
+    },
+    "code": "Code promo",
+    "discount": "Pourcentage de réduction",
+    "activated": "Activé",
+    "deactivated": "Désactivé",
+    "createdDate": "Créé le",
+    "promoCodeError": "Le code promo doit être unique.",
+    "discountError": "Le pourcentage de réduction doit être compris entre 0 et 100.",
+    "promoCodeErrorNotExist": "Le code promo n'existe pas.",
+    "promoCodeErrorNotActivated": "Le code promo doit être activé pour être utilisé."
+  }
+}

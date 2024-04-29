@@ -9,6 +9,10 @@
           <span>
             <span>{{ 'home.chooseZones' | translate }}</span>
           </span>
+          <span>
+            <span>{{ 'home.choose' | translate }}</span>
+            <span class="localUrl" (click)="scrollToElement()">{{ 'home.generic' | translate }}</span>
+          </span>
         </div>
         <div class="zone" *ngIf="!isMobileDisplay">
           <ngb-carousel [interval]="100000" [showNavigationIndicators]="false">
@@ -107,7 +111,7 @@
           </ngb-carousel>
         </div>
       </div>
-      <div class="protos col-12 col-lg-10">
+      <div #elementToScrollTo class="protos col-12 col-lg-10">
         <div class="row col-12">
           <div class="label">
             <span>
@@ -115,7 +119,7 @@
             </span>
           </div>
           <div class="protocols">
-            <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols" (click)="selectProtocol(protocol)">
+            <div class="protocol col-12 col-sm-6 col-lg-4" *ngFor="let protocol of protocols">
               <jhi-proto [protocol]="protocol"></jhi-proto>
             </div>
           </div>
@@ -127,7 +131,7 @@
         <div class="video col-12 col-lg-7">
           <app-video></app-video>
         </div>
-        <span class="text col-12 col-md-8 mt-2 mb-3">
+        <span class="text col-12 col-md-8 col-lg-8 mb-5">
           <span class="title">
             {{ 'home.title' | translate }}
           </span>
@@ -139,8 +143,93 @@
           <button class="btn btn-primary" (click)="login()">{{ 'global.messages.info.authenticated.link' | translate }}</button>
           <button class="btn btn-primary" (click)="register()">{{ 'global.messages.info.register.link' | translate }}</button>
         </div>
-        <span class="logo-img mt-3"></span>
+        <div class="img">
+          <ngb-carousel [interval]="3000" [showNavigationIndicators]="false">
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/abdi.jpg"
+                  alt=""
+                  usemap="#front-zones-reactives"
+                  name="front-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/Garde1.jpg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/ghandriok.jpg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/jerry ok jpeg2.jpg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/kahudi.jpeg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/kahudi1.jpg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/kahudi2.jpg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img
+                  src="../../content/images/carousel_sports/kongok.jpg"
+                  alt=""
+                  usemap="#back-zones-reactives"
+                  name="back-zones-reactives"
+                />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
       </div>
     </div>
+
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
   </div>
 </div>

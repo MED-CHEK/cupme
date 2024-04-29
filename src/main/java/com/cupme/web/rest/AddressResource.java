@@ -3,8 +3,7 @@ package com.cupme.web.rest;
 import com.cupme.security.AuthoritiesConstants;
 import com.cupme.service.AddressService;
 import com.cupme.service.dto.AddressDTO;
-import java.net.URI;
-import java.util.List;
+import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +30,10 @@ public class AddressResource {
      */
     @GetMapping("/addresses")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
-    public ResponseEntity<List<AddressDTO>> getAllAddresses() {
+    public ResponseEntity<Set<AddressDTO>> getAllAddresses() {
         log.debug("REST request to get all public Address names");
 
-        final List<AddressDTO> addresses = addressService.getAddresses();
+        final Set<AddressDTO> addresses = addressService.getAddresses();
         return ResponseEntity.ok().body(addresses);
     }
 
@@ -59,7 +58,7 @@ public class AddressResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new addressDTO, or with status {@code 400 (Bad Request)} if the address has already an ID.
      */
     @PostMapping("/addresses")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.USER + "\")")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<AddressDTO> createAddress(@Valid @RequestBody AddressDTO addressDTO) {
         log.debug("REST request to save Address : {}", addressDTO);
 

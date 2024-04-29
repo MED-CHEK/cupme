@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center product-detail">
+  <div class="col-12 col-md-8">
+    <div *ngIf="product">
+      <h2 class="title">
+        <span jhiTranslate="productManagement.detail.title">Product</span> [<strong>{{ product.id }}</strong
+        >]
+      </h2>
+
+      <div class="details">
+        <div class="product-images mb-3">
+          <ngb-carousel [interval]="10000" [showNavigationIndicators]="false">
+            <ng-template ngbSlide *ngFor="let picture of product.pictures">
+              <div class="image-container">
+                <img [src]="getProductImage(picture)" [alt]="product.name" />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="global.field.id">ID</label>
+          <span>{{ product.id }}</span>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="productManagement.name">Nom</label>
+          <span>{{ product.name }}</span>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="productManagement.shortDescription">Description courte</label>
+          <span>{{ product.shortDescription }}</span>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="productManagement.description">Description</label>
+          <span>{{ product.description }}</span>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="productManagement.price">Prix</label>
+          <span>{{ product.price }}</span>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="productManagement.stock">Stock</label>
+          <span>( {{ product.stock }})</span>
+        </div>
+        <div class="divider"></div>
+        <!-- Divider for separation -->
+        <div class="detail-item">
+          <label jhiTranslate="productManagement.lastModifiedDate">Prix</label>
+          <span>{{ product.lastModifiedDate | date: 'dd/MM/YYYY HH:mm:ss' }}</span>
+        </div>
+      </div>
+
+      <div class="actions mb-3">
+        <button type="submit" routerLink="../../" class="btn btn-info">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="submit" [routerLink]="['../edit']" queryParamsHandling="merge" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>
+          <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+
+        <button type="button" (click)="deleteProduct(product)" class="btn btn-danger">
+          <fa-icon icon="times"></fa-icon>
+          <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

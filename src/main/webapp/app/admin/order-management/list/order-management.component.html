@@ -1,0 +1,259 @@
+<div class="order-mgmt">
+  <div class="row col-12 col-md-10">
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne"
+            aria-expanded="false"
+            aria-controls="flush-collapseOne"
+          >
+            <span jhiTranslate="orderManagement.applist.title">Liste des produits</span>
+          </button>
+        </h2>
+        <div
+          id="flush-collapseOne"
+          class="accordion-collapse collapse"
+          aria-labelledby="flush-headingOne"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body">
+            <div class="d-flex justify-content-md-end justify-content-center mt-3 mb-3">
+              <button class="btn btn-primary me-2" (click)="showTodayAppointments()">
+                <span>Rendez-vous du jour</span>
+              </button>
+
+              <button class="btn btn-secondary me-2" (click)="showFutureAppointments()" [disabled]="isLoading">
+                <span>Rendez-vous à venir</span>
+              </button>
+
+              <button class="btn btn-info me-2" (click)="showAllAppointments()">
+                <span>Tous les rendez-vous</span>
+              </button>
+            </div>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+            <div class="appointments" *ngIf="!isLoading">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Type</th>
+                    <th>Date du rendez-vous</th>
+                    <th>Heure du rendez-vous</th>
+                    <th>Session</th>
+                    <th>ID de commande</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let appointment of filteredAppointments">
+                    <td>{{ appointment.id }}</td>
+                    <td>{{ appointment.email }}</td>
+                    <td>{{ appointment.telephone }}</td>
+                    <td>{{ appointment.type }}</td>
+                    <td>{{ appointment.appointmentDate }}</td>
+                    <td>{{ appointment.appointmentTime }}</td>
+                    <td>{{ appointment.session.name }}</td>
+                    <td>{{ appointment.order?.id }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTwo"
+            aria-expanded="false"
+            aria-controls="flush-collapseTwo"
+          >
+            <span jhiTranslate="orderManagement.list.title">Liste des produits</span>
+          </button>
+        </h2>
+        <div
+          id="flush-collapseTwo"
+          class="accordion-collapse collapse"
+          aria-labelledby="flush-headingTwo"
+          data-bs-parent="#accordionFlushExample"
+        >
+          <div class="accordion-body order-tab">
+            <div class="d-flex justify-content-md-end justify-content-center mt-3 mb-3">
+              <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+                <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+                <span jhiTranslate="orderManagement.home.refreshListLabel">Actualiser la liste</span>
+              </button>
+              <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
+                <fa-icon icon="plus"></fa-icon> <span jhiTranslate="orderManagement.home.createLabel">Créer un nouvel produit</span>
+              </button>
+            </div>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <jhi-alert></jhi-alert>
+
+            <sec-loading class="loading" *ngIf="isLoading"></sec-loading>
+            <div class="orders" *ngIf="!isLoading">
+              <div class="order-details" *ngFor="let orderData of paginatedList">
+                <div class="orderInfo">
+                  <div class="orderId">
+                    <span class="titre">
+                      <strong>Commande </strong>
+                    </span>
+                    <span class="value">
+                      <strong>#{{ orderData.orderId }}</strong>
+                    </span>
+                  </div>
+                  <div class="orderClient">
+                    <span class="titre">
+                      <strong>Client </strong>
+                    </span>
+                    <span class="value">{{ orderData.orderUserName }}</span>
+                  </div>
+
+                  <div class="orderDate">
+                    <span class="titre">
+                      <strong>Date de la commande </strong>
+                    </span>
+                    <span class="value">{{ orderData.orderDate | date: 'dd/MM/yyyy' }}</span>
+                  </div>
+                  <div class="orderTotalPrice">
+                    <span class="titre">
+                      <strong>Prix total </strong>
+                    </span>
+                    <span class="value">{{ orderData.orderTotalPrice }} €</span>
+                  </div>
+                  <div class="orderPaid">
+                    <span class="titre">
+                      <strong>Transaction payée </strong>
+                    </span>
+                    <span class="value">{{ orderData.orderPaid ? 'Oui' : 'Non' }}</span>
+                  </div>
+                  <div class="ordertransactionId">
+                    <span class="titre">
+                      <strong>ID de transaction </strong>
+                    </span>
+                    <span class="value">{{ orderData.ordertransactionId }}</span>
+                  </div>
+                </div>
+                <div class="table">
+                  <div class="thead">
+                    <div class="tr">
+                      <div class="th name col-9 col-md-7">
+                        <span>
+                          {{ 'global.cart.table.name' | translate }}
+                        </span>
+                      </div>
+                      <div class="th quantity col-3 col-md-3">
+                        <span>
+                          {{ 'global.cart.table.quantity' | translate }}
+                        </span>
+                      </div>
+                      <div class="th total col-md-2" *ngIf="!isMobileDisplay">
+                        <span>
+                          {{ 'global.cart.table.total' | translate }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tbody">
+                    <div class="tr" *ngFor="let protocol of orderData.protocols">
+                      <div class="td name col-9 col-md-7">
+                        <div class="row" *ngIf="protocol">
+                          <div class="img col-3 col-sm-4">
+                            <img [src]="protocol.picture.file" [alt]="protocol.name" />
+                          </div>
+                          <div class="name-price col-9 col-sm-8">
+                            <span class="pro-name">{{ protocol.name }}</span>
+                            <div class="price">
+                              <span class="label">{{ 'global.cart.price' | translate }}</span>
+                              <span>€ {{ protocol.price }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="td quantity col-3 col-md-3">
+                        <span class="text">1</span>
+                      </div>
+                      <div class="td total col-12 col-md-2">
+                        <span class="sous-total" *ngIf="isMobileDisplay"> {{ 'global.cart.table.total' | translate }}: </span>
+                        <span> € {{ protocol.price }} </span>
+                      </div>
+                    </div>
+                    <div class="tr row" *ngFor="let orderProduct of orderData.orderProducts">
+                      <div class="td name col-9 col-md-7">
+                        <div class="row" *ngIf="orderProduct.product">
+                          <div class="img col-3 col-sm-4">
+                            <img [src]="orderProduct.product.picture.file" [alt]="orderProduct.product.name" />
+                          </div>
+                          <div class="name-price col-9 col-sm-8">
+                            <span class="pro-name">{{ orderProduct.product.name }}</span>
+                            <div class="price">
+                              <span class="label">{{ 'global.cart.price' | translate }}</span>
+                              <span>€ {{ orderProduct.product.price }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="td quantity col-3 col-md-3">
+                        <span class="text">{{ orderProduct.quantity }}</span>
+                      </div>
+                      <div class="td total col-12 col-md-2">
+                        <span class="sous-total" *ngIf="isMobileDisplay && orderProduct.quantity > 1">
+                          {{ 'global.cart.table.total' | translate }}:
+                        </span>
+                        <span *ngIf="isMobileDisplay && orderProduct.quantity > 1">
+                          € {{ orderProduct.product.price * orderProduct.quantity }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="actions mb-3">
+                  <button type="submit" (click)="updateOrder(orderData.orderId)" class="btn btn-primary">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </button>
+
+                  <button type="button" (click)="deleteOrder(orderData.orderId)" class="btn btn-danger">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <jhi-item-count [params]="{ page: page, totalItems: fullList.length, itemsPerPage: itemsPerPage }"></jhi-item-count>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <ngb-pagination
+                [collectionSize]="fullList.length"
+                [(page)]="page"
+                [pageSize]="itemsPerPage"
+                [maxSize]="5"
+                [rotate]="true"
+                [boundaryLinks]="true"
+                (pageChange)="onPageChange($event)"
+              ></ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

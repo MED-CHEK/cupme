@@ -1,3 +1,5 @@
+import { Address } from 'app/entities/address.model';
+
 export class Account {
   constructor(
     public activated: boolean,
@@ -10,6 +12,7 @@ export class Account {
     public imageUrl: string | null,
     public sex: string | null,
     public age: number | null,
-    public poseTime: number | null
+    public poseTime: number | null,
+    public addresses?: Address[] | null
   ) {}
 }

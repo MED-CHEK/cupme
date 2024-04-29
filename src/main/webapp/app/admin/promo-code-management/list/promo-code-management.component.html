@@ -1,0 +1,186 @@
+<div class="promo-code-mgmt">
+  <div class="row col-12 col-md-10 col-lg-8">
+    <div class="promo-code-tab">
+      <h2>
+        <span id="promo-code-management-page-heading" jhiTranslate="promoCodeManagement.home.title" data-cy="promoCodeManagementPageHeading"
+          >Utilisateurs</span
+        >
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+            <span jhiTranslate="promoCodeManagement.home.refreshListLabel">Actualiser la liste</span>
+          </button>
+          <button class="btn btn-primary jh-create-entity" (click)="savePromoCode = true">
+            <fa-icon icon="plus"></fa-icon> <span jhiTranslate="promoCodeManagement.home.createLabel">Créer un nouveau code promo</span>
+          </button>
+        </div>
+      </h2>
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <div class="table-responsive" *ngIf="promoCodes">
+        <table class="table table-striped" aria-describedby="promoCode-management-page-heading">
+          <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="transition()">
+              <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+              <th scope="col" jhiSortBy="code">
+                <span jhiTranslate="promoCodeManagement.code">Code</span> <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col" jhiSortBy="discount">
+                <span jhiTranslate="promoCodeManagement.discount">Réduction</span>
+                <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col"></th>
+              <th scope="col" jhiSortBy="createdDate">
+                <span jhiTranslate="promoCodeManagement.createdDate">Créé le</span> <fa-icon icon="sort"></fa-icon>
+              </th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody *ngIf="promoCodes">
+            <tr *ngFor="let promoCode of promoCodes; trackBy: trackIdentity">
+              <td>
+                {{ promoCode.id }}
+              </td>
+              <td>{{ promoCode.code }}</td>
+              <td>{{ promoCode.discount }}</td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="setActive(promoCode, true)"
+                  *ngIf="!promoCode.activated"
+                  jhiTranslate="promoCodeManagement.deactivated"
+                >
+                  Désactivé
+                </button>
+                <button
+                  class="btn btn-success btn-sm"
+                  (click)="setActive(promoCode, false)"
+                  *ngIf="promoCode.activated"
+                  jhiTranslate="promoCodeManagement.activated"
+                >
+                  Activé
+                </button>
+              </td>
+              <td>{{ promoCode.createdDate | date: 'dd/MM/yy HH:mm' }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button type="submit" (click)="updatePromoCode(promoCode)" class="btn btn-primary btn-sm">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </button>
+
+                  <button type="button" (click)="deletePromoCode(promoCode.id || 0)" class="btn btn-danger btn-sm">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="promoCodes">
+        <div class="d-flex justify-content-center">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [(page)]="page"
+            [pageSize]="itemsPerPage"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="transition()"
+          ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+
+    <form *ngIf="savePromoCode" name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="myPromoLabel" jhiTranslate="promoCodeManagement.home.createOrEditLabel">Créer ou éditer un promo code</h2>
+
+      <div class="alert alert-danger" *ngIf="promoCodeError" data-cy="loginError">
+        <span>
+          <strong>{{ 'promoCodeManagement.promoCodeError' | translate }}</strong>
+        </span>
+      </div>
+      <div class="mb-3" [hidden]="!editForm.value.id">
+        <label jhiTranslate="global.field.id">ID</label>
+        <input type="text" class="form-control disabled" name="id" formControlName="id" readonly />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="promoCodeManagement.code">Code</label>
+        <input type="text" class="form-control" name="code" formControlName="code" (input)="convertToUpperCase()" />
+
+        <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+
+          <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength">
+            Ce champ doit faire moins de 15 caractères.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" jhiTranslate="promoCodeManagement.discount">Réduction</label>
+        <input type="number" class="form-control" name="discount" formControlName="discount" />
+
+        <div *ngIf="editForm.get('discount')!.invalid && (editForm.get('discount')!.dirty || editForm.get('discount')!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get('discount')?.errors?.required" jhiTranslate="entity.validation.required">
+            Ce champ est obligatoire.
+          </small>
+        </div>
+
+        <small
+          class="form-text text-danger"
+          *ngIf="editForm.get('discount')?.errors?.minlength"
+          jhiTranslate="entity.validation.min"
+          [translateValues]="{ min: 0 }"
+        >
+          Ce champ doit être supérieur ou égal à 0.
+        </small>
+
+        <small
+          class="form-text text-danger"
+          *ngIf="editForm.get('discount')?.errors?.max"
+          jhiTranslate="entity.validation.max"
+          [translateValues]="{ max: 100 }"
+        >
+          Ce champ doit être inférieur ou égal à 100.
+        </small>
+      </div>
+
+      <div class="mb-3 filter-checkbox">
+        <label for="activatedPromo" class="label">
+          <input type="checkbox" id="activatedPromo" name="activated" formControlName="activated" />
+          <span>{{ 'promoCodeManagement.activated' | translate }}</span>
+          <span class="asterisk">*</span>
+          <span class="checkmark"></span>
+        </label>
+      </div>
+
+      <button type="button" class="btn btn-secondary" (click)="savePromoCode = false">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+      </button>
+
+      <button
+        type="submit"
+        [ngClass]="editForm.invalid || isSaving ? 'disabled' : null"
+        [disabled]="editForm.invalid || isSaving"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+      </button>
+    </form>
+  </div>
+</div>

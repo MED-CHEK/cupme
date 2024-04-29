@@ -12,11 +12,7 @@ import { ProtocolCartDTO } from '../entities/protocol.model';
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(
-    private http: HttpClient,
-    private applicationConfigService: ApplicationConfigService,
-    private localStorageService: LocalStorageService
-  ) {}
+  constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   getOrders(): Observable<any> {
     return this.http.get<any>(this.applicationConfigService.getEndpointFor('api/orders'));
@@ -28,19 +24,28 @@ export class OrderService {
     return this.http.post<any>(this.applicationConfigService.getEndpointFor('api/orderItems'), orderSeverDTO);
   }
 
-  getOrderServerDTO(cartItems: CartItemDisplayDTO[], transactionId: string): OrderSeverDTO {
+  private getOrderServerDTO(cartItems: CartItemDisplayDTO[], transactionId: string): OrderSeverDTO {
     let orderSeverDTO: OrderSeverDTO = {
       transactionId: transactionId,
       totalPrice: cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      paid: true,
       orderItemServerDTOs: [],
     };
     cartItems.forEach(item => {
-      let orderItem = {
-        productId: item.productId,
-        quantity: item.quantity,
-        type: item.protocol ? ProductType.PROTOCOL : ProductType.PRODUCT,
-      };
-      orderSeverDTO.orderItemServerDTOs.push(orderItem);
+      if (item.type === ProductType.PROTOCOL || item.type === ProductType.PRODUCT) {
+        orderSeverDTO.orderItemServerDTOs.push({
+          productId: item.productId,
+          quantity: item.quantity,
+          type: item.type,
+        });
+      } else {
+        orderSeverDTO.orderItemServerDTOs.push({
+          productId: item.productId,
+          quantity: item.quantity,
+          type: item.type,
+          appointmentInfo: item.appointmentInfo,
+        });
+      }
     });
     return orderSeverDTO;
   }
