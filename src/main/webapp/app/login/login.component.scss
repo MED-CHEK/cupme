@@ -22,6 +22,14 @@
           width: 20%;
         }
 
+        .carousel-control-prev {
+          justify-content: flex-start;
+        }
+
+        .carousel-control-next {
+          justify-content: flex-end;
+        }
+
         .carousel-control-prev,
         .carousel-control-next {
           opacity: 1;
@@ -31,7 +39,7 @@
           .picsum-img-wrapper {
             display: flex;
             justify-content: center;
-            height: 32rem;
+            height: 29rem;
 
             img {
               border-radius: 0.25rem;
@@ -117,34 +125,27 @@ login page styles
     flex-direction: column !important;
     justify-content: flex-start !important;
 
-    .row {
-      height: 100vh !important;
+    .info {
+      height: 59%;
+    }
 
-      .info {
-        height: 59%;
-      }
+    .img {
+      ::ng-deep .carousel {
+        .carousel-inner {
+          .picsum-img-wrapper {
+            height: 19rem !important;
 
-      .img {
-        ::ng-deep .carousel {
-          .carousel-inner {
-            .picsum-img-wrapper {
-              height: 21rem !important;
-
-              .img-fluid {
-                padding: 0 6rem;
-              }
+            .img-fluid {
+              padding: 0 6rem;
             }
           }
         }
-
-        min-height: 41%;
-        height: auto;
       }
     }
+  }
 
-    .alert {
-      padding: 0.25rem 0.5rem;
-      margin-bottom: 0.5rem;
-    }
+  .alert {
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.5rem;
   }
 }

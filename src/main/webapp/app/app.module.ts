@@ -28,7 +28,7 @@ import { ProtocolModule } from './protocol/protocol.module';
 import { MyProtocolModule } from './myprotocol/myprotocol.module';
 import { CartModule } from './cart/cart.module';
 import { SuccessModule } from './success/success.module';
-import { ProtoComponent } from './shared/proto/proto.component';
+import { TutosComponent } from './tutos/tutos.component';
 
 // Add the import statement for MatPaginatorModule
 @NgModule({
@@ -54,7 +54,7 @@ import { ProtoComponent } from './shared/proto/proto.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, ActiveMenuDirective, FooterComponent, TutosComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

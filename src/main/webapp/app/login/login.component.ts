@@ -6,6 +6,7 @@ import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { CartService } from '../cart/cart.service';
 import { ToastService } from 'app/shared/toast/toast.service';
+import { CarrouselImageService } from 'app/services/carrousel-image.service';
 
 @Component({
   selector: 'jhi-login',
@@ -15,7 +16,7 @@ import { ToastService } from 'app/shared/toast/toast.service';
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
-
+  images: string[] = [];
   authenticationError = false;
 
   loginForm = new FormGroup({
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private cartService: CartService,
     private loginService: LoginService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private carrouselImageService: CarrouselImageService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
       if (this.accountService.isAuthenticated()) {
         this.router.navigate(['']);
       }
+    });
+    this.loadImages();
+  }
+
+  loadImages(): void {
+    this.carrouselImageService.getImages().subscribe(data => {
+      this.images = data;
     });
   }
 

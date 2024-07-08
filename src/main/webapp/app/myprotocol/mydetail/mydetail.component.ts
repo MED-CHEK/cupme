@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MyProtocolDTO, ProtocolDTO } from 'app/entities/protocol.model';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -30,7 +30,7 @@ export class MyDetailComponent implements OnInit {
   timerInterval: any;
   isTimerRunning: boolean = false;
 
-  constructor(private route: ActivatedRoute, private accountService: AccountService, private modalService: NgbModal) {}
+  constructor(private route: ActivatedRoute, private accountService: AccountService, private router: Router) {}
 
   ngOnInit(): void {
     this.sound = new Howl({
@@ -165,10 +165,7 @@ export class MyDetailComponent implements OnInit {
     this.sound.play();
   }
 
-  showTuto(content: any) {
-    this.modalService.open(content, { modalDialogClass: 'tuto-modal', centered: true }).result.then(
-      result => {},
-      reason => {}
-    );
+  goToTuto() {
+    this.router.navigate(['/tutos']);
   }
 }

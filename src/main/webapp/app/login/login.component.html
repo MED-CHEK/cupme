@@ -57,54 +57,9 @@
     </div>
     <div class="img col-md-6">
       <ngb-carousel [interval]="3000" [showNavigationIndicators]="false">
-        <ng-template ngbSlide>
+        <ng-template ngbSlide *ngFor="let image of images">
           <div class="picsum-img-wrapper">
-            <img src="../../content/images/carousel_sports/abdi.jpg" alt="" usemap="#front-zones-reactives" name="front-zones-reactives" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img src="../../content/images/carousel_sports/Garde1.jpg" alt="" usemap="#back-zones-reactives" name="back-zones-reactives" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img
-              src="../../content/images/carousel_sports/ghandriok.jpg"
-              alt=""
-              usemap="#back-zones-reactives"
-              name="back-zones-reactives"
-            />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img
-              src="../../content/images/carousel_sports/jerry ok jpeg2.jpg"
-              alt=""
-              usemap="#back-zones-reactives"
-              name="back-zones-reactives"
-            />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img src="../../content/images/carousel_sports/kahudi.jpeg" alt="" usemap="#back-zones-reactives" name="back-zones-reactives" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img src="../../content/images/carousel_sports/kahudi1.jpg" alt="" usemap="#back-zones-reactives" name="back-zones-reactives" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img src="../../content/images/carousel_sports/kahudi2.jpg" alt="" usemap="#back-zones-reactives" name="back-zones-reactives" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img src="../../content/images/carousel_sports/kongok.jpg" alt="" usemap="#back-zones-reactives" name="back-zones-reactives" />
+            <img [src]="'../../content/images/carousel_sports/' + image" alt="{{ image }}" />
           </div>
         </ng-template>
       </ngb-carousel>

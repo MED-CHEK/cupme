@@ -1,0 +1,41 @@
+<div class="tutos d-flex justify-content-center">
+  <div class="videos col-12 col-lg-10 d-flex justify-content-center">
+    <div class="video-side col-12 col-md-6">
+      <div class="video-item col-4 col-md-12" *ngFor="let video of videos" (click)="selectVideo(video)">
+        <img [src]="video.thumbnail" alt="Video Thumbnail" />
+        <div class="video-title">{{ video.title }}</div>
+      </div>
+    </div>
+    <div class="message col-md-6" *ngIf="!selectedVideo">Sélectionnez l'une des ces vidéos pour la regarde</div>
+    <div class="video-player col-12 col-md-6" *ngIf="selectedVideo?.id == 1">
+      <iframe
+        src="https://www.youtube.com/embed/4DspfvjB1fU"
+        title="Tuto - Atteindre une zone difficile d&#39;accès en ventouses sèches"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="video-player col-12 col-md-6" *ngIf="selectedVideo?.id == 2">
+      <iframe
+        src="https://www.youtube.com/embed/BTb_5Wlthu0"
+        title="Tuto - Atteindre une zone difficile d&#39;accès en ventouses sèches"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="video-player col-12 col-md-6" *ngIf="selectedVideo?.id == 3">
+      <iframe
+        src="https://www.youtube.com/embed/kXBY9_e3egE"
+        title="Tuto - Atteindre une zone difficile d&#39;accès en ventouses sèches"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>

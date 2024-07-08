@@ -7,6 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { ProtocolService } from 'app/protocol/protocol.service';
 import { ProtocolCartDTO } from 'app/entities/protocol.model';
+import { CarrouselImageService } from 'app/services/carrousel-image.service';
 
 @Component({
   selector: 'jhi-home',
@@ -24,7 +25,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router, private protocolService: ProtocolService) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private protocolService: ProtocolService,
+    private carrouselImageService: CarrouselImageService
+  ) {}
 
   ngOnInit(): void {
     this.onWindowResize();
@@ -34,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(account => (this.account = account));
 
     this.protocolService.getGenericProtocols().subscribe(protocols => (this.protocols = protocols));
+    this.loadImages();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -45,9 +52,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.isMobileDisplay = false;
     }
   }
-
   scrollToElement(): void {
     window.scrollTo({ top: this.elementToScrollTo.nativeElement.getBoundingClientRect().top - 32, behavior: 'smooth' });
+  }
+
+  loadImages(): void {
+    this.carrouselImageService.getImages().subscribe(data => {
+      this.images = data;
+    });
   }
 
   login(): void {

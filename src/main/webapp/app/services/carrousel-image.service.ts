@@ -5,9 +5,11 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CarrouselImageService {
-  constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
+  private imagesUrl = '../../content/images/carousel_sports/images.json';
 
-  getCarrouselImages(): Observable<string[]> {
-    return this.http.get<string[]>(this.applicationConfigService.getEndpointFor('api/carrousel-images'));
+  constructor(private http: HttpClient) {}
+
+  getImages(): Observable<string[]> {
+    return this.http.get<string[]>(this.imagesUrl);
   }
 }

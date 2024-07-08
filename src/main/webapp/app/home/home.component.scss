@@ -176,12 +176,8 @@
 
     ::ng-deep .carousel {
       margin-top: 2rem;
-      width: 36rem;
+      width: 43rem;
       background-color: #fefefe;
-
-      button {
-        width: 20%;
-      }
 
       .carousel-control-prev,
       .carousel-control-next {
@@ -195,7 +191,7 @@
         .picsum-img-wrapper {
           display: flex;
           justify-content: center;
-          width: 36rem;
+          width: 43rem;
           height: 32rem;
 
           img {

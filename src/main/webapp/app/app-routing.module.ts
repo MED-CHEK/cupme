@@ -8,6 +8,7 @@ import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { HomeComponent } from './home/home.component';
+import { TutosComponent } from './tutos/tutos.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,10 @@ import { HomeComponent } from './home/home.component';
           },
           canActivate: [UserRouteAccessService],
           loadChildren: () => import('./admin/admin-routing.module').then(m => m.AdminRoutingModule),
+        },
+        {
+          path: 'tutos',
+          component: TutosComponent,
         },
         {
           path: 'account',
