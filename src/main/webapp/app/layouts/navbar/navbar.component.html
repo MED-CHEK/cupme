@@ -64,7 +64,7 @@
               <span>{{ 'global.menu.sessions.title' | translate }}</span>
             </span>
           </a>
-          <ul class="dropdown-menu" ngbDropdownMenu aria-la>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="session-menu">
             <li *ngFor="let session of onlineSessions" (click)="schedule(session, content)">
               <a class="dropdown-item" (click)="collapseNavbar(); loadSession()">
                 <span>{{ 'global.menu.sessions.session' + session.duration | translate }}</span>

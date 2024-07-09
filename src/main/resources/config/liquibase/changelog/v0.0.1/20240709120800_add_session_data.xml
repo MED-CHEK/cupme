@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="v0.0.1-ADD_SESSION_DATA" author="cupme">
+        <sql dbms="mariadb" splitStatements="true" stripComments="true">
+            -- Insert Session
+            INSERT INTO cupme.session (id, name, duration, price) VALUES(1, 'Séance 15 min', 15, 24.99);
+            INSERT INTO cupme.session (id, name, duration, price) VALUES(2, 'Séance 30 min', 30, 39.99);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

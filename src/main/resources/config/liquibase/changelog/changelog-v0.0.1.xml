@@ -28,4 +28,6 @@
     <!-- Add session and appointment table -->
     <include file="config/liquibase/changelog/v0.0.1/20240426182200_add_session_and_appointment_table.xml" relativeToChangelogFile="false"/>
 
+    <!-- Add session data -->
+    <include file="config/liquibase/changelog/v0.0.1/20240709120800_add_session_data.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
