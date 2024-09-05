@@ -4,11 +4,13 @@ import { ApplicationConfigService } from '../core/config/application-config.serv
 import { CartItemDisplayDTO } from '../entities/cartItem.model';
 import { LocalStorageService } from 'ngx-webstorage';
 import { EventEmitter } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  cartdata = new EventEmitter<CartItemDisplayDTO[] | []>();
+  private cartdata = new BehaviorSubject<CartItemDisplayDTO[]>([]);
+  public cartdata$ = this.cartdata.asObservable();
   private cartItems: CartItemDisplayDTO[] = [];
   transactionId: string = '';
 
@@ -84,7 +86,8 @@ export class CartService {
 
   loadCartFromLocalStorage(): void {
     this.cartItems = this.localStorageService.retrieve('cart-items') || [];
-    this.cartdata.emit(this.cartItems);
+    console.log('Updating cart data:', this.cartItems);
+    this.cartdata.next(this.cartItems);
   }
 
   persistCart(): void {
@@ -109,7 +112,7 @@ export class CartService {
         this.cartItems.forEach(item => {
           item.picture = item.picture.replace(/\\/g, '/');
         });
-        this.cartdata.emit(this.cartItems);
+        this.cartdata.next(this.cartItems);
         this.saveCartToLocalStorage();
       });
   }

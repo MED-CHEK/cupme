@@ -239,10 +239,10 @@
   </div>
 </nav>
 
-<ng-template #content let-modal>
+<ng-template #content let-modal let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h5 class="modal-title" id="modal-basic-title">{{ 'global.menu.sessions.modal.session' + selectedSession.duration | translate }}</h5>
-    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
   </div>
   <div class="modal-body" [formGroup]="appointmentForm">
     <div class="col-12">
@@ -287,7 +287,9 @@
     </div>
   </div>
   <div class="modal-footer mt-3">
-    <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ 'entity.action.cancel' | translate }}</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss(); this.appointmentForm.reset()">
+      {{ 'entity.action.cancel' | translate }}
+    </button>
     <button type="button" class="btn btn-primary" (click)="addToCart()">
       {{ 'entity.action.addToCart' | translate }}
     </button>

@@ -53,24 +53,11 @@ public class ProtocolService {
 
     public List<ProtocolDTO> getProtocols() {
         List<ProtocolDTO> protocols = protocolMapper.protocolsToProtocolDTOs(protocolRepository.findAll());
-
-        protocols.forEach(protocolDTO -> {
-            protocolDTO
-                .getPictures()
-                .forEach(pictureDTO -> {
-                    pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-                });
-        });
         return protocols;
     }
 
     public List<ProtocolCartDTO> getProtocolCards() {
         List<ProtocolCartDTO> protocols = protocolMapper.protocolsToProtocolCartDTOs(protocolRepository.findAll());
-
-        protocols.forEach(protocolDTO -> {
-            protocolDTO.getPicture().setFile(assetFilesService.getFile(protocolDTO.getPicture().getFile()));
-        });
-
         return protocols;
     }
 
@@ -79,45 +66,16 @@ public class ProtocolService {
             protocolRepository.findProtocolByType(ProtocolType.GENERIC)
         );
 
-        protocols.forEach(protocolDTO -> {
-            protocolDTO.getPicture().setFile(assetFilesService.getFile(protocolDTO.getPicture().getFile()));
-        });
-
         return protocols;
     }
 
     public ProtocolDTO getProtocol(long id) {
         ProtocolDTO protocolDTO = protocolMapper.protocolToProtocolDTO(protocolRepository.findById(id).get());
-        protocolDTO
-            .getPictures()
-            .forEach(pictureDTO -> {
-                pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-            });
-        protocolDTO
-            .getProductDTOs()
-            .forEach(productDTO -> {
-                productDTO
-                    .getPictures()
-                    .forEach(pictureDTO -> {
-                        pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-                    });
-            });
         return protocolDTO;
     }
 
     public ProtocolDetailDTO getProtocolDetail(long id) {
         ProtocolDetailDTO protocolDetailDTO = protocolMapper.protocolToProtocolDetailDTO(protocolRepository.findById(id).get());
-        protocolDetailDTO
-            .getPictures()
-            .forEach(pictureDTO -> {
-                pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
-            });
-
-        protocolDetailDTO
-            .getProductDTOs()
-            .forEach(productDTO -> {
-                productDTO.getPicture().setFile(assetFilesService.getFile(productDTO.getPicture().getFile()));
-            });
 
         return protocolDetailDTO;
     }

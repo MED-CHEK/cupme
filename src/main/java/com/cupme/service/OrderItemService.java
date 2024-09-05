@@ -91,7 +91,6 @@ public class OrderItemService {
             .filter(orderItem -> orderItem.getProtocol() != null)
             .map(orderItem -> {
                 ProtocolCartDTO protocolCartDTO = protocolMapper.protocolToProtocolCartDTO(orderItem.getProtocol());
-                protocolCartDTO.getPicture().setFile(assetFilesService.getFile(protocolCartDTO.getPicture().getFile()));
                 return protocolCartDTO;
             })
             .collect(Collectors.toList());

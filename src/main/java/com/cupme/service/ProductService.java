@@ -52,16 +52,12 @@ public class ProductService {
 
     public List<ProductCartDTO> getProducts() {
         List<ProductCartDTO> productCartDTOs = productMapper.productsToProductCartDTO(productRepository.findAll());
-        productCartDTOs.forEach(productDTO -> {
-            productDTO.getPicture().setFile(assetFilesService.getFile(productDTO.getPicture().getFile()));
-        });
 
         return productCartDTOs;
     }
 
     public ProductDTO getProduct(long id) {
         ProductDTO productDTO = productMapper.productToProductDTO(productRepository.findById(id).get());
-        productDTO.getPictures().forEach(pictureDTO -> pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile())));
         return productDTO;
     }
 
@@ -100,7 +96,7 @@ public class ProductService {
                 .getPictures()
                 .forEach(picture -> {
                     if (picture.getMain()) {
-                        picture.setName("main");
+                        picture.setName("main.png");
                     }
                     picture.setFile(assetFilesService.savePicture(picture, productDTO.getId()));
                     Picture toPicture = pictureMapper.pictureDtoToPicture(picture);

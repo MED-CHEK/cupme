@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrderManagementDeleteDialogComponent } from '../delete/order-management-delete-dialog.component';
 import { Router } from '@angular/router';
 import { AppointmentService } from 'app/services/appointment.service';
-import { AppointmentDTO } from 'app/entities/session.model';
+import { AppointmentDTO, ContactType } from 'app/entities/session.model';
 
 @Component({
   selector: 'jhi-order-mgmt',
@@ -29,6 +29,74 @@ export class OrderManagementComponent implements OnInit {
   appointments: AppointmentDTO[] = [];
   filteredAppointments: AppointmentDTO[] = [];
 
+  staticAppointments: AppointmentDTO[] = [
+    {
+      id: 1,
+      email: '',
+      telephone: '0708058161',
+      type: ContactType.WHATSAPP,
+      appointmentDate: '2024-12-06',
+      appointmentTime: '15:22:00',
+      session: {
+        id: 1,
+        name: 'Séance 15 min',
+        duration: 15.0,
+        price: 24.99,
+      },
+      order: {
+        id: 59,
+        user: {
+          id: 11,
+          login: 'achraf',
+          password: 'qweqrwe',
+          firstName: 'Achraf',
+          lastName: 'Jallaglag',
+          email: 'achraf@gmail.com',
+          sex: 'HOMME',
+          age: 26,
+          weight: 60,
+          size: 178,
+        },
+        paid: true,
+        totalPrice: 65.97,
+        transactionId: 'PAS_DE_TRANSACTION',
+        createdDate: new Date(),
+      },
+    },
+    {
+      id: 2,
+      email: '',
+      telephone: '0602555555',
+      type: ContactType.WHATSAPP,
+      appointmentDate: '2024-04-29',
+      appointmentTime: '16:00:00',
+      session: {
+        id: 1,
+        name: 'Séance 15 min',
+        duration: 15.0,
+        price: 24.99,
+      },
+      order: {
+        id: 75,
+        user: {
+          id: 1,
+          login: 'admin',
+          password: 'jhudshk',
+          firstName: 'Administrator',
+          lastName: 'Administrator',
+          email: 'chekrouni50@gmail.com',
+          sex: 'HOMME',
+          age: 38,
+          weight: 75,
+          size: 175,
+        },
+        paid: true,
+        totalPrice: 0.0,
+        transactionId: '0GS24599XB9243931',
+        createdDate: new Date(),
+      },
+    },
+  ];
   constructor(
     private orderService: OrderManagementService,
     private accountService: AccountService,

@@ -87,11 +87,9 @@ public class CartItemService {
             .forEach(cartItemDTO -> {
                 if (cartItemDTO.getProtocolCartDTO() != null) {
                     PictureDTO pictureDTO = cartItemDTO.getProtocolCartDTO().getPicture();
-                    pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
                     cartItemDTO.getProtocolCartDTO().setPicture(pictureDTO);
                 } else if (cartItemDTO.getProductCartDTO() != null) {
                     PictureDTO pictureDTO = cartItemDTO.getProductCartDTO().getPicture();
-                    pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
                     cartItemDTO.getProductCartDTO().setPicture(pictureDTO);
                 }
             });
@@ -127,11 +125,9 @@ public class CartItemService {
 
         if (cartItem.getProtocolCartDTO() != null) {
             PictureDTO pictureDTO = cartItem.getProtocolCartDTO().getPicture();
-            pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
             cartItem.getProtocolCartDTO().setPicture(pictureDTO);
         } else if (cartItem.getProductCartDTO() != null) {
             PictureDTO pictureDTO = cartItem.getProductCartDTO().getPicture();
-            pictureDTO.setFile(assetFilesService.getFile(pictureDTO.getFile()));
             cartItem.getProductCartDTO().setPicture(pictureDTO);
         }
 

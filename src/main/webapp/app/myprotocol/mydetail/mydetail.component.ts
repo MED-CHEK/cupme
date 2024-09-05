@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { MyProtocolDTO, ProtocolDTO } from 'app/entities/protocol.model';
-import { DomSanitizer } from '@angular/platform-browser';
+import { MyProtocolDTO } from 'app/entities/protocol.model';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Howl } from 'howler';
@@ -52,15 +51,16 @@ export class MyDetailComponent implements OnInit {
   getDuree() {
     if (this.protocol.id === 7537 || this.protocol.id === 7539) this.duree = this.initialTime * 4;
     else if (this.protocol.id === 7555 || this.protocol.id === 7527 || this.protocol.id === 7494)
-      this.duree = this.initialTime * 2 + this.getPoseTime() * 2;
-    else if (this.protocol.id === 7530 || this.protocol.id === 7486) this.duree = this.initialTime + this.getPoseTime() * 2;
-    else this.duree = this.initialTime + this.getPoseTime();
+      this.duree = parseFloat((this.initialTime * 2 + this.getPoseTime() * 2).toFixed(2));
+    else if (this.protocol.id === 7530 || this.protocol.id === 7486)
+      this.duree = parseFloat((this.initialTime + this.getPoseTime() * 2).toFixed(2));
+    else this.duree = parseFloat((this.initialTime + this.getPoseTime()).toFixed(2));
   }
 
   getAspirationAndPoseTime() {
     if (this.account && this.account.age && this.account.age >= 10 && this.account.age < 16 && this.protocol) {
       this.aspiration = 1;
-      this.poseTime = (this.protocol.poseTime * 0.8) as number;
+      this.poseTime = parseFloat((this.protocol.poseTime * 0.8).toFixed(2)) as number;
     } else if (
       this.account &&
       this.protocol &&
@@ -68,7 +68,7 @@ export class MyDetailComponent implements OnInit {
       ((this.account.age >= 16 && this.account.age < 20) || (this.account.age >= 50 && this.account.age < 60))
     ) {
       this.aspiration = 2;
-      this.poseTime = (this.protocol.poseTime * 0.9) as number;
+      this.poseTime = parseFloat((this.protocol.poseTime * 0.9).toFixed(2)) as number;
     } else if (this.account && this.account.age && this.account.age >= 20 && this.account.age < 50 && this.protocol) {
       this.aspiration = 3;
       if (this.account.sex == Genre.FEMME) {
@@ -76,7 +76,7 @@ export class MyDetailComponent implements OnInit {
       } else this.poseTime = 8;
     } else if (this.account && this.account.age && this.account.age >= 60 && this.protocol) {
       this.aspiration = 1.5;
-      this.poseTime = (this.protocol.poseTime * 0.8) as number;
+      this.poseTime = parseFloat((this.protocol.poseTime * 0.8).toFixed(2)) as number;
     }
 
     this.initialTime = this.poseTime;

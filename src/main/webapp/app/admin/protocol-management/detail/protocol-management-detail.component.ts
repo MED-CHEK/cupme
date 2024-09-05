@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PictureDTO } from 'app/entities/picture.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProtocolDTO, ProtocolDetailDTO } from 'app/entities/protocol.model';
+import { ProtocolDetailDTO } from 'app/entities/protocol.model';
 import { ProtocolManagementDeleteDialogComponent } from '../delete/protocol-management-delete-dialog.component';
 import { ProductCartDTO } from 'app/entities/product.model';
 
@@ -16,7 +15,7 @@ export class ProtocolManagementDetailComponent implements OnInit {
   protocol!: ProtocolDetailDTO;
   isLoading = false;
 
-  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private modalService: NgbModal, private router: Router) {}
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private router: Router) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ protocol }) => {
@@ -25,25 +24,11 @@ export class ProtocolManagementDetailComponent implements OnInit {
   }
 
   getProtocolImage(picture: PictureDTO): string {
-    let path = picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
+    return picture.file ?? '../../../../content/images/Pictos/No-picture.svg';
   }
 
   getProductImage(product: ProductCartDTO): string {
-    let path = product.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
+    return product.picture.file ?? '../../../../content/images/Pictos/No-picture.svg';
   }
 
   deleteProtocol(protocol: ProtocolDetailDTO): void {

@@ -49,8 +49,7 @@ public class AssetFilesService {
         }
         return null;
     }
-
-    public String getFile(String path) {
+    /*    public String getFile(String path) {
         String filePath = "src/main/webapp/" + path;
         File convertFile = new File(filePath);
         byte[] fileContent = new byte[0];
@@ -62,5 +61,5 @@ public class AssetFilesService {
         }
         String encodedString = Base64.getEncoder().encodeToString(fileContent);
         return encodedString;
-    }
+    }*/
 }

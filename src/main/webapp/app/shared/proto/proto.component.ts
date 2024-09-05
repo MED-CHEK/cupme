@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { DomSanitizer } from '@angular/platform-browser';
 import { ProtocolCartDTO } from '../../entities/protocol.model';
 import { CartItemDisplayDTO } from 'app/entities/cartItem.model';
 import { CartService } from 'app/cart/cart.service';
@@ -20,30 +19,13 @@ export class ProtoComponent implements OnInit {
   imagePath!: string;
   type = ProductType;
 
-  constructor(
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private cartService: CartService,
-    private toastService: ToastService
-  ) {}
+  constructor(private router: Router, private cartService: CartService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.getProtoImage();
-
     /*  this.route.queryParams.pipe(mergeMap(params => this.detailService.get(params.key))).subscribe({
       next: () => (this.success = true),
       error: () => (this.error = true),
     }); */
-  }
-
-  getProtoImage() {
-    let path = this.protocol.picture.file;
-
-    if (path == undefined) {
-      this.imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
   }
 
   selectProtocol(protocol: any) {
@@ -55,7 +37,7 @@ export class ProtoComponent implements OnInit {
       productId: protocol.id,
       name: protocol.name,
       price: protocol.price,
-      picture: (('../../content/images/' + protocol.id + '/' + protocol.picture.name) as string) + '.png',
+      picture: ('content/images/' + protocol.id + '/' + protocol.picture.name) as string,
       type: this.type.PROTOCOL,
       createdDate: new Date().toISOString(),
       quantity: 1,

@@ -6,7 +6,6 @@ import { PictureDTO } from 'app/entities/picture.model';
 import { ProtocolDTO, ProtocolDetailDTO } from 'app/entities/protocol.model';
 import { ProtocolManagementService } from '../service/protocol-management.service';
 import { ProductCartDTO } from 'app/entities/product.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ProductManagementService } from 'app/admin/product-management/service/product-management.service';
 
 const protocolTemplate = {} as ProtocolDetailDTO;
@@ -51,8 +50,7 @@ export class ProtocolManagementUpdateComponent implements OnInit {
   constructor(
     private protocolService: ProtocolManagementService,
     private productService: ProductManagementService,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -80,14 +78,7 @@ export class ProtocolManagementUpdateComponent implements OnInit {
   }
 
   getProductImage(product: ProductCartDTO): string {
-    let path = product.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
+    return product.picture.file ?? '../../../../content/images/Pictos/No-picture.svg';
   }
 
   addProduct(product: ProductCartDTO): void {

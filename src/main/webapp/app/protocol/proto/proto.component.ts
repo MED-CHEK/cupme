@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DomSanitizer } from '@angular/platform-browser';
 import { ProtocolCartDTO } from '../../entities/protocol.model';
 
 @Component({
@@ -16,24 +15,12 @@ export class ProtoComponent implements OnInit {
   imagePath!: string;
   rating = 4.2;
 
-  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.getProtoImage();
-
     /*  this.route.queryParams.pipe(mergeMap(params => this.detailService.get(params.key))).subscribe({
       next: () => (this.success = true),
       error: () => (this.error = true),
     }); */
-  }
-
-  getProtoImage() {
-    let path = this.protocol.picture.file;
-
-    if (path == undefined) {
-      this.imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
   }
 }

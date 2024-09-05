@@ -82,6 +82,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.cartSize = 0;
     }
+
     this.loadCart();
   }
 
@@ -97,8 +98,11 @@ export class NavbarComponent implements OnInit {
 
   loadCart(): void {
     this.cartService.loadCartFromLocalStorage();
-    this.cartService.cartdata.subscribe(items => {
-      this.cartSize = items.length;
+    this.cartService.cartdata$.subscribe({
+      next: (items: CartItemDisplayDTO[]) => {
+        this.cartSize = items.length;
+      },
+      error: () => console.log('Error in subscription'),
     });
   }
 
@@ -149,19 +153,11 @@ export class NavbarComponent implements OnInit {
       this.appointmentForm.controls['email'].updateValueAndValidity();
       this.appointmentForm.controls['telephone'].updateValueAndValidity();
     }
-    console.log(this.appointmentForm.valid);
   }
 
   schedule(session: SessionDTO, content: any): void {
     this.selectedSession = session;
-    if (!this.modalRef) {
-      this.modalRef = this.modalService.open(content, { modalDialogClass: 'session-modal', centered: true });
-    }
-  }
-
-  closeModal(): void {
-    this.modalRef.close();
-    this.modalRef = null;
+    this.modalService.open(content, { modalDialogClass: 'session-modal', centered: true });
   }
 
   addToCart() {
@@ -210,7 +206,8 @@ export class NavbarComponent implements OnInit {
         this.toastService.show('Product already in cart', { delay: 2000 });
       }
     }
-    this.modalRef.result.then(this.appointmentForm.reset());
-    this.closeModal();
+
+    this.appointmentForm.reset();
+    this.modalService.dismissAll();
   }
 }

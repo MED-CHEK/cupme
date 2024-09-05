@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { CartItemDisplayDTO, CartItemDTO } from '../entities/cartItem.model';
+import { CartItemDisplayDTO } from '../entities/cartItem.model';
 import { CartService } from './cart.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { OrderService } from '../order/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -62,17 +61,12 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
-    private sanitizer: DomSanitizer,
     private router: Router,
     private modalService: NgbModal,
     private accountService: AccountService,
     private addressService: AddressService,
     private promoCodeService: PromoCodeManagementService
-  ) {
-    this.cartService.loadCartFromLocalStorage();
-    this.cartItems = this.cartService.getCartItems();
-    this.getSubTotal();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.onWindowResize();
@@ -86,6 +80,17 @@ export class CartComponent implements OnInit {
         this.billingAddress = null;
         this.shippingAddress = null;
       }
+    });
+
+    console.log('im here');
+
+    this.cartService.cartdata$.subscribe({
+      next: (items: CartItemDisplayDTO[]) => {
+        console.log('Received items:', items);
+        this.cartItems = items;
+        this.getSubTotal();
+      },
+      error: () => console.log('Error in subscription'),
     });
 
     window.paypal
@@ -158,11 +163,6 @@ export class CartComponent implements OnInit {
     this.getSubTotal();
   }
 
-  addToCart(product: any) {
-    this.cartService.addToCart(product);
-    this.getSubTotal();
-  }
-
   removeFromCart(product: any) {
     this.cartService.removeFromCart(product);
     this.getSubTotal();
@@ -190,30 +190,7 @@ export class CartComponent implements OnInit {
     if (this.promoCode && this.promoCode.activated) {
       this.subTotal = this.subTotal - (this.subTotal * this.promoCode.discount) / 100;
     }
-
     return this.subTotal;
-  }
-
-  getProtoImage(protocol: any): string {
-    let path = protocol.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
-  }
-
-  getProductImage(product: any): string {
-    let path = product.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
   }
 
   addAddress() {

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { CartService } from 'app/cart/cart.service';
 import { CartItemDisplayDTO } from 'app/entities/cartItem.model';
 import { ProductType } from 'app/entities/product-type.enum';
@@ -25,7 +24,6 @@ export class StoreComponent implements OnInit {
     private protocolService: ProtocolService,
     private productService: ProductService,
     private cartService: CartService,
-    private sanitizer: DomSanitizer,
     private toastService: ToastService
   ) {}
 
@@ -50,7 +48,7 @@ export class StoreComponent implements OnInit {
       productId: product.id ? product.id : 0,
       name: product.name,
       price: product.price,
-      picture: (('../../content/images/' + product.id + '/' + product.picture.name) as string) + '.png',
+      picture: ('content/images/' + product.id + '/' + product.picture.name) as string,
       type: this.type.PRODUCT,
       createdDate: new Date().toISOString(),
       quantity: 1,
@@ -61,16 +59,5 @@ export class StoreComponent implements OnInit {
     } else {
       this.toastService.show('Product already in cart', { delay: 2000 });
     }
-  }
-
-  getProductImage(product: ProductCartDTO): string {
-    let path = product.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
   }
 }

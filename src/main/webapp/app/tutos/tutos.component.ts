@@ -1,6 +1,4 @@
-import { identifierName } from '@angular/compiler';
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-tutos',
@@ -27,7 +25,7 @@ export class TutosComponent {
   ];
   selectedVideo: { id: number; title: string; thumbnail: string } | null = null;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor() {}
 
   selectVideo(video: { id: number; title: string; thumbnail: string }) {
     this.selectedVideo = video;

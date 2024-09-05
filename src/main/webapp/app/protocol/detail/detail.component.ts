@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ProtocolCartDTO, ProtocolDetailDTO, ProtocolDTO } from '../../entities/protocol.model';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ProtocolDetailDTO } from '../../entities/protocol.model';
 import { CartService } from '../../cart/cart.service';
 import { CartDTO } from '../../entities/cart.model';
 import { CartItemDisplayDTO, CartItemDTO } from '../../entities/cartItem.model';
-import { ProductCartDTO, ProductDTO } from '../../entities/product.model';
+import { ProductCartDTO } from '../../entities/product.model';
 import { ProtocolService } from '../protocol.service';
 import { ToastService } from '../../shared/toast/toast.service';
 import { ProductType } from 'app/entities/product-type.enum';
@@ -32,7 +31,6 @@ export class DetailComponent implements OnInit {
     private protocolService: ProtocolService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,
     private toastService: ToastService
   ) {}
 
@@ -42,19 +40,10 @@ export class DetailComponent implements OnInit {
       this.protocolService.getProtocol(id).subscribe(protocol => {
         this.protocol = protocol;
         this.isLoading = false;
-        this.getAssetImage();
+        this.imagePath =
+          this.protocol.pictures.find(picture => picture.main === true)?.file ?? '../../../../assets/images/Pictos/No-picture.svg';
       });
     });
-  }
-
-  getAssetImage() {
-    let path = this.protocol.pictures.find(picture => picture.main === true)?.file;
-
-    if (path == undefined) {
-      this.imagePath = '../../../../assets/images/Pictos/No-picture.svg';
-    } else {
-      this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
   }
 
   addProductToCart(product: ProductCartDTO) {
@@ -62,7 +51,7 @@ export class DetailComponent implements OnInit {
       productId: product.id ? product.id : 0,
       name: product.name,
       price: product.price,
-      picture: (('../../content/images/' + product.id + '/' + product.picture.name) as string) + '.png',
+      picture: ('content/images/' + product.id + '/' + product.picture.name) as string,
       type: this.type.PRODUCT,
       createdDate: new Date().toISOString(),
       quantity: 1,
@@ -80,8 +69,7 @@ export class DetailComponent implements OnInit {
       productId: protocol.id,
       name: protocol.name,
       price: protocol.price,
-      picture:
-        (('../../content/images/' + protocol.id + '/' + protocol.pictures.find(picture => picture.main === true)?.name) as string) + '.png',
+      picture: ('content/images/' + protocol.id + '/' + protocol.pictures.find(picture => picture.main === true)?.name) as string,
       type: this.type.PROTOCOL,
       createdDate: new Date().toISOString(),
       quantity: 1,
@@ -92,16 +80,5 @@ export class DetailComponent implements OnInit {
     } else {
       this.toastService.show('Protocol already in cart', { delay: 2000 });
     }
-  }
-
-  getProductImage(product: ProductCartDTO): string {
-    let path = product.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
   }
 }

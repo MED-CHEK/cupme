@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { ASC, DESC, SORT } from 'app/config/navigation.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ProtocolCartDTO } from 'app/entities/protocol.model';
 import { ProtocolManagementService } from '../service/protocol-management.service';
 
@@ -31,8 +28,7 @@ export class protocolManagementComponent implements OnInit {
     private protocolService: ProtocolManagementService,
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private sanitizer: DomSanitizer
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,14 +71,7 @@ export class protocolManagementComponent implements OnInit {
   }
 
   getProtocolImage(protocol: ProtocolCartDTO): string {
-    let path = protocol.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
+    return protocol.picture.file ?? '../../../../content/images/Pictos/No-picture.svg';
   }
 
   view(protocol: ProtocolCartDTO) {

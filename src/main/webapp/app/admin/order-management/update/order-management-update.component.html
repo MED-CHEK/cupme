@@ -69,7 +69,7 @@
             <div class="protocol col-6 col-lg-4" *ngFor="let protocol of editForm.value.protocols">
               <div class="prod">
                 <div class="image">
-                  <img [src]="getImage(protocol)" alt="product.name" />
+                  <img [src]="protocol.picture.file" alt="product.name" />
                   <span class="update-icon remove-icon remove" (click)="removeProtocol(protocol)"></span>
                 </div>
                 <div class="name">
@@ -95,7 +95,7 @@
               <div class="protocol col-6 col-lg-4" *ngFor="let protocol of protocols">
                 <div class="prod">
                   <div class="image">
-                    <img [src]="getImage(protocol)" alt="product.name" />
+                    <img [src]="protocol.picture.file" alt="product.name" />
                   </div>
                   <div class="name">
                     <span>
@@ -122,7 +122,7 @@
             <div class="product col-6 col-lg-4" *ngFor="let product of editForm.value.orderProducts">
               <div class="prod">
                 <div class="image">
-                  <img [src]="getImage(product.product)" alt="product.name" />
+                  <img [src]="product.product.picture.file" alt="product.name" />
                   <span class="update-icon remove-icon remove" (click)="removeProduct(product.product)"></span>
                 </div>
                 <div class="name">
@@ -157,7 +157,7 @@
               <div class="product col-6 col-lg-4" *ngFor="let product of products">
                 <div class="prod">
                   <div class="image">
-                    <img [src]="getImage(product)" alt="product.name" />
+                    <img [src]="product.picture.file" alt="product.name" />
                   </div>
                   <div class="name">
                     <span>

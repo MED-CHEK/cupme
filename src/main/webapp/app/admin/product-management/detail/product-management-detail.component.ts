@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PictureDTO } from 'app/entities/picture.model';
 import { ProductDTO } from 'app/entities/product.model';
@@ -14,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ProductManagementDetailComponent implements OnInit {
   product!: ProductDTO;
 
-  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private modalService: NgbModal, private router: Router) {}
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private router: Router) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(({ product }) => {
@@ -23,14 +22,7 @@ export class ProductManagementDetailComponent implements OnInit {
   }
 
   getProductImage(picture: PictureDTO): string {
-    let path = picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
+    return picture.file ?? '../../../../content/images/Pictos/No-picture.svg';
   }
 
   deleteProduct(product: ProductDTO): void {

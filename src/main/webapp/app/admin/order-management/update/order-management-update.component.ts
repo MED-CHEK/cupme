@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { OrderManagementService } from '../service/order-management.service';
 import { ProductCartDTO } from 'app/entities/product.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ProductManagementService } from 'app/admin/product-management/service/product-management.service';
 import { OrderItemByOrderDTO, OrderItemByOrderIdDTO, OrderItemDTO, OrderProductDTO } from 'app/entities/orderItem.model';
 import { ProtocolCartDTO } from 'app/entities/protocol.model';
@@ -57,8 +56,7 @@ export class OrderManagementUpdateComponent implements OnInit {
     private protocolService: ProtocolManagementService,
     private productService: ProductManagementService,
     private userService: UserService,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -159,19 +157,6 @@ export class OrderManagementUpdateComponent implements OnInit {
       }
       this.products.push(orderProductDTO.product);
     }
-  }
-
-  getImage(product: ProductCartDTO | ProtocolCartDTO): string {
-    let path = product.picture.file;
-    let imagePath!: string;
-    if (path == undefined) {
-      imagePath = '../../../../content/images/Pictos/No-picture.svg';
-    } else if (path.startsWith('content/images/')) {
-      imagePath = '../../../../' + path;
-    } else {
-      imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + path) as string;
-    }
-    return imagePath;
   }
 
   addProtocol(protocol: ProtocolCartDTO): void {

@@ -237,7 +237,7 @@
 
           <small
             class="form-text text-info"
-            *ngIf="promoCode"
+            *ngIf="promoCode && !(promoCodeErrorNotActivated || promoCodeErrorNotExist)"
             jhiTranslate="global.cart.appliedPromoCode"
             [translateValues]="{ discount: promoCode.discount }"
           >
