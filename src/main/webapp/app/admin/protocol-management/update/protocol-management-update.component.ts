@@ -127,7 +127,7 @@ export class ProtocolManagementUpdateComponent implements OnInit {
       pictures: pictures,
     } as ProtocolDTO;
 
-    if (protocol.id !== null && typeof protocol.id === 'number') {
+    if (protocol.id !== null) {
       this.protocolService.update(protocol).subscribe({
         next: () => this.onSaveSuccess(),
         error: () => this.onSaveError(),

@@ -82,11 +82,8 @@ export class CartComponent implements OnInit {
       }
     });
 
-    console.log('im here');
-
     this.cartService.cartdata$.subscribe({
       next: (items: CartItemDisplayDTO[]) => {
-        console.log('Received items:', items);
         this.cartItems = items;
         this.getSubTotal();
       },

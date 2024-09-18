@@ -72,7 +72,7 @@ public class ProductService {
                 .getPictures()
                 .forEach(picture -> {
                     if (picture.getMain()) {
-                        picture.setName("main");
+                        picture.setName("main.png");
                     }
                     picture.setFile(assetFilesService.savePicture(picture, dto.getId()));
                     Picture toPicture = pictureMapper.pictureDtoToPicture(picture);

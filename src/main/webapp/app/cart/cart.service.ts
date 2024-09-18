@@ -86,7 +86,6 @@ export class CartService {
 
   loadCartFromLocalStorage(): void {
     this.cartItems = this.localStorageService.retrieve('cart-items') || [];
-    console.log('Updating cart data:', this.cartItems);
     this.cartdata.next(this.cartItems);
   }
 

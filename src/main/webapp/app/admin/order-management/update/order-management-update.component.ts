@@ -231,7 +231,6 @@ export class OrderManagementUpdateComponent implements OnInit {
       paid: order.orderPaid ?? false,
       orderItemServerDTOs: [],
     };
-    console.log(orderInfo);
     this.isSaving = false;
 
     order.protocols?.forEach((protocol: ProtocolCartDTO) => {
